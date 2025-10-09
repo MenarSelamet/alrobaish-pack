@@ -1,10 +1,11 @@
 import { Head, Link } from "@inertiajs/react";
-import { Package } from "lucide-react";
+import { Button } from "../Components/button";
+import { ArrowRight, Package } from "lucide-react";
 
 export default function Welcome() {
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Alrobaish Pack" />
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 group">
@@ -40,6 +41,48 @@ export default function Welcome() {
                         </Link>
                     </div>
                 </div>
+            </div>
+            <div className="min-h-screen">
+                {/* Hero Section */}
+                <section className="relative h-[600px] flex items-center">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                            backgroundImage: "url(/images/hero-bags.jpg)",
+                        }}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/60" />
+                    </div>
+
+                    <div className="container mx-auto px-4 relative z-10">
+                        <div className="max-w-2xl">
+                            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+                                Sustainable Paper Bags for Every Need
+                            </h1>
+                            <p className="text-xl text-muted-foreground mb-8">
+                                Custom-made, eco-friendly packaging solutions
+                                that make a difference for your business and the
+                                planet.
+                            </p>
+                            <div className="flex gap-4">
+                                <Link to="/products">
+                                    <Button
+                                        size="lg"
+                                        className="bg-primary hover:bg-primary/90"
+                                    >
+                                        View Products
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Button>
+                                </Link>
+                                <Link to="/contact">
+                                    <Button size="lg" variant="outline">
+                                        Get a Quote
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </>
     );

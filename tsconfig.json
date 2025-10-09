@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/jsx/ts/tsx*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy"]
+        },
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["resources/jss/**/*.ts", "resources/js/**/*.tsx", "vendor/tightenco/ziggy/**/*.js"],
+    "exclude": ["node_modules", "public"]
+}
