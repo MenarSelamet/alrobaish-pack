@@ -1,4 +1,5 @@
 import { Head, Link } from "@inertiajs/react";
+import { Package } from "lucide-react";
 
 export default function Welcome() {
     return (
@@ -7,11 +8,7 @@ export default function Welcome() {
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 group">
-                        <img
-                            src="/logo.png"
-                            alt="Logo"
-                            className="h-6 w-6 text-primary transition-transform group-hover:scale-110"
-                        />
+                        <Package className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
                         <span className="text-xl font-bold text-foreground">
                             Alrobaish Pack
                         </span>
