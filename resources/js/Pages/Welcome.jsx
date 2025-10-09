@@ -1,34 +1,46 @@
 import { Head, Link } from "@inertiajs/react";
 
-export default function Welcome({ auth }) {
+export default function Welcome() {
     return (
         <>
             <Head title="Welcome" />
-            <div className="  bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-                <div>
-                    <div>
-                        <header>
-                            <nav>
-                            <Link>Home</Link>
-                            <Link>About</Link>
-                            <Link>Products</Link>
-                            <Link>Contact</Link>
-                                {auth.user ? (
-                                    <Link href={route("dashboard")}>
-                                        Dashboard
-                                    </Link>
-                                ) : (
-                                    <>
-                                        <Link href={route("login")}>
-                                            Log in
-                                        </Link>
-                                        <Link href={route("register")}>
-                                            Register
-                                        </Link>
-                                    </>
-                                )}
-                            </nav>
-                        </header>
+            <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+                    <Link href="/" className="flex items-center gap-2 group">
+                        <img
+                            src="/logo.png"
+                            alt="Logo"
+                            className="h-6 w-6 text-primary transition-transform group-hover:scale-110"
+                        />
+                        <span className="text-xl font-bold text-foreground">
+                            Alrobaish Pack
+                        </span>
+                    </Link>
+                    <div className="flex gap-6">
+                        <Link
+                            href="/"
+                            className="text-sm font-medium transition-colors hover:text-primary"
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            href="/about"
+                            className="text-sm font-medium transition-colors hover:text-primary"
+                        >
+                            About
+                        </Link>
+                        <Link
+                            href="/products"
+                            className="text-sm font-medium transition-colors hover:text-primary"
+                        >
+                            Products
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="text-sm font-medium transition-colors hover:text-primary"
+                        >
+                            Contact
+                        </Link>
                     </div>
                 </div>
             </div>
