@@ -9,6 +9,10 @@ export default function Welcome({ auth }) {
                     <div>
                         <header>
                             <nav>
+                            <Link>Home</Link>
+                            <Link>About</Link>
+                            <Link>Products</Link>
+                            <Link>Contact</Link>
                                 {auth.user ? (
                                     <Link href={route("dashboard")}>
                                         Dashboard
