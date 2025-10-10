@@ -28,4 +28,12 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
+
+Route::get('/products', function () {
+    return Inertia::render('Products');
+});
+
 require __DIR__.'/auth.php';
