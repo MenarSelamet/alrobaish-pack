@@ -191,6 +191,23 @@ export default function Welcome() {
                         </div>
                     </div>
                 </section>
+                {/* CTA Section */}
+                <section className="py-20 bg-primary text-primary-foreground">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="text-4xl font-bold mb-6">
+                            Ready to Go Green?
+                        </h2>
+                        <p className="text-xl mb-8 opacity-90">
+                            Join thousands of businesses making the switch to
+                            sustainable packaging.
+                        </p>
+                        <Link to="/contact">
+                            <Button size="lg" variant="secondary">
+                                Contact Us Today
+                            </Button>
+                        </Link>
+                    </div>
+                </section>
             </div>
         </>
     );
