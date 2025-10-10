@@ -1,6 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import { Button } from "../Components/button";
-import { ArrowRight, Package } from "lucide-react";
+import { Card, CardContent } from "../Components/card";
+import { ArrowRight, Package, Leaf, Award } from "lucide-react";
 
 export default function Welcome() {
     return (
@@ -119,6 +120,74 @@ export default function Welcome() {
                                     Years Experience
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+                {/* Mission Section */}
+                <section className="py-20">
+                    <div className="container mx-auto px-4">
+                        <div className="max-w-3xl mx-auto text-center mb-16">
+                            <h2 className="text-4xl font-bold text-foreground mb-6">
+                                Our Mission
+                            </h2>
+                            <p className="text-lg text-muted-foreground">
+                                We're committed to providing high-quality,
+                                sustainable paper bag solutions that help
+                                businesses reduce their environmental impact
+                                while maintaining excellence in packaging.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <Card className="border-2 hover:shadow-lg transition-shadow">
+                                <CardContent className="pt-6">
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Leaf className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        Eco-Friendly
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        All our bags are made from 100%
+                                        recyclable materials, helping reduce
+                                        plastic waste and protect our
+                                        environment.
+                                    </p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="border-2 hover:shadow-lg transition-shadow">
+                                <CardContent className="pt-6">
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Package className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        Custom Made
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        Tailored to your exact specifications
+                                        with custom sizes, colors, and branding
+                                        options to match your business.
+                                    </p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="border-2 hover:shadow-lg transition-shadow">
+                                <CardContent className="pt-6">
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Award className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        Premium Quality
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        Durable construction and superior
+                                        materials ensure your products are
+                                        well-protected and beautifully
+                                        presented.
+                                    </p>
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
                 </section>
