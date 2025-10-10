@@ -83,6 +83,45 @@ export default function Welcome() {
                         </div>
                     </div>
                 </section>
+                {/* Stats Section */}
+                <section className="py-16 bg-primary/5">
+                    <div className="container mx-auto px-4">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                            <div>
+                                <div className="text-4xl font-bold text-primary mb-2">
+                                    10,000+
+                                </div>
+                                <div className="text-muted-foreground">
+                                    Happy Customers
+                                </div>
+                            </div>
+                            <div>
+                                <div className="text-4xl font-bold text-primary mb-2">
+                                    5M+
+                                </div>
+                                <div className="text-muted-foreground">
+                                    Bags Produced
+                                </div>
+                            </div>
+                            <div>
+                                <div className="text-4xl font-bold text-primary mb-2">
+                                    100%
+                                </div>
+                                <div className="text-muted-foreground">
+                                    Recyclable Materials
+                                </div>
+                            </div>
+                            <div>
+                                <div className="text-4xl font-bold text-primary mb-2">
+                                    15+
+                                </div>
+                                <div className="text-muted-foreground">
+                                    Years Experience
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </>
     );
