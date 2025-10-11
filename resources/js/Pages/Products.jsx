@@ -1,10 +1,11 @@
 import React from 'react'
+import GuestLayout from '../Layouts/GuestLayout'
 
 const Products = () => {
   return (
-    <div>
+    <GuestLayout>
       Product Page
-    </div>
+    </GuestLayout>
   )
 }
 
