@@ -1,15 +1,14 @@
 import { Head, Link } from "@inertiajs/react";
-import { Button } from "../Components/button";
-import { Card, CardContent } from "../Components/card";
+import { Card, CardContent } from "../components/card";
+import { Button } from "../components/button";
 import { ArrowRight, Package, Leaf, Award } from "lucide-react";
 import GuestLayout from "../Layouts/GuestLayout";
 
 export default function Welcome() {
     return (
         <GuestLayout>
-        
-                <Head title="Alrobaish Pack" />
-  
+            <Head title="Alrobaish Pack" />
+
             <div className="min-h-screen">
                 {/* Hero Section */}
                 <section className="relative h-[600px] flex items-center">
