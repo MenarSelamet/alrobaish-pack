@@ -1,6 +1,7 @@
 import GuestLayout from "../Layouts/GuestLayout";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "@inertiajs/react";
+import { Button } from "../components/button";
 
 const ProductCategory = () => {
     return (
@@ -19,6 +20,49 @@ const ProductCategory = () => {
                         <h1 className="text-5xl font-bold text-foreground">
                             Product Categories
                         </h1>
+                    </div>
+                </section>
+                {/* Product Details */}
+                <section className="py-16">
+                    <div className="container mx-auto px-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                            <div>
+                                <img
+                                    src="/images/shopping-bags.jpg"
+                                    className="w-full rounded-lg shadow-lg"
+                                />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-foreground mb-6">
+                                    Product Overview
+                                </h2>
+                                <p className="text-lg text-muted-foreground mb-8">
+                                    Detailed description of the product
+                                    category, its benefits, and applications.
+                                </p>
+
+                                <div className="mb-8">
+                                    <h3 className="text-xl font-semibold text-foreground mb-4">
+                                        Key Features
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <div className="flex items-start">
+                                            <Check className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                                            <span className="text-muted-foreground"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <Link href="/contact">
+                                    <Button
+                                        size="lg"
+                                        className="w-full md:w-auto"
+                                    >
+                                        Request a Quote
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
