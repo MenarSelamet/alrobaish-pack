@@ -36,4 +36,8 @@ Route::get('/products', function () {
     return Inertia::render('Products');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/products/{id}', function ($id) {
+    return Inertia::render('ProductCategory', ['id' => $id]);
+});
+
+require __DIR__ . '/auth.php';

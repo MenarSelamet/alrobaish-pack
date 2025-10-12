@@ -106,7 +106,7 @@ const Products = () => {
                                                 )
                                             )}
                                         </ul>
-                                        <Link to={`/products/${category.id}`}>
+                                        <Link href={`/products/${category.id}`}>
                                             <Button className="w-full">
                                                 View Details{" "}
                                                 <ArrowRight className="ml-2 h-4 w-4" />
