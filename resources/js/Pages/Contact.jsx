@@ -8,6 +8,10 @@ import {
     CardTitle,
 } from "../Components/card";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { Label } from "../Components/label";
+import { Input } from "../Components/input";
+import { Textarea } from "../Components/textarea";
+import { Button } from "../Components/button";
 
 const Contact = () => {
     return (
@@ -83,6 +87,84 @@ const Contact = () => {
                                 </CardContent>
                             </Card>
                         </div>
+                        {/* Contact Form */}
+                        <Card className="max-w-2xl mx-auto">
+                            <CardHeader>
+                                <CardTitle className="text-2xl">
+                                    Send us a message
+                                </CardTitle>
+                                <CardDescription>
+                                    Fill out the form below and we'll get back
+                                    to you shortly.
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <form className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label>Name *</Label>
+                                            <Input
+                                                id="name"
+                                                name="name"
+                                                required
+                                                placeholder="John Doe"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label>Email *</Label>
+                                            <Input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                required
+                                                placeholder="john@example.com"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label>Phone</Label>
+                                            <Input
+                                                id="phone"
+                                                name="phone"
+                                                type="tel"
+                                                placeholder="+1 (555) 123-4567"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="company">
+                                                Company
+                                            </Label>
+                                            <Input
+                                                id="company"
+                                                name="company"
+                                                placeholder="Your Company"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label>Message *</Label>
+                                        <Textarea
+                                            id="message"
+                                            name="message"
+                                            required
+                                            placeholder="Tell us about your project..."
+                                            rows={6}
+                                        />
+                                    </div>
+
+                                    <Button
+                                        type="submit"
+                                        size="lg"
+                                        className="w-full"
+                                    >
+                                        Send Message
+                                    </Button>
+                                </form>
+                            </CardContent>
+                        </Card>
                     </div>
                 </section>
             </div>

@@ -1,12 +1,8 @@
-import React from 'react'
-import GuestLayout from '../Layouts/GuestLayout'
+import React from "react";
+import GuestLayout from "../Layouts/GuestLayout";
 
 const Products = () => {
-  return (
-    <GuestLayout>
-      Product Page
-    </GuestLayout>
-  )
-}
+    return <GuestLayout>Product Page</GuestLayout>;
+};
 
-export default Products
+export default Products;
