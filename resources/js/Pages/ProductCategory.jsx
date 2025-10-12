@@ -2,6 +2,7 @@ import GuestLayout from "../Layouts/GuestLayout";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "@inertiajs/react";
 import { Button } from "../components/button";
+import { Card, CardContent } from "../components/card";
 
 const ProductCategory = () => {
     return (
@@ -63,6 +64,25 @@ const ProductCategory = () => {
                                 </Link>
                             </div>
                         </div>
+                        {/* Specifications */}
+                        <Card>
+                            <CardContent className="pt-6">
+                                <h3 className="text-2xl font-bold text-foreground mb-6">
+                                    Specifications
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="flex items-start">
+                                        {" "}
+                                        specification 1
+                                        <span className="h-2 w-2 rounded-full bg-primary mr-3 mt-2 flex-shrink-0" />
+                                        <span className="text-muted-foreground">
+                                            {" "}
+                                            Specification{" "}
+                                        </span>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
                 </section>
             </div>
