@@ -118,6 +118,22 @@ const Products = () => {
                         </div>
                     </div>
                 </section>
+                {/* CTA Section */}
+                <section className="py-20 bg-muted/30">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="text-3xl font-bold text-foreground mb-6">
+                            Need Custom Solutions?
+                        </h2>
+                        <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                            We specialize in creating custom paper bags tailored
+                            to your exact specifications. Let's discuss your
+                            project!
+                        </p>
+                        <Link to="/contact">
+                            <Button size="lg">Get a Custom Quote</Button>
+                        </Link>
+                    </div>
+                </section>
             </div>
         </GuestLayout>
     );
