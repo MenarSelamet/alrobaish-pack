@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Contact;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Product;
@@ -37,6 +38,8 @@ Route::get('/contact', function () {
 Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/category/{category}', [ProductController::class, 'showByCategory']);
+
+Route::post('/contact', [Contact::class, '__invoke']);
 
 
 require __DIR__ . '/auth.php';
