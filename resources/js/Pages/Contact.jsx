@@ -4,16 +4,29 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardHeader,
     CardTitle,
-} from "../Components/card";
+    CardHeader,
+} from "../components/card";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Label } from "../Components/label";
 import { Input } from "../Components/input";
 import { Textarea } from "../Components/textarea";
-import { Button } from "../Components/button";
+import { Button } from "../components/button";
+import { useForm } from "@inertiajs/react";
 
 const Contact = () => {
+    const { data, setData, post, processing, errors } = useForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        message: "",
+    });
+
+    function submit(e) {
+        e.preventDefault();
+        post("/contact");
+    }
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -99,13 +112,20 @@ const Contact = () => {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <form className="space-y-6">
+                                <form onSubmit={submit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-2">
                                             <Label>Name *</Label>
                                             <Input
                                                 id="name"
                                                 name="name"
+                                                value={data.name}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "name",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 required
                                                 placeholder="John Doe"
                                             />
@@ -116,6 +136,13 @@ const Contact = () => {
                                                 id="email"
                                                 name="email"
                                                 type="email"
+                                                value={data.email}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "email",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 required
                                                 placeholder="john@example.com"
                                             />
@@ -129,6 +156,13 @@ const Contact = () => {
                                                 id="phone"
                                                 name="phone"
                                                 type="tel"
+                                                value={data.phone}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "phone",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 placeholder="+1 (555) 123-4567"
                                             />
                                         </div>
@@ -139,6 +173,13 @@ const Contact = () => {
                                             <Input
                                                 id="company"
                                                 name="company"
+                                                value={data.company}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "company",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 placeholder="Your Company"
                                             />
                                         </div>
@@ -150,6 +191,13 @@ const Contact = () => {
                                             id="message"
                                             name="message"
                                             required
+                                            value={data.message}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "message",
+                                                    e.target.value
+                                                )
+                                            }
                                             placeholder="Tell us about your project..."
                                             rows={6}
                                         />
