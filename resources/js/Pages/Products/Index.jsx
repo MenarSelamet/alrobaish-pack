@@ -1,55 +1,18 @@
 import React from "react";
-import GuestLayout from "../Layouts/GuestLayout";
+import GuestLayout from "../../Layouts/GuestLayout";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "../components/card";
-import { Button } from "../components/button";
+} from "../../components/card";
+import { Button } from "../../components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 
-const Products = () => {
-    const categories = [
-        {
-            id: "shopping",
-            title: "Shopping Bags",
-            description:
-                "Durable, eco-friendly bags perfect for retail and commercial use. Available in various sizes and customizable with your brand.",
-            image: "images/shopping-bags.jpg",
-            features: [
-                "Multiple sizes",
-                "Reinforced handles",
-                "Custom branding",
-            ],
-        },
-        {
-            id: "gift",
-            title: "Gift Bags",
-            description:
-                "Elegant bags designed to make your gifts stand out. Perfect for special occasions and premium presentations.",
-            image: "images/gift-bags.jpg",
-            features: [
-                "Decorative designs",
-                "Premium finish",
-                "Various colors",
-            ],
-        },
-        {
-            id: "food",
-            title: "Food Packaging",
-            description:
-                "Grease-resistant bags ideal for bakeries, restaurants, and food service. Safe, hygienic, and sustainable.",
-            image: "images/food-bags.jpg",
-            features: [
-                "Food-safe materials",
-                "Grease-resistant",
-                "Various capacities",
-            ],
-        },
-    ];
+const Products = ({categories}) => {
+    console.log(categories);
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -79,40 +42,27 @@ const Products = () => {
                                 >
                                     <div className="h-64 overflow-hidden">
                                         <img
-                                            src={category.image}
-                                            alt={category.title}
+                                            
                                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
                                     <CardHeader>
                                         <CardTitle className="text-2xl">
-                                            {category.title}
+                                            {category.name}
                                         </CardTitle>
                                         <CardDescription className="text-base">
                                             {category.description}
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
-                                        <ul className="space-y-2 mb-6">
-                                            {category.features.map(
-                                                (feature, index) => (
-                                                    <li
-                                                        key={index}
-                                                        className="flex items-center text-sm text-muted-foreground"
-                                                    >
-                                                        <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2" />
-                                                        {feature}
-                                                    </li>
-                                                )
-                                            )}
-                                        </ul>
+                                       
                                         <Link href={`/products/${category.id}`}>
                                             <Button className="w-full">
-                                                View Details{" "}
+                                                View Details
                                                 <ArrowRight className="ml-2 h-4 w-4" />
                                             </Button>
                                         </Link>
-                                    </CardContent>
+                                    </CardContent> 
                                 </Card>
                             ))}
                         </div>

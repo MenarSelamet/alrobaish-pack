@@ -15,6 +15,11 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["resources/jss/**/*.ts", "resources/js/**/*.tsx", "vendor/tightenco/ziggy/**/*.js", "resources/js/Pages/ProductCategory.jsx"],
+    "include": [
+        "resources/jss/**/*.ts",
+        "resources/js/**/*.tsx",
+        "vendor/tightenco/ziggy/**/*.js",
+        "resources/js/Pages/Products/Show.jsx"
+    ],
     "exclude": ["node_modules", "public"]
 }

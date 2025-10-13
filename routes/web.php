@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,12 +34,9 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 });
 
-Route::get('/products', function () {
-    return Inertia::render('Products');
-});
+Route::get('/products', [ProductController::class, 'index']);
 
-Route::get('/products/{id}', function ($id) {
-    return Inertia::render('ProductCategory', ['id' => $id]);
-});
+Route::get('/products/{id}', [ProductController::class, 'show']);
+
 
 require __DIR__ . '/auth.php';
