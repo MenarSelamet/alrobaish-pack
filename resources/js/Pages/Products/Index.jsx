@@ -11,8 +11,7 @@ import { Button } from "../../components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 
-const Products = ({categories}) => {
-    console.log(categories);
+const Products = ({ categories }) => {
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -21,7 +20,7 @@ const Products = ({categories}) => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center">
                             <h1 className="text-5xl font-bold text-foreground mb-6">
-                                Our Products
+                                Our Categories
                             </h1>
                             <p className="text-xl text-muted-foreground">
                                 Discover our range of sustainable paper bag
@@ -41,10 +40,7 @@ const Products = ({categories}) => {
                                     className="overflow-hidden hover:shadow-xl transition-shadow"
                                 >
                                     <div className="h-64 overflow-hidden">
-                                        <img
-                                            
-                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                        />
+                                        <img className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                                     </div>
                                     <CardHeader>
                                         <CardTitle className="text-2xl">
@@ -55,14 +51,15 @@ const Products = ({categories}) => {
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
-                                       
-                                        <Link href={`/products/${category.id}`}>
+                                        <Link
+                                            href={`/products/category/${category.id}`}
+                                        >
                                             <Button className="w-full">
                                                 View Details
                                                 <ArrowRight className="ml-2 h-4 w-4" />
                                             </Button>
                                         </Link>
-                                    </CardContent> 
+                                    </CardContent>
                                 </Card>
                             ))}
                         </div>

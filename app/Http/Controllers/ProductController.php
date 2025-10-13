@@ -37,13 +37,24 @@ class ProductController extends Controller
         //
     }
 
+    public function showByCategory(Category $category)
+    {
+        $products = Product::where('category_id', $category->id)
+            ->with('category')
+            ->get();
+
+        return inertia('Products/Show', [
+            'category' => $category,
+            'products' => $products
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
-        return inertia('Products/Show');
-    }
+    public function show(Product $product) {}
+
+
 
     /**
      * Show the form for editing the specified resource.
