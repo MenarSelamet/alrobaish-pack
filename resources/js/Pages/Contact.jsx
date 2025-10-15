@@ -27,7 +27,6 @@ const Contact = () => {
         e.preventDefault();
         post("/contact");
     }
-
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -127,11 +126,9 @@ const Contact = () => {
                                                         e.target.value
                                                     )
                                                 }
+                                                required
                                                 placeholder="John Doe"
                                             />
-                                            {errors.name && (
-                                                <div>{errors.name}</div>
-                                            )}
                                         </div>
                                         <div className="space-y-2">
                                             <Label>Email *</Label>
@@ -146,11 +143,9 @@ const Contact = () => {
                                                         e.target.value
                                                     )
                                                 }
+                                                required
                                                 placeholder="john@example.com"
                                             />
-                                            {errors.email && (
-                                                <div>{errors.email}</div>
-                                            )}
                                         </div>
                                     </div>
 
@@ -195,6 +190,7 @@ const Contact = () => {
                                         <Textarea
                                             id="message"
                                             name="message"
+                                            required
                                             value={data.message}
                                             onChange={(e) =>
                                                 setData(
@@ -205,16 +201,12 @@ const Contact = () => {
                                             placeholder="Tell us about your project..."
                                             rows={6}
                                         />
-                                        {errors.message && (
-                                            <div>{errors.message}</div>
-                                        )}
                                     </div>
 
                                     <Button
                                         type="submit"
                                         size="lg"
                                         className="w-full"
-                                        disabled={processing}
                                     >
                                         Send Message
                                     </Button>
