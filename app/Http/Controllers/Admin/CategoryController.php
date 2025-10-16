@@ -15,4 +15,26 @@ class CategoryController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function create()
+    {
+        return inertia('Admin/Categories/Create');
+    }
+
+    public function store(Request $request) {}
+
+    public function edit(Category $category)
+    {
+        return inertia('Admin/Categories/Edit', [
+            'category' => $category
+        ]);
+    }
+
+    public function update(Request $request, Category $category) {}
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+    }
 }

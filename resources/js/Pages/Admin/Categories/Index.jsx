@@ -1,5 +1,6 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Link } from "@inertiajs/react";
 
 const Index = ({ categories }) => {
     return (
@@ -8,16 +9,23 @@ const Index = ({ categories }) => {
                 {categories.map((category) => (
                     <div className="m-6" key={category.id}>
                         <ul>
+                            <li>{category.id}</li>
                             <li className="bg-gray-200">{category.name}</li>
                             <li>{category.slug}</li>
                             <li>{category.description}</li>
                         </ul>
                         <div className="flex justify-between">
                             <button className="bg-green-200 m-2 px-3 rounded-md">
-                                Create New Category
+                                <Link href="/admin/dashboard/categories/create">
+                                    Create New Category
+                                </Link>
                             </button>
                             <button className="bg-blue-200 m-2 px-3 rounded-md">
-                                Edit Category
+                                <Link
+                                    href={`/admin/dashboard/categories/${category.id}/edit`}
+                                >
+                                    Edit Category
+                                </Link>
                             </button>
                             <button className="bg-red-200 m-2 px-3 rounded-md">
                                 Delete Category
