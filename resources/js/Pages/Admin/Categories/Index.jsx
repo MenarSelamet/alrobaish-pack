@@ -15,11 +15,6 @@ const Index = ({ categories }) => {
                             <li>{category.description}</li>
                         </ul>
                         <div className="flex justify-between">
-                            <button className="bg-green-200 m-2 px-3 rounded-md">
-                                <Link href="/admin/dashboard/categories/create">
-                                    Create New Category
-                                </Link>
-                            </button>
                             <button className="bg-blue-200 m-2 px-3 rounded-md">
                                 <Link
                                     href={`/admin/dashboard/categories/${category.id}/edit`}
@@ -33,6 +28,11 @@ const Index = ({ categories }) => {
                         </div>
                     </div>
                 ))}
+                <button className="bg-green-200 m-2 px-3 rounded-md">
+                    <Link href="/admin/dashboard/categories/create">
+                        Create New Category
+                    </Link>
+                </button>
             </div>
         </AuthenticatedLayout>
     );

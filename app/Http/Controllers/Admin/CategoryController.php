@@ -21,7 +21,18 @@ class CategoryController extends Controller
         return inertia('Admin/Categories/Create');
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'slug' => 'required|string|max:255|unique:categories,slug',
+        ]);
+
+        Category::create($validated);
+
+        return redirect()->route('categories.index');
+    }
 
     public function edit(Category $category)
     {
