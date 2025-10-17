@@ -16,11 +16,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return inertia('Admin/Categories/Create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -34,14 +29,18 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
-    public function edit(Category $category)
+    public function update(Request $request, Category $category)
     {
-        return inertia('Admin/Categories/Edit', [
-            'category' => $category
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'slug' => 'required|string|max:255|unique:categories,slug,' . $category->id,
         ]);
-    }
 
-    public function update(Request $request, Category $category) {}
+        $category->update($validated);
+
+        return redirect()->route('categories.index');
+    }
 
     public function destroy(Category $category)
     {

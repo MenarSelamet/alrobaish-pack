@@ -22,32 +22,37 @@ import {
     TableRow,
 } from "../../../Components/table";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { useToast } from "../../../hooks/use-toast";
 
 export default function Categories({ categories }) {
-    const { toast } = useToast();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
 
-    const { data, setData, post, put, reset, errors } = useForm({
+    const {
+        data,
+        setData,
+        post,
+        put,
+        reset,
+        errors,
+        delete: destroy,
+    } = useForm({
         name: "",
         description: "",
+        slug: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (editingCategory) {
-            put(`/admin/dashboard/categories/${editingCategory.id}`, {
+            put(`/admin/dashboard/categories/${editingCategory.id}`, data, {
                 onSuccess: () => {
-                    toast({ title: "Category updated successfully" });
                     handleDialogClose();
                 },
             });
         } else {
             post(`/admin/dashboard/categories`, {
                 onSuccess: () => {
-                    toast({ title: "Category created successfully" });
                     handleDialogClose();
                 },
             });
@@ -59,17 +64,14 @@ export default function Categories({ categories }) {
         setData({
             name: category.name,
             description: category.description,
+            slug: category.slug,
         });
         setIsDialogOpen(true);
     };
 
     const handleDelete = (id) => {
         if (confirm("Are you sure you want to delete this category?")) {
-            // You can also use `useForm().delete`, but this is fine too:
-            useForm.delete(`/admin/dashboard/categories/${id}`, {
-                onSuccess: () =>
-                    toast({ title: "Category deleted successfully" }),
-            });
+            destroy(`/admin/dashboard/categories/${id}`);
         }
     };
 
@@ -117,11 +119,25 @@ export default function Categories({ categories }) {
                                             onChange={(e) =>
                                                 setData("name", e.target.value)
                                             }
-                                            required
                                         />
                                         {errors.name && (
                                             <p className="text-sm text-red-500 mt-1">
                                                 {errors.name}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <Label htmlFor="slug">Slug</Label>
+                                        <Input
+                                            id="slug"
+                                            value={data.slug}
+                                            onChange={(e) =>
+                                                setData("slug", e.target.value)
+                                            }
+                                        />
+                                        {errors.slug && (
+                                            <p className="text-sm text-red-500 mt-1">
+                                                {errors.slug}
                                             </p>
                                         )}
                                     </div>
@@ -138,7 +154,6 @@ export default function Categories({ categories }) {
                                                     e.target.value
                                                 )
                                             }
-                                            required
                                         />
                                         {errors.description && (
                                             <p className="text-sm text-red-500 mt-1">
