@@ -19,7 +19,8 @@
         "resources/jss/**/*.ts",
         "resources/js/**/*.tsx",
         "vendor/tightenco/ziggy/**/*.js",
-        "resources/js/Pages/Products/Show.jsx"
+        "resources/js/Pages/Products/Show.jsx",
+        "resources/js/Components/sidebar.tsx"
     ],
     "exclude": ["node_modules", "public"]
 }
