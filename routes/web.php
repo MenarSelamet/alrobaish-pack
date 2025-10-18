@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Contact;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,7 @@ Route::get('admin/dashboard', function () {
 
 Route::resource('admin/dashboard/categories', CategoryController::class);
 Route::resource('admin/dashboard/products', AdminProductController::class);
+Route::resource('admin/dashboard/users', UserController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
