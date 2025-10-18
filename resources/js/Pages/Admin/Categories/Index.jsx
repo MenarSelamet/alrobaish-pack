@@ -38,6 +38,7 @@ export default function Categories({ categories }) {
         name: "",
         description: "",
         slug: "",
+        image: "",
     });
 
     const handleSubmit = (e) => {
@@ -64,6 +65,7 @@ export default function Categories({ categories }) {
             name: category.name,
             description: category.description,
             slug: category.slug,
+            image: category.image,
         });
         setIsDialogOpen(true);
     };
@@ -153,6 +155,21 @@ export default function Categories({ categories }) {
                                         </p>
                                     )}
                                 </div>
+                                <div>
+                                    <Label htmlFor="name">Image</Label>
+                                    <Input
+                                        id="image"
+                                        value={data.image}
+                                        onChange={(e) =>
+                                            setData("image", e.target.value)
+                                        }
+                                    />
+                                    {errors.name && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.image}
+                                        </p>
+                                    )}
+                                </div>
                                 <Button type="submit" className="w-full">
                                     {editingCategory ? "Update" : "Create"}
                                 </Button>
@@ -165,6 +182,7 @@ export default function Categories({ categories }) {
                     <Table>
                         <TableHeader>
                             <TableRow>
+                                <TableHead>Image</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Description</TableHead>
                                 <TableHead className="text-right">
@@ -175,6 +193,13 @@ export default function Categories({ categories }) {
                         <TableBody>
                             {categories.map((category) => (
                                 <TableRow key={category.id}>
+                                    <TableCell>
+                                        <img
+                                            src={category.image}
+                                            // alt={category.name}
+                                            className="w-16 h-16 object-cover rounded-md"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">
                                         {category.name}
                                     </TableCell>

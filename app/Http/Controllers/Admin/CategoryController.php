@@ -35,6 +35,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'slug' => 'required|string|max:255|unique:categories,slug,' . $category->id,
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $category->update($validated);
