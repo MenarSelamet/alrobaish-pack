@@ -31,7 +31,9 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 
 export default function Products({ products, categories }) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
+    const [viewingProduct, setViewingProduct] = useState(null);
     const [filterCategory, setFilterCategory] = useState("all");
 
     const {
@@ -43,7 +45,7 @@ export default function Products({ products, categories }) {
         reset,
         errors,
     } = useForm({
-        name: "",
+        title: "",
         category_id: "",
         description: "",
         image_path: "",
@@ -66,12 +68,17 @@ export default function Products({ products, categories }) {
     const handleEdit = (product) => {
         setEditingProduct(product);
         setData({
-            name: product.name || "",
+            title: product.title || "",
             category_id: product.category_id || "",
             description: product.description || "",
             image_path: product.image_path || "",
         });
         setIsDialogOpen(true);
+    };
+
+    const handleViewProduct = (product) => {
+        setViewingProduct(product);
+        setIsViewDialogOpen(true);
     };
 
     const handleDelete = (id) => {
@@ -100,6 +107,7 @@ export default function Products({ products, categories }) {
                     </h2>
                 </div>
 
+                {/* Filter + Add Product */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
                     <div className="flex flex-col w-full sm:w-auto">
                         <Label className="mb-3" htmlFor="filter">
@@ -128,6 +136,7 @@ export default function Products({ products, categories }) {
                         </Select>
                     </div>
 
+                    {/* Create/Edit Product Dialog */}
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
@@ -147,17 +156,17 @@ export default function Products({ products, categories }) {
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="title">Title</Label>
                                     <Input
-                                        id="name"
-                                        value={data.name}
+                                        id="title"
+                                        value={data.title}
                                         onChange={(e) =>
-                                            setData("name", e.target.value)
+                                            setData("title", e.target.value)
                                         }
                                     />
-                                    {errors.name && (
+                                    {errors.title && (
                                         <p className="text-sm text-red-500 mt-1">
-                                            {errors.name}
+                                            {errors.title}
                                         </p>
                                     )}
                                 </div>
@@ -244,12 +253,92 @@ export default function Products({ products, categories }) {
                     </Dialog>
                 </div>
 
+                {/* View Product Dialog */}
+                <Dialog
+                    open={isViewDialogOpen}
+                    onOpenChange={setIsViewDialogOpen}
+                >
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                        <DialogHeader>
+                            <DialogTitle>Product Details</DialogTitle>
+                        </DialogHeader>
+                        {viewingProduct && (
+                            <div className="space-y-6">
+                                <div>
+                                    <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                                        Title
+                                    </h3>
+                                    <p className="text-lg font-semibold">
+                                        {viewingProduct.title}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                                        Category
+                                    </h3>
+                                    <p>{viewingProduct.category?.name}</p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                                        Description
+                                    </h3>
+                                    <p className="text-sm">
+                                        {viewingProduct.description}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-sm font-medium text-muted-foreground mb-2">
+                                        Image
+                                    </h3>
+                                    {viewingProduct.image_path ? (
+                                        <img
+                                            src={viewingProduct.image_path}
+                                            alt={viewingProduct.title}
+                                            className="w-full h-64 object-cover rounded-lg border"
+                                        />
+                                    ) : (
+                                        <p className="text-sm text-muted-foreground">
+                                            No image available
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="flex gap-2 pt-4">
+                                    <Button
+                                        onClick={() => {
+                                            setIsViewDialogOpen(false);
+                                            handleEdit(viewingProduct);
+                                        }}
+                                        className="flex-1"
+                                    >
+                                        <Pencil className="h-4 w-4 mr-2" />
+                                        Edit
+                                    </Button>
+                                    <Button
+                                        variant="destructive"
+                                        onClick={() =>
+                                            handleDelete(viewingProduct.id)
+                                        }
+                                        className="flex-1"
+                                    >
+                                        <Trash2 className="h-4 w-4 mr-2" />
+                                        Delete
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
+                    </DialogContent>
+                </Dialog>
+
                 {/* Product Table */}
                 <div className="bg-card rounded-lg border overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Name</TableHead>
+                                <TableHead>Title</TableHead>
                                 <TableHead>Category</TableHead>
                                 <TableHead>Description</TableHead>
                                 <TableHead>Image</TableHead>
@@ -260,13 +349,16 @@ export default function Products({ products, categories }) {
                         </TableHeader>
                         <TableBody>
                             {filteredProducts.map((product) => (
-                                <TableRow key={product.id}>
+                                <TableRow
+                                    key={product.id}
+                                    className="cursor-pointer hover:bg-muted/50"
+                                    onClick={() => handleViewProduct(product)}
+                                >
                                     <TableCell className="font-medium">
                                         {product.title}
                                     </TableCell>
                                     <TableCell>
-                                        {product.category?.name ||
-                                            product.category_id}
+                                        {product.category?.name}
                                     </TableCell>
                                     <TableCell>
                                         {product.short_description}
@@ -275,7 +367,7 @@ export default function Products({ products, categories }) {
                                         {product.image_path ? (
                                             <img
                                                 src={product.image_path}
-                                                alt={product.name}
+                                                alt={product.title}
                                                 className="w-16 h-16 object-cover rounded border"
                                             />
                                         ) : (
@@ -288,16 +380,20 @@ export default function Products({ products, categories }) {
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            onClick={() => handleEdit(product)}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleEdit(product);
+                                            }}
                                         >
                                             <Pencil className="h-4 w-4" />
                                         </Button>
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            onClick={() =>
-                                                handleDelete(product.id)
-                                            }
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDelete(product.id);
+                                            }}
                                         >
                                             <Trash2 className="h-4 w-4" />
                                         </Button>
