@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
 
         return inertia('Admin/Products/Index', [
-            'products' => Product::all(),
+            'products' => Product::latest()->get(),
         ]);
     }
 
@@ -21,5 +21,9 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product) {}
 
-    public function destroy(Product $product) {}
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
 }

@@ -1,7 +1,8 @@
 import { Link } from "@inertiajs/react";
 import { Package } from "lucide-react";
+import LanguageSwitcher from "../Components/LanguageSwitcher";
 
-export default function GuestLayout({children}) {
+export default function GuestLayout({ children }) {
     return (
         <div>
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -38,6 +39,7 @@ export default function GuestLayout({children}) {
                             Contact
                         </Link>
                     </div>
+                    <LanguageSwitcher />
                 </div>
             </div>
             <main>{children}</main>
