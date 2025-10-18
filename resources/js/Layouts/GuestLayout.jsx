@@ -13,7 +13,7 @@ export default function GuestLayout({ children }) {
                             Alrobaish Pack
                         </span>
                     </Link>
-                    <div className="flex gap-6">
+                    <div className="flex items-center gap-6">
                         <Link
                             href="/"
                             className="text-sm font-medium transition-colors hover:text-primary"
@@ -38,10 +38,11 @@ export default function GuestLayout({ children }) {
                         >
                             Contact
                         </Link>
+                        <LanguageSwitcher />
                     </div>
-                    <LanguageSwitcher />
                 </div>
             </div>
+
             <main>{children}</main>
         </div>
     );
