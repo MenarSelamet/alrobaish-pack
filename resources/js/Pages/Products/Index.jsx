@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "../../components/card";
-import { Button } from "../../components/button";
+import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 

@@ -1,6 +1,6 @@
 import { Head, Link } from "@inertiajs/react";
 import { Card, CardContent } from "../components/card";
-import { Button } from "../components/button";
+import { Button } from "../Components/button";
 import { ArrowRight, Package, Leaf, Award } from "lucide-react";
 import GuestLayout from "../Layouts/GuestLayout";
 

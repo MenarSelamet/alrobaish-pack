@@ -36,6 +36,7 @@ const ProductCategory = ({ category, products }) => {
                                     />
                                 </div>
                                 <div>
+                                    <h1>{product.image}</h1>
                                     <h2 className="text-3xl font-bold text-foreground mb-6">
                                         {product.title}
                                     </h2>

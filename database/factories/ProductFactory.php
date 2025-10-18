@@ -28,6 +28,7 @@ class ProductFactory extends Factory
             'sort_order' => fake()->numberBetween(1, 100),
             'meta_title' => fake()->words(6, true),
             'meta_description' => fake()->sentence(),
+            'image_path' => null,
         ];
     }
 }

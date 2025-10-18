@@ -11,7 +11,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { Label } from "../Components/label";
 import { Input } from "../Components/input";
 import { Textarea } from "../Components/textarea";
-import { Button } from "../components/button";
+import { Button } from "../Components/button";
 import { useForm } from "@inertiajs/react";
 
 const Contact = () => {

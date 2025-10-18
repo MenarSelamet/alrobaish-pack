@@ -12,8 +12,10 @@ class ProductController extends Controller
     public function index()
     {
 
+        $products = Product::with('category')->latest()->paginate(15);
         return inertia('Admin/Products/Index', [
-            'products' => Product::latest()->get(),
+            'products' => $products,
+            'categories' => Category::all(),
         ]);
     }
 

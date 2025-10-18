@@ -20,51 +20,56 @@ import {
     TableHeader,
     TableRow,
 } from "../../../Components/table";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "../../../Components/select";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 
-export default function Products({ products }) {
+export default function Products({ products, categories }) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [editingProducts, setEditingProducts] = useState(null);
+    const [editingProduct, setEditingProduct] = useState(null);
+    const [filterCategory, setFilterCategory] = useState("all");
+
     const {
         data,
         setData,
         post,
         put,
+        delete: destroy,
         reset,
         errors,
-        delete: destroy,
     } = useForm({
         name: "",
+        category_id: "",
         description: "",
-        slug: "",
-        category: "",
+        image_path: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (editingProducts) {
-            put(`/admin/dashboard/products/${editingProducts.id}`, data, {
-                onSuccess: () => {
-                    handleDialogClose();
-                },
+        if (editingProduct) {
+            put(`/admin/dashboard/products/${editingProduct.id}`, {
+                onSuccess: () => handleDialogClose(),
             });
         } else {
             post(`/admin/dashboard/products`, {
-                onSuccess: () => {
-                    handleDialogClose();
-                },
+                onSuccess: () => handleDialogClose(),
             });
         }
     };
 
     const handleEdit = (product) => {
-        setEditingProducts(product);
+        setEditingProduct(product);
         setData({
-            name: product.name,
-            description: product.description,
-            slug: product.slug,
-            category: product.category,
+            name: product.name || "",
+            category_id: product.category_id || "",
+            description: product.description || "",
+            image_path: product.image_path || "",
         });
         setIsDialogOpen(true);
     };
@@ -77,9 +82,14 @@ export default function Products({ products }) {
 
     const handleDialogClose = () => {
         setIsDialogOpen(false);
-        setEditingProducts(null);
+        setEditingProduct(null);
         reset();
     };
+
+    const filteredProducts =
+        filterCategory === "all"
+            ? products.data
+            : products.data.filter((p) => p.category_id == filterCategory);
 
     return (
         <DashboardLayout>
@@ -88,6 +98,36 @@ export default function Products({ products }) {
                     <h2 className="text-2xl font-bold text-foreground">
                         Products
                     </h2>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
+                    <div className="flex flex-col w-full sm:w-auto">
+                        <Label className="mb-3" htmlFor="filter">
+                            Filter by Category
+                        </Label>
+                        <Select
+                            value={filterCategory}
+                            onValueChange={(value) => setFilterCategory(value)}
+                        >
+                            <SelectTrigger className="w-full sm:w-[250px]">
+                                <SelectValue placeholder="All Categories" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">
+                                    All Categories
+                                </SelectItem>
+                                {categories.map((category) => (
+                                    <SelectItem
+                                        key={category.id}
+                                        value={String(category.id)}
+                                    >
+                                        {category.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
@@ -95,14 +135,16 @@ export default function Products({ products }) {
                                 Add Product
                             </Button>
                         </DialogTrigger>
+
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>
-                                    {editingProducts
+                                    {editingProduct
                                         ? "Edit Product"
                                         : "Add New Product"}
                                 </DialogTitle>
                             </DialogHeader>
+
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
                                     <Label htmlFor="name">Name</Label>
@@ -119,36 +161,38 @@ export default function Products({ products }) {
                                         </p>
                                     )}
                                 </div>
+
                                 <div>
-                                    <Label htmlFor="slug">Category</Label>
-                                    <Input
-                                        id="category"
-                                        value={data.category}
-                                        onChange={(e) =>
-                                            setData("category", e.target.value)
+                                    <Label htmlFor="category_id">
+                                        Category
+                                    </Label>
+                                    <Select
+                                        value={data.category_id}
+                                        onValueChange={(value) =>
+                                            setData("category_id", value)
                                         }
-                                    />
-                                    {errors.category && (
+                                    >
+                                        <SelectTrigger id="category_id">
+                                            <SelectValue placeholder="Select category" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {categories.map((category) => (
+                                                <SelectItem
+                                                    key={category.id}
+                                                    value={category.id}
+                                                >
+                                                    {category.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    {errors.category_id && (
                                         <p className="text-sm text-red-500 mt-1">
-                                            {errors.category}
+                                            {errors.category_id}
                                         </p>
                                     )}
                                 </div>
-                                <div>
-                                    <Label htmlFor="slug">Slug</Label>
-                                    <Input
-                                        id="slug"
-                                        value={data.slug}
-                                        onChange={(e) =>
-                                            setData("slug", e.target.value)
-                                        }
-                                    />
-                                    {errors.slug && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.slug}
-                                        </p>
-                                    )}
-                                </div>
+
                                 <div>
                                     <Label htmlFor="description">
                                         Description
@@ -169,38 +213,77 @@ export default function Products({ products }) {
                                         </p>
                                     )}
                                 </div>
+
+                                <div>
+                                    <Label htmlFor="image_path">
+                                        Image URL
+                                    </Label>
+                                    <Input
+                                        id="image_path"
+                                        value={data.image_path}
+                                        onChange={(e) =>
+                                            setData(
+                                                "image_path",
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder="https://example.com/image.jpg"
+                                    />
+                                    {errors.image_path && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.image_path}
+                                        </p>
+                                    )}
+                                </div>
+
                                 <Button type="submit" className="w-full">
-                                    {editingProducts ? "Update" : "Create"}
+                                    {editingProduct ? "Update" : "Create"}
                                 </Button>
                             </form>
                         </DialogContent>
                     </Dialog>
                 </div>
 
-                <div className="bg-card rounded-lg border">
+                {/* Product Table */}
+                <div className="bg-card rounded-lg border overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow>
                                 <TableHead>Name</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Images</TableHead>
                                 <TableHead>Category</TableHead>
+                                <TableHead>Description</TableHead>
+                                <TableHead>Image</TableHead>
                                 <TableHead className="text-right">
                                     Actions
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {products.map((product) => (
+                            {filteredProducts.map((product) => (
                                 <TableRow key={product.id}>
                                     <TableCell className="font-medium">
                                         {product.title}
                                     </TableCell>
                                     <TableCell>
+                                        {product.category?.name ||
+                                            product.category_id}
+                                    </TableCell>
+                                    <TableCell>
                                         {product.short_description}
                                     </TableCell>
-                                    <TableCell>{product.image_path}</TableCell>
-                                    <TableCell>{product.category_id}</TableCell>
+                                    <TableCell>
+                                        {product.image_path ? (
+                                            <img
+                                                src={product.image_path}
+                                                alt={product.name}
+                                                className="w-16 h-16 object-cover rounded border"
+                                            />
+                                        ) : (
+                                            <span className="text-muted-foreground text-sm">
+                                                No Image
+                                            </span>
+                                        )}
+                                    </TableCell>
                                     <TableCell className="text-right">
                                         <Button
                                             variant="ghost"
