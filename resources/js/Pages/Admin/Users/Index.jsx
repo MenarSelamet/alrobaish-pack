@@ -30,52 +30,55 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 
 export default function Users({ users }) {
-    console.log(users);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
-    const roles = ["admin", "user"];
-    const statuses = ["active", "inactive"];
 
-    const { data, setData, reset } = useForm({
+    const roles = ["admin", "user"];
+
+    const {
+        data,
+        setData,
+        post,
+        put,
+        delete: destroy,
+        reset,
+        errors,
+    } = useForm({
         name: "",
         email: "",
         role: "",
+        password: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (editingUser) {
-            setUsers(
-                users.map((user) =>
-                    user.id === editingUser.id ? { ...user, ...data } : user
-                )
-            );
+            put(`/admin/dashboard/users/${editingUser.id}`, {
+                onSuccess: () => handleDialogClose(),
+            });
         } else {
-            const newUser = {
-                id: Date.now(),
-                ...data,
-            };
-            setUsers([...users, newUser]);
+            post(`/admin/dashboard/users`, {
+                onSuccess: () => handleDialogClose(),
+            });
         }
-
-        setIsDialogOpen(false);
-        reset();
-        setEditingUser(null);
     };
 
     const handleEdit = (user) => {
         setEditingUser(user);
         setData({
-            name: user.name,
-            email: user.email,
-            role: user.role,
+            name: user.name || "",
+            email: user.email || "",
+            role: user.role || "",
+            password: "",
         });
         setIsDialogOpen(true);
     };
 
     const handleDelete = (id) => {
-        setUsers(users.filter((user) => user.id !== id));
+        if (confirm("Are you sure you want to delete this user?")) {
+            destroy(`/admin/dashboard/users/${id}`);
+        }
     };
 
     const handleDialogClose = () => {
@@ -118,6 +121,11 @@ export default function Users({ users }) {
                                         }
                                         required
                                     />
+                                    {errors.name && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.name}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div>
@@ -131,6 +139,27 @@ export default function Users({ users }) {
                                         }
                                         required
                                     />
+                                    {errors.email && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.email}
+                                        </p>
+                                    )}
+                                </div>
+                                <div>
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input
+                                        id="password"
+                                        value={data.password}
+                                        onChange={(e) =>
+                                            setData("password", e.target.value)
+                                        }
+                                        required
+                                    />
+                                    {errors.name && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.password}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div>
@@ -155,6 +184,11 @@ export default function Users({ users }) {
                                             ))}
                                         </SelectContent>
                                     </Select>
+                                    {errors.role && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.role}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <Button type="submit" className="w-full">
