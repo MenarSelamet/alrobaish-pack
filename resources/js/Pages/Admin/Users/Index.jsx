@@ -29,41 +29,17 @@ import { Badge } from "../../../Components/badge";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 
-export default function Users({ auth }) {
+export default function Users({ users }) {
+    console.log(users);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
     const roles = ["admin", "user"];
     const statuses = ["active", "inactive"];
 
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            name: "John Doe",
-            email: "john@example.com",
-            role: "admin",
-            status: "active",
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            email: "jane@example.com",
-            role: "user",
-            status: "active",
-        },
-        {
-            id: 3,
-            name: "Bob Wilson",
-            email: "bob@example.com",
-            role: "user",
-            status: "inactive",
-        },
-    ]);
-
     const { data, setData, reset } = useForm({
         name: "",
         email: "",
-        role: "user",
-        status: "active",
+        role: "",
     });
 
     const handleSubmit = (e) => {
@@ -94,7 +70,6 @@ export default function Users({ auth }) {
             name: user.name,
             email: user.email,
             role: user.role,
-            status: user.status,
         });
         setIsDialogOpen(true);
     };
@@ -182,30 +157,6 @@ export default function Users({ auth }) {
                                     </Select>
                                 </div>
 
-                                <div>
-                                    <Label htmlFor="status">Status</Label>
-                                    <Select
-                                        value={data.status}
-                                        onValueChange={(value) =>
-                                            setData("status", value)
-                                        }
-                                    >
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select status" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {statuses.map((status) => (
-                                                <SelectItem
-                                                    key={status}
-                                                    value={status}
-                                                >
-                                                    {status}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
                                 <Button type="submit" className="w-full">
                                     {editingUser ? "Update" : "Create"}
                                 </Button>
@@ -221,7 +172,6 @@ export default function Users({ auth }) {
                                 <TableHead>Name</TableHead>
                                 <TableHead>Email</TableHead>
                                 <TableHead>Role</TableHead>
-                                <TableHead>Status</TableHead>
                                 <TableHead className="text-right">
                                     Actions
                                 </TableHead>
@@ -244,17 +194,6 @@ export default function Users({ auth }) {
                                             }
                                         >
                                             {user.role}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge
-                                            variant={
-                                                user.status === "active"
-                                                    ? "default"
-                                                    : "secondary"
-                                            }
-                                        >
-                                            {user.status}
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="text-right">

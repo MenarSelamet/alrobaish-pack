@@ -11,7 +11,9 @@ class UserController extends Controller
     public function index()
     {
 
-        return inertia('Admin/Users/Index');
+        return inertia('Admin/Users/Index', [
+            "users" => User::all()
+        ]);
     }
 
     public function store(Request $request) {}
