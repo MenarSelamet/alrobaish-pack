@@ -19,7 +19,20 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products,slug',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string|max:500',
+            'image_path' => 'nullable|string|max:2048'
+        ]);
+
+
+        Product::create($validated);
+        return redirect()->route('products.index');
+    }
 
     public function update(Request $request, Product $product) {}
 

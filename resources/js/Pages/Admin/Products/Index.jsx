@@ -46,6 +46,7 @@ export default function Products({ products, categories }) {
         errors,
     } = useForm({
         title: "",
+        slug: "",
         category_id: "",
         description: "",
         image_path: "",
@@ -69,6 +70,7 @@ export default function Products({ products, categories }) {
         setEditingProduct(product);
         setData({
             title: product.title || "",
+            slug: product.slug || "",
             category_id: product.category_id || "",
             description: product.description || "",
             image_path: product.image_path || "",
@@ -167,6 +169,22 @@ export default function Products({ products, categories }) {
                                     {errors.title && (
                                         <p className="text-sm text-red-500 mt-1">
                                             {errors.title}
+                                        </p>
+                                    )}
+                                </div>
+                                <div>
+                                    <Label htmlFor="title">Slug</Label>
+
+                                    <Input
+                                        id="slug"
+                                        value={data.slug}
+                                        onChange={(e) =>
+                                            setData("slug", e.target.value)
+                                        }
+                                    />
+                                    {errors.title && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors.slug}
                                         </p>
                                     )}
                                 </div>
@@ -361,7 +379,7 @@ export default function Products({ products, categories }) {
                                         {product.category?.name}
                                     </TableCell>
                                     <TableCell>
-                                        {product.short_description}
+                                        {product.description}
                                     </TableCell>
                                     <TableCell>
                                         {product.image_path ? (
