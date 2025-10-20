@@ -34,7 +34,19 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function update(Request $request, Product $product) {}
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products,slug,' . $product->id,
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string|max:500',
+            'image_path' => 'nullable|string|max:2048'
+        ]);
+
+        $product->update($validated);
+        return redirect()->route('products.index');
+    }
 
     public function destroy(Product $product)
     {

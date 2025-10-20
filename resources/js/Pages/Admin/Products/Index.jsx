@@ -56,7 +56,7 @@ export default function Products({ products, categories }) {
         e.preventDefault();
 
         if (editingProduct) {
-            put(`/admin/dashboard/products/${editingProduct.id}`, {
+            put(`/admin/dashboard/products/${editingProduct.id}`, data, {
                 onSuccess: () => handleDialogClose(),
             });
         } else {
