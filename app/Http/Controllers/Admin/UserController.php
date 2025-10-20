@@ -31,5 +31,9 @@ class UserController extends Controller
 
     public function update(Request $request, User $user) {}
 
-    public function destroy(User $user) {}
+    public function destroy(User $user) {
+
+        $user->delete();
+        return redirect(route('users.index'));
+    }
 }
