@@ -13,8 +13,10 @@ import { Input } from "../Components/input";
 import { Textarea } from "../Components/textarea";
 import { Button } from "../Components/button";
 import { useForm } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         email: "",
@@ -35,12 +37,10 @@ const Contact = () => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center">
                             <h1 className="text-5xl font-bold text-foreground mb-6">
-                                Contact Us
+                                {t("contact.title")}
                             </h1>
                             <p className="text-xl text-muted-foreground">
-                                Have questions? We'd love to hear from you. Send
-                                us a message and we'll respond as soon as
-                                possible.
+                                {t("contact.subtitle")}
                             </p>
                         </div>
                     </div>
@@ -54,14 +54,14 @@ const Contact = () => {
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Phone className="h-6 w-6 text-primary" />
                                     </div>
-                                    <CardTitle>Phone</CardTitle>
+                                    <CardTitle>{t("contact.phone")}</CardTitle>
                                     <CardDescription>
-                                        Mon-Fri from 8am to 6pm
+                                        {t("contact.phone_hours")}
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-foreground font-medium">
-                                        +1 (555) 123-4567
+                                        {t("contact.phone_number")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -71,14 +71,14 @@ const Contact = () => {
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Mail className="h-6 w-6 text-primary" />
                                     </div>
-                                    <CardTitle>Email</CardTitle>
+                                    <CardTitle>{t("contact.email")}</CardTitle>
                                     <CardDescription>
-                                        We'll respond within 24 hours
+                                        {t("contact.email_desc")}
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-foreground font-medium">
-                                        info@ecobag.com
+                                        {t("contact.email_address")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -88,14 +88,14 @@ const Contact = () => {
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <MapPin className="h-6 w-6 text-primary" />
                                     </div>
-                                    <CardTitle>Office</CardTitle>
+                                    <CardTitle>{t("contact.office")}</CardTitle>
                                     <CardDescription>
-                                        Visit our showroom
+                                        {t("contact.office_desc")}
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-foreground font-medium">
-                                        123 Green Street, Eco City, EC 12345
+                                        {t("contact.office_address")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -104,18 +104,17 @@ const Contact = () => {
                         <Card className="max-w-2xl mx-auto">
                             <CardHeader>
                                 <CardTitle className="text-2xl">
-                                    Send us a message
+                                    {t("contact.form_title")}
                                 </CardTitle>
                                 <CardDescription>
-                                    Fill out the form below and we'll get back
-                                    to you shortly.
+                                    {t("contact.form_subtitle")}
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <form onSubmit={submit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label>Name *</Label>
+                                            <Label>{t("contact.name")} *</Label>
                                             <Input
                                                 id="name"
                                                 name="name"
@@ -127,11 +126,15 @@ const Contact = () => {
                                                     )
                                                 }
                                                 required
-                                                placeholder="John Doe"
+                                                placeholder={t(
+                                                    "contact.name_placeholder"
+                                                )}
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label>Email *</Label>
+                                            <Label>
+                                                {t("contact.email_label")} *
+                                            </Label>
                                             <Input
                                                 id="email"
                                                 name="email"
@@ -144,14 +147,18 @@ const Contact = () => {
                                                     )
                                                 }
                                                 required
-                                                placeholder="john@example.com"
+                                                placeholder={t(
+                                                    "contact.email_placeholder"
+                                                )}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label>Phone</Label>
+                                            <Label>
+                                                {t("contact.phone_label")}
+                                            </Label>
                                             <Input
                                                 id="phone"
                                                 name="phone"
@@ -163,12 +170,14 @@ const Contact = () => {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder="+1 (555) 123-4567"
+                                                placeholder={t(
+                                                    "contact.phone_placeholder"
+                                                )}
                                             />
                                         </div>
                                         <div className="space-y-2">
                                             <Label htmlFor="company">
-                                                Company
+                                                {t("contact.company")}
                                             </Label>
                                             <Input
                                                 id="company"
@@ -180,13 +189,15 @@ const Contact = () => {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder="Your Company"
+                                                placeholder={t(
+                                                    "contact.company_placeholder"
+                                                )}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label>Message *</Label>
+                                        <Label>{t("contact.message")} *</Label>
                                         <Textarea
                                             id="message"
                                             name="message"
@@ -198,7 +209,9 @@ const Contact = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            placeholder="Tell us about your project..."
+                                            placeholder={t(
+                                                "contact.message_placeholder"
+                                            )}
                                             rows={6}
                                         />
                                     </div>
@@ -208,7 +221,7 @@ const Contact = () => {
                                         size="lg"
                                         className="w-full"
                                     >
-                                        Send Message
+                                        {t("contact.send")}
                                     </Button>
                                 </form>
                             </CardContent>

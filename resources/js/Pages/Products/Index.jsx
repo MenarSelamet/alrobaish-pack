@@ -11,6 +11,7 @@ import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 
+
 const Products = ({ categories }) => {
     return (
         <GuestLayout>
