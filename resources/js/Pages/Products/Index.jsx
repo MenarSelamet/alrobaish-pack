@@ -10,9 +10,10 @@ import {
 import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
-
+import { useTranslation } from "react-i18next";
 
 const Products = ({ categories }) => {
+    const { t } = useTranslation();
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -21,12 +22,10 @@ const Products = ({ categories }) => {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center">
                             <h1 className="text-5xl font-bold text-foreground mb-6">
-                                Our Categories
+                                {t("products.title")}
                             </h1>
                             <p className="text-xl text-muted-foreground">
-                                Discover our range of sustainable paper bag
-                                solutions, each designed with quality and the
-                                environment in mind.
+                                {t("products.subtitle")}
                             </p>
                         </div>
                     </div>
@@ -56,7 +55,7 @@ const Products = ({ categories }) => {
                                             href={`/products/category/${category.id}`}
                                         >
                                             <Button className="w-full">
-                                                View Details
+                                                {t("products.view_details")}
                                                 <ArrowRight className="ml-2 h-4 w-4" />
                                             </Button>
                                         </Link>
@@ -70,15 +69,15 @@ const Products = ({ categories }) => {
                 <section className="py-20 bg-muted/30">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="text-3xl font-bold text-foreground mb-6">
-                            Need Custom Solutions?
+                            {t("products.cta_custom_title")}
                         </h2>
                         <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                            We specialize in creating custom paper bags tailored
-                            to your exact specifications. Let's discuss your
-                            project!
+                            {t("products.cta_custom_subtitle")}
                         </p>
                         <Link to="/contact">
-                            <Button size="lg">Get a Custom Quote</Button>
+                            <Button size="lg">
+                                {t("products.cta_custom_button")}
+                            </Button>
                         </Link>
                     </div>
                 </section>

@@ -1,7 +1,6 @@
 import GuestLayout from "../../Layouts/GuestLayout";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "@inertiajs/react";
-// import { Button } from "../../components/button";
 import { Card, CardContent } from "../../components/card";
 
 const ProductCategory = ({ category, products }) => {
