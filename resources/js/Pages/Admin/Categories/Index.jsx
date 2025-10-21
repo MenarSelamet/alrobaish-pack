@@ -21,8 +21,10 @@ import {
     TableRow,
 } from "../../../Components/table";
 import { Plus, Pencil, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Categories({ categories }) {
+    const { t } = useTranslation();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
 
@@ -87,26 +89,28 @@ export default function Categories({ categories }) {
             <div className="m-6">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-foreground">
-                        Categories
+                        {t("dashboard.categories")}
                     </h2>
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
                                 <Plus className="h-4 w-4 mr-2" />
-                                Add Category
+                                {t("dashboard.add_category")}
                             </Button>
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>
                                     {editingCategory
-                                        ? "Edit Category"
-                                        : "Add New Category"}
+                                        ? t("dashboard.edit_category")
+                                        : t("dashboard.add_new_category")}
                                 </DialogTitle>
                             </DialogHeader>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="name">
+                                        {t("dashboard.category_name")}
+                                    </Label>
                                     <Input
                                         id="name"
                                         value={data.name}
@@ -121,7 +125,9 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="slug">Slug</Label>
+                                    <Label htmlFor="slug">
+                                        {t("dashboard.slug")}
+                                    </Label>
                                     <Input
                                         id="slug"
                                         value={data.slug}
@@ -137,7 +143,7 @@ export default function Categories({ categories }) {
                                 </div>
                                 <div>
                                     <Label htmlFor="description">
-                                        Description
+                                        {t("dashboard.category_description")}
                                     </Label>
                                     <Textarea
                                         id="description"
@@ -156,7 +162,9 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="name">Image</Label>
+                                    <Label htmlFor="name">
+                                        {t("dashboard.category_image")}
+                                    </Label>
                                     <Input
                                         id="image"
                                         value={data.image}
@@ -171,7 +179,9 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
                                 <Button type="submit" className="w-full">
-                                    {editingCategory ? "Update" : "Create"}
+                                    {editingCategory
+                                        ? t("dashboard.update")
+                                        : t("dashboard.create")}
                                 </Button>
                             </form>
                         </DialogContent>
@@ -182,11 +192,13 @@ export default function Categories({ categories }) {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Image</TableHead>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Description</TableHead>
+                                <TableHead>{t("dashboard.image")}</TableHead>
+                                <TableHead>{t("dashboard.name")}</TableHead>
+                                <TableHead>
+                                    {t("dashboard.description")}
+                                </TableHead>
                                 <TableHead className="text-right">
-                                    Actions
+                                    {t("dashboard.actions")}
                                 </TableHead>
                             </TableRow>
                         </TableHeader>

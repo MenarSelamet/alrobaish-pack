@@ -28,8 +28,10 @@ import {
     SelectValue,
 } from "../../../Components/select";
 import { Plus, Pencil, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Products({ products, categories }) {
+    const { t } = useTranslation();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
@@ -105,7 +107,7 @@ export default function Products({ products, categories }) {
             <div className="m-6">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-foreground">
-                        Products
+                        {t("dashboard.products")}
                     </h2>
                 </div>
 
@@ -113,18 +115,20 @@ export default function Products({ products, categories }) {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
                     <div className="flex flex-col w-full sm:w-auto">
                         <Label className="mb-3" htmlFor="filter">
-                            Filter by Category
+                            {t("dashboard.product_category")}
                         </Label>
                         <Select
                             value={filterCategory}
                             onValueChange={(value) => setFilterCategory(value)}
                         >
                             <SelectTrigger className="w-full sm:w-[250px]">
-                                <SelectValue placeholder="All Categories" />
+                                <SelectValue
+                                    placeholder={t("dashboard.filter_all")}
+                                />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="all">
-                                    All Categories
+                                    {t("dashboard.filter_all")}
                                 </SelectItem>
                                 {categories.map((category) => (
                                     <SelectItem
@@ -143,7 +147,7 @@ export default function Products({ products, categories }) {
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
                                 <Plus className="h-4 w-4 mr-2" />
-                                Add Product
+                                {t("dashboard.add_product")}
                             </Button>
                         </DialogTrigger>
 
@@ -158,7 +162,9 @@ export default function Products({ products, categories }) {
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label htmlFor="title">Title</Label>
+                                    <Label htmlFor="title">
+                                        {t("dashboard.product_name")}
+                                    </Label>
                                     <Input
                                         id="title"
                                         value={data.title}
@@ -191,7 +197,7 @@ export default function Products({ products, categories }) {
 
                                 <div>
                                     <Label htmlFor="category_id">
-                                        Category
+                                        {t("dashboard.product_category")}
                                     </Label>
                                     <Select
                                         value={data.category_id}
@@ -222,7 +228,7 @@ export default function Products({ products, categories }) {
 
                                 <div>
                                     <Label htmlFor="description">
-                                        Description
+                                        {t("dashboard.product_description")}
                                     </Label>
                                     <Textarea
                                         id="description"
@@ -243,7 +249,7 @@ export default function Products({ products, categories }) {
 
                                 <div>
                                     <Label htmlFor="image_path">
-                                        Image URL
+                                        {t("dashboard.product_images")}
                                     </Label>
                                     <Input
                                         id="image_path"
@@ -264,7 +270,9 @@ export default function Products({ products, categories }) {
                                 </div>
 
                                 <Button type="submit" className="w-full">
-                                    {editingProduct ? "Update" : "Create"}
+                                    {editingProduct
+                                        ? t("dashboard.edit_button")
+                                        : t("dashboard.create")}
                                 </Button>
                             </form>
                         </DialogContent>
@@ -278,13 +286,15 @@ export default function Products({ products, categories }) {
                 >
                     <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
-                            <DialogTitle>Product Details</DialogTitle>
+                            <DialogTitle>
+                                {t("dashboard.view_product")}
+                            </DialogTitle>
                         </DialogHeader>
                         {viewingProduct && (
                             <div className="space-y-6">
                                 <div>
                                     <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                                        Title
+                                        {t("dashboard.product_name")}
                                     </h3>
                                     <p className="text-lg font-semibold">
                                         {viewingProduct.title}
@@ -293,14 +303,14 @@ export default function Products({ products, categories }) {
 
                                 <div>
                                     <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                                        Category
+                                        {t("dashboard.product_category")}
                                     </h3>
                                     <p>{viewingProduct.category?.name}</p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                                        Description
+                                        {t("dashboard.product_description")}
                                     </h3>
                                     <p className="text-sm">
                                         {viewingProduct.description}
@@ -309,7 +319,7 @@ export default function Products({ products, categories }) {
 
                                 <div>
                                     <h3 className="text-sm font-medium text-muted-foreground mb-2">
-                                        Image
+                                        {t("dashboard.product_images")}
                                     </h3>
                                     {viewingProduct.image_path ? (
                                         <img
@@ -319,7 +329,7 @@ export default function Products({ products, categories }) {
                                         />
                                     ) : (
                                         <p className="text-sm text-muted-foreground">
-                                            No image available
+                                            {t("dashboard.no_image")}
                                         </p>
                                     )}
                                 </div>
@@ -333,7 +343,7 @@ export default function Products({ products, categories }) {
                                         className="flex-1"
                                     >
                                         <Pencil className="h-4 w-4 mr-2" />
-                                        Edit
+                                        {t("dashboard.edit_button")}
                                     </Button>
                                     <Button
                                         variant="destructive"
@@ -343,7 +353,7 @@ export default function Products({ products, categories }) {
                                         className="flex-1"
                                     >
                                         <Trash2 className="h-4 w-4 mr-2" />
-                                        Delete
+                                        {t("dashboard.delete_button")}
                                     </Button>
                                 </div>
                             </div>
@@ -356,12 +366,18 @@ export default function Products({ products, categories }) {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Title</TableHead>
-                                <TableHead>Category</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Image</TableHead>
+                                <TableHead>{t("dashboard.name")}</TableHead>
+                                <TableHead>
+                                    {t("dashboard.product_category")}
+                                </TableHead>
+                                <TableHead>
+                                    {t("dashboard.product_description")}
+                                </TableHead>
+                                <TableHead>
+                                    {t("dashboard.product_images")}
+                                </TableHead>
                                 <TableHead className="text-right">
-                                    Actions
+                                    {t("dashboard.actions")}
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
@@ -378,9 +394,7 @@ export default function Products({ products, categories }) {
                                     <TableCell>
                                         {product.category?.name}
                                     </TableCell>
-                                    <TableCell>
-                                        {product.description}
-                                    </TableCell>
+                                    <TableCell>{product.description}</TableCell>
                                     <TableCell>
                                         {product.image_path ? (
                                             <img
@@ -390,7 +404,7 @@ export default function Products({ products, categories }) {
                                             />
                                         ) : (
                                             <span className="text-muted-foreground text-sm">
-                                                No Image
+                                                {t("dashboard.no_image")}
                                             </span>
                                         )}
                                     </TableCell>

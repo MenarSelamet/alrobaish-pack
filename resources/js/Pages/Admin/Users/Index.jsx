@@ -28,8 +28,10 @@ import {
 import { Badge } from "../../../Components/badge";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
+import { useTranslation } from "react-i18next";
 
 export default function Users({ users }) {
+    const { t } = useTranslation();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
 
@@ -92,27 +94,31 @@ export default function Users({ users }) {
             <div className="m-6">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-foreground">
-                        Users
+                        {t("dashboard.users")}
                     </h2>
 
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
                                 <Plus className="h-4 w-4 mr-2" />
-                                Add User
+                                {t("dashboard.add_user")}
                             </Button>
                         </DialogTrigger>
 
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>
-                                    {editingUser ? "Edit User" : "Add New User"}
+                                    {editingUser
+                                        ? t("dashboard.edit_user")
+                                        : t("dashboard.add_new_user")}
                                 </DialogTitle>
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="name">
+                                        {t("dashboard.user_name")}
+                                    </Label>
                                     <Input
                                         id="name"
                                         value={data.name}
@@ -129,7 +135,9 @@ export default function Users({ users }) {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="email">Email</Label>
+                                    <Label htmlFor="email">
+                                        {t("dashboard.user_email")}
+                                    </Label>
                                     <Input
                                         id="email"
                                         type="email"
@@ -146,7 +154,9 @@ export default function Users({ users }) {
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">
+                                        {t("dashboard.password")}
+                                    </Label>
                                     <Input
                                         id="password"
                                         value={data.password}
@@ -163,7 +173,9 @@ export default function Users({ users }) {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="role">Role</Label>
+                                    <Label htmlFor="role">
+                                        {t("dashboard.user_role")}
+                                    </Label>
                                     <Select
                                         value={data.role}
                                         onValueChange={(value) =>
@@ -179,7 +191,13 @@ export default function Users({ users }) {
                                                     key={role}
                                                     value={role}
                                                 >
-                                                    {role}
+                                                    {role === "admin"
+                                                        ? t(
+                                                              "dashboard.role_admin"
+                                                          )
+                                                        : t(
+                                                              "dashboard.role_user"
+                                                          )}
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>
@@ -192,7 +210,9 @@ export default function Users({ users }) {
                                 </div>
 
                                 <Button type="submit" className="w-full">
-                                    {editingUser ? "Update" : "Create"}
+                                    {editingUser
+                                        ? t("dashboard.update")
+                                        : t("dashboard.create")}
                                 </Button>
                             </form>
                         </DialogContent>
@@ -203,11 +223,17 @@ export default function Users({ users }) {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Email</TableHead>
-                                <TableHead>Role</TableHead>
+                                <TableHead>
+                                    {t("dashboard.user_name")}
+                                </TableHead>
+                                <TableHead>
+                                    {t("dashboard.user_email")}
+                                </TableHead>
+                                <TableHead>
+                                    {t("dashboard.user_role")}
+                                </TableHead>
                                 <TableHead className="text-right">
-                                    Actions
+                                    {t("dashboard.actions")}
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
@@ -227,7 +253,9 @@ export default function Users({ users }) {
                                                     : "secondary"
                                             }
                                         >
-                                            {user.role}
+                                            {user.role === "admin"
+                                                ? t("dashboard.role_admin")
+                                                : t("dashboard.role_user")}
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="text-right">
