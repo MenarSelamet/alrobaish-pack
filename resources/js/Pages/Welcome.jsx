@@ -3,8 +3,11 @@ import { Card, CardContent } from "../components/card";
 import { Button } from "../Components/button";
 import { ArrowRight, Package, Leaf, Award } from "lucide-react";
 import GuestLayout from "../Layouts/GuestLayout";
+import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
+    const { t } = useTranslation();
+
     return (
         <GuestLayout>
             <Head title="Alrobaish Pack" />
@@ -24,12 +27,10 @@ export default function Welcome() {
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="max-w-2xl">
                             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-                                Sustainable Paper Bags for Every Need
+                                {t("home.hero_title")}
                             </h1>
                             <p className="text-xl text-muted-foreground mb-8">
-                                Custom-made, eco-friendly packaging solutions
-                                that make a difference for your business and the
-                                planet.
+                                {t("home.hero_subtitle")}
                             </p>
                             <div className="flex gap-4">
                                 <Link to="/products">
@@ -37,13 +38,13 @@ export default function Welcome() {
                                         size="lg"
                                         className="bg-primary hover:bg-primary/90"
                                     >
-                                        View Products
+                                        {t("home.cta_products")}
                                         <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </Link>
                                 <Link to="/contact">
                                     <Button size="lg" variant="outline">
-                                        Get a Quote
+                                        {t("home.cta_quote")}
                                     </Button>
                                 </Link>
                             </div>
@@ -59,7 +60,7 @@ export default function Welcome() {
                                     10,000+
                                 </div>
                                 <div className="text-muted-foreground">
-                                    Happy Customers
+                                    {t("home.stats_customers")}
                                 </div>
                             </div>
                             <div>
@@ -67,7 +68,7 @@ export default function Welcome() {
                                     5M+
                                 </div>
                                 <div className="text-muted-foreground">
-                                    Bags Produced
+                                    {t("home.stats_bags")}
                                 </div>
                             </div>
                             <div>
@@ -75,7 +76,7 @@ export default function Welcome() {
                                     100%
                                 </div>
                                 <div className="text-muted-foreground">
-                                    Recyclable Materials
+                                    {t("home.stats_recyclable")}
                                 </div>
                             </div>
                             <div>
@@ -83,7 +84,7 @@ export default function Welcome() {
                                     15+
                                 </div>
                                 <div className="text-muted-foreground">
-                                    Years Experience
+                                    {t("home.stats_experience")}
                                 </div>
                             </div>
                         </div>
@@ -94,13 +95,10 @@ export default function Welcome() {
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center mb-16">
                             <h2 className="text-4xl font-bold text-foreground mb-6">
-                                Our Mission
+                                {t("home.mission_title")}
                             </h2>
                             <p className="text-lg text-muted-foreground">
-                                We're committed to providing high-quality,
-                                sustainable paper bag solutions that help
-                                businesses reduce their environmental impact
-                                while maintaining excellence in packaging.
+                                {t("home.mission_text")}
                             </p>
                         </div>
 
@@ -111,13 +109,10 @@ export default function Welcome() {
                                         <Leaf className="h-6 w-6 text-primary" />
                                     </div>
                                     <h3 className="text-xl font-semibold mb-3">
-                                        Eco-Friendly
+                                        {t("home.feature_eco_title")}
                                     </h3>
                                     <p className="text-muted-foreground">
-                                        All our bags are made from 100%
-                                        recyclable materials, helping reduce
-                                        plastic waste and protect our
-                                        environment.
+                                        {t("home.feature_eco_text")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -128,12 +123,10 @@ export default function Welcome() {
                                         <Package className="h-6 w-6 text-primary" />
                                     </div>
                                     <h3 className="text-xl font-semibold mb-3">
-                                        Custom Made
+                                        {t("home.feature_custom_title")}
                                     </h3>
                                     <p className="text-muted-foreground">
-                                        Tailored to your exact specifications
-                                        with custom sizes, colors, and branding
-                                        options to match your business.
+                                        {t("home.feature_custom_text")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -144,13 +137,10 @@ export default function Welcome() {
                                         <Award className="h-6 w-6 text-primary" />
                                     </div>
                                     <h3 className="text-xl font-semibold mb-3">
-                                        Premium Quality
+                                        {t("home.feature_quality_title")}
                                     </h3>
                                     <p className="text-muted-foreground">
-                                        Durable construction and superior
-                                        materials ensure your products are
-                                        well-protected and beautifully
-                                        presented.
+                                        {t("home.feature_quality_text")}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -161,15 +151,14 @@ export default function Welcome() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="text-4xl font-bold mb-6">
-                            Ready to Go Green?
+                            {t("home.cta_green_title")}
                         </h2>
                         <p className="text-xl mb-8 opacity-90">
-                            Join thousands of businesses making the switch to
-                            sustainable packaging.
+                            {t("home.cta_green_subtitle")}
                         </p>
                         <Link to="/contact">
                             <Button size="lg" variant="secondary">
-                                Contact Us Today
+                                {t("home.cta_green_button")}
                             </Button>
                         </Link>
                     </div>
