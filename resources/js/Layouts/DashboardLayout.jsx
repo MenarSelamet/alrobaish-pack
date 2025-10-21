@@ -15,8 +15,10 @@ import Dropdown from "@/Components/Dropdown";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { useState } from "react";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export default function DashboardLayout({ header, children }) {
+    const { t } = useTranslation();
     const user = usePage().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -25,21 +27,25 @@ export default function DashboardLayout({ header, children }) {
 
     const menuItems = [
         {
-            title: "Dashboard",
+            title: t("dashboard.overview"),
             url: "/admin/dashboard",
             icon: LayoutDashboard,
         },
         {
-            title: "Categories",
+            title: t("dashboard.categories"),
             url: "/admin/dashboard/categories",
             icon: FolderTree,
         },
         {
-            title: "Products",
+            title: t("dashboard.products"),
             url: "/admin/dashboard/products",
             icon: Package,
         },
-        { title: "Users", url: "/admin/dashboard/users", icon: Users },
+        {
+            title: t("dashboard.users"),
+            url: "/admin/dashboard/users",
+            icon: Users,
+        },
     ];
 
     return (
@@ -49,7 +55,7 @@ export default function DashboardLayout({ header, children }) {
                     <SidebarContent>
                         <div className="p-6">
                             <h2 className="text-lg font-semibold">
-                                Admin Dashboard
+                                {t("dashboard.management")}
                             </h2>
                         </div>
                         <SidebarGroup>
@@ -119,14 +125,14 @@ export default function DashboardLayout({ header, children }) {
                                                             "profile.edit"
                                                         )}
                                                     >
-                                                        Profile
+                                                        {t("dashboard.profile")}
                                                     </Dropdown.Link>
                                                     <Dropdown.Link
                                                         href={route("logout")}
                                                         method="post"
                                                         as="button"
                                                     >
-                                                        Log Out
+                                                        {t("dashboard.logout")}
                                                     </Dropdown.Link>
                                                 </Dropdown.Content>
                                             </Dropdown>
