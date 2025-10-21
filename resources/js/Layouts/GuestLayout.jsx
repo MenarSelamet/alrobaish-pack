@@ -1,8 +1,10 @@
 import { Link } from "@inertiajs/react";
 import { Package } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
 
 export default function GuestLayout({ children }) {
+    const { t } = useTranslation();
     return (
         <div>
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -18,25 +20,25 @@ export default function GuestLayout({ children }) {
                             href="/"
                             className="text-sm font-medium transition-colors hover:text-primary"
                         >
-                            Home
+                            {t("nav.home")}
                         </Link>
                         <Link
                             href="/about"
                             className="text-sm font-medium transition-colors hover:text-primary"
                         >
-                            About
+                            {t("nav.about")}
                         </Link>
                         <Link
                             href="/products"
                             className="text-sm font-medium transition-colors hover:text-primary"
                         >
-                            Products
+                            {t("nav.products")}
                         </Link>
                         <Link
                             href="/contact"
                             className="text-sm font-medium transition-colors hover:text-primary"
                         >
-                            Contact
+                            {t("nav.contact")}
                         </Link>
                         <LanguageSwitcher />
                     </div>
