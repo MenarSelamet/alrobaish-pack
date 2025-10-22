@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react";
 import { Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
+import ThemeToggle from "../Components/ThemeToggle";
 
 export default function GuestLayout({ children }) {
     const { t } = useTranslation();
@@ -40,6 +41,7 @@ export default function GuestLayout({ children }) {
                         >
                             {t("nav.contact")}
                         </Link>
+                        <ThemeToggle/>
                         <LanguageSwitcher />
                     </div>
                 </div>

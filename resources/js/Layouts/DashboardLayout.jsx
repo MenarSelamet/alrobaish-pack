@@ -16,6 +16,7 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { useState } from "react";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import ThemeToggle from "../Components/ThemeToggle";
 
 export default function DashboardLayout({ header, children }) {
     const { t } = useTranslation();
@@ -137,6 +138,7 @@ export default function DashboardLayout({ header, children }) {
                                                 </Dropdown.Content>
                                             </Dropdown>
                                         </div>
+                                        <ThemeToggle/>
                                         <LanguageSwitcher />
                                     </div>
 
