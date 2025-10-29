@@ -3,6 +3,7 @@ import { Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
 import ThemeToggle from "../Components/ThemeToggle";
+import Footer from "../Components/Footer";
 
 export default function GuestLayout({ children }) {
     const { t } = useTranslation();
@@ -48,6 +49,7 @@ export default function GuestLayout({ children }) {
             </div>
 
             <main>{children}</main>
+            <Footer />
         </div>
     );
 }
