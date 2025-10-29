@@ -18,13 +18,21 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'slug' => 'required|string|max:255|unique:categories,slug',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        Category::create($validated);
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('categories', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        Category::create($validated, $imagePath);
 
         return redirect()->route('categories.index');
     }

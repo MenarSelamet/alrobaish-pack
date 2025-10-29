@@ -40,7 +40,7 @@ export default function Categories({ categories }) {
         name: "",
         description: "",
         slug: "",
-        image: "",
+        image: null,
     });
 
     const handleSubmit = (e) => {
@@ -48,12 +48,14 @@ export default function Categories({ categories }) {
 
         if (editingCategory) {
             put(`/admin/dashboard/categories/${editingCategory.id}`, data, {
+                forceFormData: true,
                 onSuccess: () => {
                     handleDialogClose();
                 },
             });
         } else {
             post(`/admin/dashboard/categories`, {
+                forceFormData: true,
                 onSuccess: () => {
                     handleDialogClose();
                 },
@@ -106,7 +108,11 @@ export default function Categories({ categories }) {
                                         : t("dashboard.add_new_category")}
                                 </DialogTitle>
                             </DialogHeader>
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="space-y-4"
+                                encType="multipart/form-data"
+                            >
                                 <div>
                                     <Label htmlFor="name">
                                         {t("dashboard.category_name")}
@@ -162,14 +168,15 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="name">
+                                    <Label htmlFor="image">
                                         {t("dashboard.category_image")}
                                     </Label>
                                     <Input
+                                        type="file"
                                         id="image"
-                                        value={data.image}
+                                        accept="image/*"
                                         onChange={(e) =>
-                                            setData("image", e.target.value)
+                                            setData("image", e.target.files[0])
                                         }
                                     />
                                     {errors.name && (
