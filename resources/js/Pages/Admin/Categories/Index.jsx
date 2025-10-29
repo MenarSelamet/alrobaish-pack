@@ -40,7 +40,7 @@ export default function Categories({ categories }) {
         name: "",
         description: "",
         slug: "",
-        image: null,
+        image_path: null,
     });
 
     const handleSubmit = (e) => {
@@ -69,7 +69,7 @@ export default function Categories({ categories }) {
             name: category.name,
             description: category.description,
             slug: category.slug,
-            image: category.image,
+            image_path: category.image,
         });
         setIsDialogOpen(true);
     };
@@ -85,6 +85,8 @@ export default function Categories({ categories }) {
         setEditingCategory(null);
         reset();
     };
+
+    console.log(categories);
 
     return (
         <DashboardLayout>
@@ -168,15 +170,18 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="image">
+                                    <Label htmlFor="image_path">
                                         {t("dashboard.category_image")}
                                     </Label>
                                     <Input
                                         type="file"
-                                        id="image"
+                                        id="image_path"
                                         accept="image/*"
                                         onChange={(e) =>
-                                            setData("image", e.target.files[0])
+                                            setData(
+                                                "image_path",
+                                                e.target.files[0]
+                                            )
                                         }
                                     />
                                     {errors.name && (
@@ -214,8 +219,8 @@ export default function Categories({ categories }) {
                                 <TableRow key={category.id}>
                                     <TableCell>
                                         <img
-                                            src={category.image}
-                                            // alt={category.name}
+                                            src={`/storage/categories/${category.image_path}`}
+                                            alt={category.name}
                                             className="w-16 h-16 object-cover rounded-md"
                                         />
                                     </TableCell>

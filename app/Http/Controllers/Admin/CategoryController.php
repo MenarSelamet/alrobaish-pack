@@ -23,13 +23,13 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'slug' => 'required|string|max:255|unique:categories,slug',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
-            $validated['image'] = $imagePath;
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('categories', 'public');
+            $validated['image_path'] = $imagePath;
         }
 
         Category::create($validated, $imagePath);
