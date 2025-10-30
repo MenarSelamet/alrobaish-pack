@@ -86,7 +86,7 @@ export default function Categories({ categories }) {
         reset();
     };
 
-    console.log(categories);
+    console.log(categories[0].image_path);
 
     return (
         <DashboardLayout>
@@ -218,11 +218,13 @@ export default function Categories({ categories }) {
                             {categories.map((category) => (
                                 <TableRow key={category.id}>
                                     <TableCell>
-                                        <img
-                                            src={`/storage/categories/${category.image_path}`}
-                                            alt={category.name}
-                                            className="w-16 h-16 object-cover rounded-md"
-                                        />
+                                        {category.image_path && (
+                                            <img
+                                                src={`/storage/${category.image_path}`}
+                                                // alt={category.name}
+                                                className="w-16 h-16 object-cover rounded-md"
+                                            />
+                                        )}
                                     </TableCell>
                                     <TableCell className="font-medium">
                                         {category.name}
