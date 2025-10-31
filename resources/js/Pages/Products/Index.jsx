@@ -40,7 +40,13 @@ const Products = ({ categories }) => {
                                     className="overflow-hidden hover:shadow-xl transition-shadow"
                                 >
                                     <div className="h-64 overflow-hidden">
-                                        <img className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                                        {category.image_path && (
+                                            <img
+                                                src={`/storage/${category.image_path}`}
+                                                // alt={category.name}
+                                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                            />
+                                        )}
                                     </div>
                                     <CardHeader>
                                         <CardTitle className="text-2xl">
