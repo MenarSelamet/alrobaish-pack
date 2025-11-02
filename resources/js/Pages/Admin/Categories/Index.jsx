@@ -23,7 +23,7 @@ import {
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export default function Categories({ categories }) {
+export default function Categories({ categories, products }) {
     const { t } = useTranslation();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
@@ -86,6 +86,7 @@ export default function Categories({ categories }) {
         reset();
     };
 
+    console.log(categories);
     return (
         <DashboardLayout>
             <div className="m-6">
@@ -207,6 +208,9 @@ export default function Categories({ categories }) {
                                 <TableHead>
                                     {t("dashboard.description")}
                                 </TableHead>
+                                <TableHead>
+                                    {t("dashboard.products_in_category")}
+                                </TableHead>
                                 <TableHead className="text-right">
                                     {t("dashboard.actions")}
                                 </TableHead>
@@ -229,6 +233,14 @@ export default function Categories({ categories }) {
                                     </TableCell>
                                     <TableCell>
                                         {category.description}
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="flex items-center">
+                                            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                                {category.products_count || 0}{" "}
+                                                products
+                                            </span>
+                                        </div>
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Button

@@ -169,7 +169,8 @@
         "name": "Name",
         "description": "Description",
         "slug": "Slug",
-        "no_image": "No Images Available"
+        "no_image": "No Images Available",
+        "products_in_category": "Products In Category"
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",

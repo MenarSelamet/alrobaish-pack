@@ -534,13 +534,22 @@ export default function Products({ products, categories }) {
                                     </TableCell>
                                     <TableCell>{product.description}</TableCell>
                                     <TableCell>
-                                        {product.images != 0 ? (
-                                            <span>{product.images.length}</span>
-                                        ) : (
-                                            <span className="text-muted-foreground text-sm">
-                                                {t("dashboard.no_image")}
+                                        <div className="flex items-center">
+                                            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                                {product.images != 0 ? (
+                                                    <span>
+                                                        {product.images.length}{" "}
+                                                        Images
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-muted-foreground text-sm">
+                                                        {t(
+                                                            "dashboard.no_image"
+                                                        )}
+                                                    </span>
+                                                )}
                                             </span>
-                                        )}
+                                        </div>
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Button
