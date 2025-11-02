@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { useForm } from "@inertiajs/react";
 import { Button } from "../../../Components/button";
@@ -27,7 +27,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../../../Components/select";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function Products({ products, categories }) {
@@ -37,6 +37,8 @@ export default function Products({ products, categories }) {
     const [editingProduct, setEditingProduct] = useState(null);
     const [viewingProduct, setViewingProduct] = useState(null);
     const [filterCategory, setFilterCategory] = useState("all");
+    const [imagePreviews, setImagePreviews] = useState([]);
+    const fileInputRef = useRef(null);
 
     const {
         data,
@@ -77,8 +79,18 @@ export default function Products({ products, categories }) {
             slug: product.slug || "",
             category_id: product.category_id || "",
             description: product.description || "",
-            image_path: product.image_path || "",
+            images: [],
         });
+        if (product.images && product.images.length > 0) {
+            const previews = product.images.map((img) => ({
+                url: `/storage/${img.image_path}`,
+                name: img.image_path,
+                isExisting: true,
+            }));
+            setImagePreviews(previews);
+        } else {
+            setImagePreviews([]);
+        }
         setIsDialogOpen(true);
     };
 
@@ -96,10 +108,58 @@ export default function Products({ products, categories }) {
     const handleDialogClose = () => {
         setIsDialogOpen(false);
         setEditingProduct(null);
+        setImagePreviews([]);
         reset();
     };
 
-    console.log(data);
+    const handleAddImages = (e) => {
+        const files = Array.from(e.target.files);
+
+        if (files.length > 0) {
+            const newPreviews = files.map((file) => ({
+                url: URL.createObjectURL(file),
+                name: file.name,
+                file: file,
+                isExisting: false,
+            }));
+
+            setImagePreviews((prev) => [...prev, ...newPreviews]);
+
+            const currentFiles = data.images ? Array.from(data.images) : [];
+            const updatedFiles = [...currentFiles, ...files];
+
+            const dataTransfer = new DataTransfer();
+            updatedFiles.forEach((file) => dataTransfer.items.add(file));
+
+            setData("images", dataTransfer.files);
+        }
+    };
+
+    const handleRemoveImage = (index) => {
+        const previewToRemove = imagePreviews[index];
+
+        if (!previewToRemove.isExisting) {
+            URL.revokeObjectURL(previewToRemove.url);
+        }
+
+        const updatedPreviews = imagePreviews.filter((_, i) => i !== index);
+        setImagePreviews(updatedPreviews);
+
+        if (updatedPreviews.length === 0) {
+            setData("images", []);
+        } else {
+            const dataTransfer = new DataTransfer();
+            updatedPreviews
+                .filter((preview) => !preview.isExisting)
+                .forEach((preview) => dataTransfer.items.add(preview.file));
+
+            setData("images", dataTransfer.files);
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current?.click();
+    };
 
     const filteredProducts =
         filterCategory === "all"
@@ -115,7 +175,6 @@ export default function Products({ products, categories }) {
                     </h2>
                 </div>
 
-                {/* Filter + Add Product */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
                     <div className="flex flex-col w-full sm:w-auto">
                         <Label className="mb-3" htmlFor="filter">
@@ -146,7 +205,6 @@ export default function Products({ products, categories }) {
                         </Select>
                     </div>
 
-                    {/* Create/Edit Product Dialog */}
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button onClick={() => handleDialogClose()}>
@@ -210,7 +268,15 @@ export default function Products({ products, categories }) {
                                         }
                                     >
                                         <SelectTrigger id="category_id">
-                                            <SelectValue placeholder="Select category" />
+                                            <SelectValue>
+                                                {data.category_id
+                                                    ? categories.find(
+                                                          (cat) =>
+                                                              cat.id ==
+                                                              data.category_id
+                                                      )?.name
+                                                    : "Select category"}
+                                            </SelectValue>
                                         </SelectTrigger>
                                         <SelectContent>
                                             {categories.map((category) => (
@@ -255,19 +321,81 @@ export default function Products({ products, categories }) {
                                     <Label htmlFor="images">
                                         {t("dashboard.product_images")}
                                     </Label>
-                                    <Input
-                                        type="file"
-                                        id="images"
-                                        accept="image/*"
-                                        onChange={(e) =>
-                                            setData("images", e.target.files)
-                                        }
-                                        placeholder="https://example.com/image.jpg"
-                                    />
-                                    {errors.image_path && (
+                                    <div className="flex gap-2">
+                                        <Input
+                                            type="file"
+                                            id="images"
+                                            ref={fileInputRef}
+                                            accept="image/*"
+                                            multiple
+                                            onChange={handleAddImages}
+                                            className="hidden"
+                                        />
+                                        <Input
+                                            type="text"
+                                            placeholder="Select images..."
+                                            value={
+                                                imagePreviews.length > 0
+                                                    ? `${imagePreviews.length} image(s) selected`
+                                                    : ""
+                                            }
+                                            readOnly
+                                            className="flex-1"
+                                        />
+                                        <Button
+                                            type="button"
+                                            onClick={triggerFileInput}
+                                            className="bg-green-600 hover:bg-green-700 text-white"
+                                        >
+                                            <Plus className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                    {errors.images && (
                                         <p className="text-sm text-red-500 mt-1">
-                                            {errors.image_path}
+                                            {errors.images}
                                         </p>
+                                    )}
+
+                                    {imagePreviews.length > 0 && (
+                                        <div className="mt-4">
+                                            <Label className="text-sm font-medium mb-2 block">
+                                                Image Previews:
+                                            </Label>
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                                {imagePreviews.map(
+                                                    (preview, index) => (
+                                                        <div
+                                                            key={index}
+                                                            className="relative group"
+                                                        >
+                                                            <img
+                                                                src={
+                                                                    preview.url
+                                                                }
+                                                                alt={`Preview ${
+                                                                    index + 1
+                                                                }`}
+                                                                className="w-full h-24 object-cover rounded border"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    handleRemoveImage(
+                                                                        index
+                                                                    )
+                                                                }
+                                                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                            >
+                                                                <X className="h-3 w-3" />
+                                                            </button>
+                                                            <div className="text-xs text-center mt-1 truncate">
+                                                                {preview.name}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
 
@@ -281,7 +409,6 @@ export default function Products({ products, categories }) {
                     </Dialog>
                 </div>
 
-                {/* View Product Dialog */}
                 <Dialog
                     open={isViewDialogOpen}
                     onOpenChange={setIsViewDialogOpen}
@@ -373,7 +500,6 @@ export default function Products({ products, categories }) {
                     </DialogContent>
                 </Dialog>
 
-                {/* Product Table */}
                 <div className="bg-card rounded-lg border overflow-x-auto">
                     <Table>
                         <TableHeader>
