@@ -40,7 +40,7 @@ class ProductController extends Controller
     public function showByCategory(Category $category)
     {
         $products = Product::where('category_id', $category->id)
-            ->with('category')
+            ->with(['category', 'images'])
             ->get();
 
         return inertia('Products/Show', [
