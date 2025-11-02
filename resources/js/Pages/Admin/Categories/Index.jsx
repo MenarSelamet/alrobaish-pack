@@ -86,8 +86,6 @@ export default function Categories({ categories }) {
         reset();
     };
 
-    console.log(categories[0].image_path);
-
     return (
         <DashboardLayout>
             <div className="m-6">

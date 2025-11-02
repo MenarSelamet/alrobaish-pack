@@ -167,7 +167,9 @@
         "user_deleted": "User deleted successfully",
         "image": "Image",
         "name": "Name",
-        "description": "Description"
+        "description": "Description",
+        "slug": "Slug",
+        "no_image": "No Images Available"
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",

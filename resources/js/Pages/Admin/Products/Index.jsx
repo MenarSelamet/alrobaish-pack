@@ -51,7 +51,7 @@ export default function Products({ products, categories }) {
         slug: "",
         category_id: "",
         description: "",
-        image_path: "",
+        images: [],
     });
 
     const handleSubmit = (e) => {
@@ -59,10 +59,12 @@ export default function Products({ products, categories }) {
 
         if (editingProduct) {
             put(`/admin/dashboard/products/${editingProduct.id}`, data, {
+                forceFormData: true,
                 onSuccess: () => handleDialogClose(),
             });
         } else {
             post(`/admin/dashboard/products`, {
+                forceFormData: true,
                 onSuccess: () => handleDialogClose(),
             });
         }
@@ -96,6 +98,8 @@ export default function Products({ products, categories }) {
         setEditingProduct(null);
         reset();
     };
+
+    console.log(data);
 
     const filteredProducts =
         filterCategory === "all"
@@ -248,17 +252,15 @@ export default function Products({ products, categories }) {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="image_path">
+                                    <Label htmlFor="images">
                                         {t("dashboard.product_images")}
                                     </Label>
                                     <Input
-                                        id="image_path"
-                                        value={data.image_path}
+                                        type="file"
+                                        id="images"
+                                        accept="image/*"
                                         onChange={(e) =>
-                                            setData(
-                                                "image_path",
-                                                e.target.value
-                                            )
+                                            setData("images", e.target.files)
                                         }
                                         placeholder="https://example.com/image.jpg"
                                     />
@@ -321,16 +323,26 @@ export default function Products({ products, categories }) {
                                     <h3 className="text-sm font-medium text-muted-foreground mb-2">
                                         {t("dashboard.product_images")}
                                     </h3>
-                                    {viewingProduct.image_path ? (
-                                        <img
-                                            src={viewingProduct.image_path}
-                                            alt={viewingProduct.title}
-                                            className="w-full h-64 object-cover rounded-lg border"
-                                        />
+                                    {viewingProduct.images &&
+                                    viewingProduct.images.length > 0 ? (
+                                        <div className="grid grid-cols-2 gap-4">
+                                            {viewingProduct.images.map(
+                                                (img) => (
+                                                    <img
+                                                        key={img.id}
+                                                        src={`/storage/${img.image_path}`}
+                                                        alt={
+                                                            viewingProduct.title
+                                                        }
+                                                        className="w-full h-48 object-cover rounded border"
+                                                    />
+                                                )
+                                            )}
+                                        </div>
                                     ) : (
-                                        <p className="text-sm text-muted-foreground">
+                                        <span className="text-muted-foreground text-sm">
                                             {t("dashboard.no_image")}
-                                        </p>
+                                        </span>
                                     )}
                                 </div>
 
@@ -396,12 +408,8 @@ export default function Products({ products, categories }) {
                                     </TableCell>
                                     <TableCell>{product.description}</TableCell>
                                     <TableCell>
-                                        {product.image_path ? (
-                                            <img
-                                                src={product.image_path}
-                                                alt={product.title}
-                                                className="w-16 h-16 object-cover rounded border"
-                                            />
+                                        {product.images != 0 ? (
+                                            <span>{product.images.length}</span>
                                         ) : (
                                             <span className="text-muted-foreground text-sm">
                                                 {t("dashboard.no_image")}

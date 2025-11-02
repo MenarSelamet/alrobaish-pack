@@ -32,7 +32,7 @@ class CategoryController extends Controller
             $validated['image_path'] = $imagePath;
         }
 
-      
+
 
         Category::create($validated, $imagePath);
 

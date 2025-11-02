@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::with('category')->latest()->paginate(15);
+        $products = Product::with(['category', 'images'])->latest()->paginate(15);
         return inertia('Admin/Products/Index', [
             'products' => $products,
             'categories' => Category::all(),
@@ -26,11 +26,23 @@ class ProductController extends Controller
             'slug' => 'required|string|max:255|unique:products,slug',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string|max:500',
-            'image_path' => 'nullable|string|max:2048'
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
+        $product = Product::create([
+            'title' => $validated['title'],
+            'slug' => $validated['slug'],
+            'category_id' => $validated['category_id'],
+            'description' => $validated['description'] ?? null,
+        ]);
 
-        Product::create($validated);
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('products', 'public');
+                $product->images()->create(['image_path' => $path]);
+            }
+        }
+
         return redirect()->route('products.index');
     }
 
