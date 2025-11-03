@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Contact;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
@@ -39,15 +40,21 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
-Route::get('/contact', function () {
-    return Inertia::render('Contact');
-});
+// Route::get('/contact', function () {
+//     return Inertia::render('Contact');
+// });
 
 Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/category/{category}', [ProductController::class, 'showByCategory']);
 
-Route::post('/contact', [Contact::class, '__invoke']);
+// Route::post('/contact', [Contact::class, '__invoke']);
+
+Route::resource('/contact', ContactController::class);
+
+
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+// Route::post('/contact', [ContactController::class, 'create'])->name('contact.send');
 
 
 require __DIR__ . '/auth.php';
