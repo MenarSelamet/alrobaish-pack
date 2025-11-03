@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { Button } from "../../../Components/button";
 import { Input } from "../../../Components/input";
 import { Label } from "../../../Components/label";
@@ -32,8 +32,13 @@ import { useTranslation } from "react-i18next";
 
 export default function Products({ products, categories }) {
     const { t } = useTranslation();
+    const { flash } = usePage().props;
+
+    // --- STATE ---
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
     const [editingProduct, setEditingProduct] = useState(null);
     const [viewingProduct, setViewingProduct] = useState(null);
     const [filterCategory, setFilterCategory] = useState("all");
@@ -56,9 +61,9 @@ export default function Products({ products, categories }) {
         images: [],
     });
 
+    // --- FORM HANDLERS ---
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (editingProduct) {
             put(`/admin/dashboard/products/${editingProduct.id}`, data, {
                 forceFormData: true,
@@ -81,6 +86,7 @@ export default function Products({ products, categories }) {
             description: product.description || "",
             images: [],
         });
+
         if (product.images && product.images.length > 0) {
             const previews = product.images.map((img) => ({
                 url: `/storage/${img.image_path}`,
@@ -99,9 +105,20 @@ export default function Products({ products, categories }) {
         setIsViewDialogOpen(true);
     };
 
+    // --- DELETE HANDLERS ---
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this product?")) {
-            destroy(`/admin/dashboard/products/${id}`);
+        setProductToDelete(id);
+        setIsDeleteDialogOpen(true);
+    };
+
+    const confirmDelete = () => {
+        if (productToDelete) {
+            destroy(`/admin/dashboard/products/${productToDelete}`, {
+                onSuccess: () => {
+                    setIsDeleteDialogOpen(false);
+                    setProductToDelete(null);
+                },
+            });
         }
     };
 
@@ -112,9 +129,9 @@ export default function Products({ products, categories }) {
         reset();
     };
 
+    // --- IMAGE HANDLERS ---
     const handleAddImages = (e) => {
         const files = Array.from(e.target.files);
-
         if (files.length > 0) {
             const newPreviews = files.map((file) => ({
                 url: URL.createObjectURL(file),
@@ -122,7 +139,6 @@ export default function Products({ products, categories }) {
                 file: file,
                 isExisting: false,
             }));
-
             setImagePreviews((prev) => [...prev, ...newPreviews]);
 
             const currentFiles = data.images ? Array.from(data.images) : [];
@@ -137,11 +153,9 @@ export default function Products({ products, categories }) {
 
     const handleRemoveImage = (index) => {
         const previewToRemove = imagePreviews[index];
-
         if (!previewToRemove.isExisting) {
             URL.revokeObjectURL(previewToRemove.url);
         }
-
         const updatedPreviews = imagePreviews.filter((_, i) => i !== index);
         setImagePreviews(updatedPreviews);
 
@@ -175,6 +189,7 @@ export default function Products({ products, categories }) {
                     </h2>
                 </div>
 
+                {/* FILTER + ADD PRODUCT */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
                     <div className="flex flex-col w-full sm:w-auto">
                         <Label className="mb-3" htmlFor="filter">
@@ -240,9 +255,9 @@ export default function Products({ products, categories }) {
                                         </p>
                                     )}
                                 </div>
-                                <div>
-                                    <Label htmlFor="title">Slug</Label>
 
+                                <div>
+                                    <Label htmlFor="slug">Slug</Label>
                                     <Input
                                         id="slug"
                                         value={data.slug}
@@ -250,7 +265,7 @@ export default function Products({ products, categories }) {
                                             setData("slug", e.target.value)
                                         }
                                     />
-                                    {errors.title && (
+                                    {errors.slug && (
                                         <p className="text-sm text-red-500 mt-1">
                                             {errors.slug}
                                         </p>
@@ -317,6 +332,7 @@ export default function Products({ products, categories }) {
                                     )}
                                 </div>
 
+                                {/* IMAGE UPLOAD */}
                                 <div>
                                     <Label htmlFor="images">
                                         {t("dashboard.product_images")}
@@ -409,6 +425,7 @@ export default function Products({ products, categories }) {
                     </Dialog>
                 </div>
 
+                {/* VIEW PRODUCT DIALOG */}
                 <Dialog
                     open={isViewDialogOpen}
                     onOpenChange={setIsViewDialogOpen}
@@ -500,6 +517,7 @@ export default function Products({ products, categories }) {
                     </DialogContent>
                 </Dialog>
 
+                {/* PRODUCT TABLE */}
                 <div className="bg-card rounded-lg border overflow-x-auto">
                     <Table>
                         <TableHeader>
@@ -536,7 +554,7 @@ export default function Products({ products, categories }) {
                                     <TableCell>
                                         <div className="flex items-center">
                                             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                                {product.images != 0 ? (
+                                                {product.images?.length > 0 ? (
                                                     <span>
                                                         {product.images.length}{" "}
                                                         Images
@@ -579,6 +597,36 @@ export default function Products({ products, categories }) {
                     </Table>
                 </div>
             </div>
+
+            {/* CONFIRM DELETE DIALOG */}
+            <Dialog
+                open={isDeleteDialogOpen}
+                onOpenChange={setIsDeleteDialogOpen}
+            >
+                <DialogContent className="max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {t("dashboard.confirm_delete_title") ||
+                                "Confirm Delete"}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-muted-foreground">
+                        {t("dashboard.confirm_delete_message") ||
+                            "Are you sure you want to delete this product? This action cannot be undone."}
+                    </p>
+                    <div className="flex justify-end gap-3 mt-6">
+                        <Button
+                            variant="outline"
+                            onClick={() => setIsDeleteDialogOpen(false)}
+                        >
+                            {t("dashboard.cancel_button") || "Cancel"}
+                        </Button>
+                        <Button variant="destructive" onClick={confirmDelete}>
+                            {t("dashboard.delete_button") || "Delete"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </DashboardLayout>
     );
 }

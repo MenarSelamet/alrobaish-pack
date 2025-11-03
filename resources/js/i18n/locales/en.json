@@ -170,7 +170,10 @@
         "description": "Description",
         "slug": "Slug",
         "no_image": "No Images Available",
-        "products_in_category": "Products In Category"
+        "products_in_category": "Products In Category",
+        "cancel_button": "Cancel",
+        "confirm_delete_title": "Confirm Deletion",
+        "confirm_delete_message": "Are you sure you want to delete this item?"
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",
