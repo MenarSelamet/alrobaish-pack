@@ -151,6 +151,7 @@
         "view_product": "Product Details",
         "edit_button": "Edit Product",
         "delete_button": "Delete Product",
+        "delete_category_button": "Delete Category",
         "add_user": "Add User",
         "edit_user": "Edit User",
         "add_new_user": "Add New User",

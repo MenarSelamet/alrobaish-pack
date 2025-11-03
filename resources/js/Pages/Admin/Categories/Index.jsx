@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { Button } from "../../../Components/button";
 import { Input } from "../../../Components/input";
 import { Label } from "../../../Components/label";
@@ -23,10 +23,13 @@ import {
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export default function Categories({ categories, products }) {
+export default function Categories({ categories }) {
     const { t } = useTranslation();
+    const { flash } = usePage().props;
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [categoryToDelete, setCategoryToDelete] = useState(null);
 
     const {
         data,
@@ -75,8 +78,18 @@ export default function Categories({ categories, products }) {
     };
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this category?")) {
-            destroy(`/admin/dashboard/categories/${id}`);
+        setCategoryToDelete(id);
+        setIsDeleteDialogOpen(true);
+    };
+
+    const confirmDelete = () => {
+        if (categoryToDelete) {
+            destroy(`/admin/dashboard/categories/${categoryToDelete}`, {
+                onSuccess: () => {
+                    setIsDeleteDialogOpen(false);
+                    setCategoryToDelete(null);
+                },
+            });
         }
     };
 
@@ -266,6 +279,34 @@ export default function Categories({ categories, products }) {
                     </Table>
                 </div>
             </div>
+            <Dialog
+                open={isDeleteDialogOpen}
+                onOpenChange={setIsDeleteDialogOpen}
+            >
+                <DialogContent className="max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {t("dashboard.confirm_delete_title") ||
+                                "Confirm Delete"}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-muted-foreground">
+                        {t("dashboard.confirm_delete_message") ||
+                            "Are you sure you want to delete this product? This action cannot be undone."}
+                    </p>
+                    <div className="flex justify-end gap-3 mt-6">
+                        <Button
+                            variant="outline"
+                            onClick={() => setIsDeleteDialogOpen(false)}
+                        >
+                            {t("dashboard.cancel_button") || "Cancel"}
+                        </Button>
+                        <Button variant="destructive" onClick={confirmDelete}>
+                            {t("dashboard.delete_category_button") || "Delete"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </DashboardLayout>
     );
 }
