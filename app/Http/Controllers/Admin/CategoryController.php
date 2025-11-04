@@ -22,9 +22,12 @@ class CategoryController extends Controller
     {
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'slug' => 'required|string|max:255|unique:categories,slug',
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
+            'description_en' => 'nullable|string',
+            'description_ar' => 'nullable|string',
+            'slug_en' => 'required|string|max:255|unique:categories,slug',
+            'slug_ar' => 'required|string|max:255|unique:categories,slug',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
