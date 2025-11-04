@@ -21,6 +21,12 @@ import {
     TableRow,
 } from "../../../Components/table";
 import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "../../../Components/tabs";
+import {
     Select,
     SelectContent,
     SelectItem,
@@ -32,7 +38,6 @@ import { useTranslation } from "react-i18next";
 
 export default function Products({ products, categories }) {
     const { t } = useTranslation();
-    const { flash } = usePage().props;
 
     // --- STATE ---
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -54,10 +59,13 @@ export default function Products({ products, categories }) {
         reset,
         errors,
     } = useForm({
-        title: "",
-        slug: "",
+        title_en: "",
+        title_ar: "",
+        slug_en: "",
+        slug_ar: "",
         category_id: "",
-        description: "",
+        description_en: "",
+        description_ar: "",
         images: [],
     });
 
@@ -80,10 +88,13 @@ export default function Products({ products, categories }) {
     const handleEdit = (product) => {
         setEditingProduct(product);
         setData({
-            title: product.title || "",
-            slug: product.slug || "",
+            title_en: product.title_en || "",
+            title_ar: product.title_ar || "",
+            slug_en: product.slug_en || "",
+            slug_ar: product.slug_ar || "",
             category_id: product.category_id || "",
-            description: product.description || "",
+            description_en: product.description_en || "",
+            description_ar: product.description_ar || "",
             images: [],
         });
 
@@ -238,99 +249,262 @@ export default function Products({ products, categories }) {
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-4">
-                                <div>
-                                    <Label htmlFor="title">
-                                        {t("dashboard.product_name")}
-                                    </Label>
-                                    <Input
-                                        id="title"
-                                        value={data.title}
-                                        onChange={(e) =>
-                                            setData("title", e.target.value)
-                                        }
-                                    />
-                                    {errors.title && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.title}
-                                        </p>
-                                    )}
-                                </div>
+                                <Tabs
+                                    defaultValue="english"
+                                    className="space-y-4"
+                                >
+                                    <TabsList className="grid w-full grid-cols-2">
+                                        <TabsTrigger value="english">
+                                            English
+                                        </TabsTrigger>
+                                        <TabsTrigger value="arabic">
+                                            العربية
+                                        </TabsTrigger>
+                                    </TabsList>
 
-                                <div>
-                                    <Label htmlFor="slug">Slug</Label>
-                                    <Input
-                                        id="slug"
-                                        value={data.slug}
-                                        onChange={(e) =>
-                                            setData("slug", e.target.value)
-                                        }
-                                    />
-                                    {errors.slug && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.slug}
-                                        </p>
-                                    )}
-                                </div>
-
-                                <div>
-                                    <Label htmlFor="category_id">
-                                        {t("dashboard.product_category")}
-                                    </Label>
-                                    <Select
-                                        value={data.category_id}
-                                        onValueChange={(value) =>
-                                            setData("category_id", value)
-                                        }
+                                    <TabsContent
+                                        value="english"
+                                        className="space-y-4"
                                     >
-                                        <SelectTrigger id="category_id">
-                                            <SelectValue>
-                                                {data.category_id
-                                                    ? categories.find(
-                                                          (cat) =>
-                                                              cat.id ==
-                                                              data.category_id
-                                                      )?.name
-                                                    : "Select category"}
-                                            </SelectValue>
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {categories.map((category) => (
-                                                <SelectItem
-                                                    key={category.id}
-                                                    value={category.id}
-                                                >
-                                                    {category.name}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                    {errors.category_id && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.category_id}
-                                        </p>
-                                    )}
-                                </div>
+                                        <div>
+                                            <Label htmlFor="title_en">
+                                                {t("dashboard.product_name")}
+                                            </Label>
+                                            <Input
+                                                id="title_en"
+                                                value={data.title_en}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "title_en",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.title_en && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.title_en}
+                                                </p>
+                                            )}
+                                        </div>
 
-                                <div>
-                                    <Label htmlFor="description">
-                                        {t("dashboard.product_description")}
-                                    </Label>
-                                    <Textarea
-                                        id="description"
-                                        value={data.description}
-                                        onChange={(e) =>
-                                            setData(
-                                                "description",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                    {errors.description && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.description}
-                                        </p>
-                                    )}
-                                </div>
+                                        <div>
+                                            <Label htmlFor="slug_en">
+                                                Slug
+                                            </Label>
+                                            <Input
+                                                id="slug_en"
+                                                value={data.slug_en}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "slug_en",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.slug_en && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.slug_en}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <Label htmlFor="category_id">
+                                                {t(
+                                                    "dashboard.product_category"
+                                                )}
+                                            </Label>
+                                            <Select
+                                                value={data.category_id}
+                                                onValueChange={(value) =>
+                                                    setData(
+                                                        "category_id",
+                                                        value
+                                                    )
+                                                }
+                                            >
+                                                <SelectTrigger id="category_id">
+                                                    <SelectValue>
+                                                        {data.category_id
+                                                            ? categories.find(
+                                                                  (cat) =>
+                                                                      cat.id ==
+                                                                      data.category_id
+                                                              )?.name
+                                                            : "Select category"}
+                                                    </SelectValue>
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {categories.map(
+                                                        (category) => (
+                                                            <SelectItem
+                                                                key={
+                                                                    category.id
+                                                                }
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {
+                                                                    category.name_en
+                                                                }
+                                                            </SelectItem>
+                                                        )
+                                                    )}
+                                                </SelectContent>
+                                            </Select>
+                                            {errors.category_id && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.category_id}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <Label htmlFor="description_en">
+                                                {t(
+                                                    "dashboard.product_description"
+                                                )}
+                                            </Label>
+                                            <Textarea
+                                                id="description_en"
+                                                value={data.description_en}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "description_en",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.description_en && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.description_en}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </TabsContent>
+                                    <TabsContent
+                                        value="arabic"
+                                        className="space-y-4"
+                                    >
+                                        <div>
+                                            <Label htmlFor="title_ar">
+                                                {t("dashboard.product_name")}
+                                            </Label>
+                                            <Input
+                                                id="title_ar"
+                                                value={data.title_ar}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "title_ar",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.title_ar && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.title_ar}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <Label htmlFor="slug_ar">
+                                                Slug
+                                            </Label>
+                                            <Input
+                                                id="slug_ar"
+                                                value={data.slug_ar}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "slug_ar",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.slug_ar && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.slug_ar}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <Label htmlFor="category_id">
+                                                {t(
+                                                    "dashboard.product_category"
+                                                )}
+                                            </Label>
+                                            <Select
+                                                value={data.category_id}
+                                                onValueChange={(value) =>
+                                                    setData(
+                                                        "category_id",
+                                                        value
+                                                    )
+                                                }
+                                            >
+                                                <SelectTrigger id="category_id">
+                                                    <SelectValue>
+                                                        {data.category_id
+                                                            ? categories.find(
+                                                                  (cat) =>
+                                                                      cat.id ==
+                                                                      data.category_id
+                                                              )?.name
+                                                            : "Select category"}
+                                                    </SelectValue>
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {categories.map(
+                                                        (category) => (
+                                                            <SelectItem
+                                                                key={
+                                                                    category.id
+                                                                }
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {
+                                                                    category.name_ar
+                                                                }
+                                                            </SelectItem>
+                                                        )
+                                                    )}
+                                                </SelectContent>
+                                            </Select>
+                                            {errors.category_id && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.category_id}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <Label htmlFor="description_ar">
+                                                {t(
+                                                    "dashboard.product_description"
+                                                )}
+                                            </Label>
+                                            <Textarea
+                                                id="description_ar"
+                                                value={data.description_ar}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "description_ar",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            {errors.description_ar && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.description_ar}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </TabsContent>
+                                </Tabs>
 
                                 {/* IMAGE UPLOAD */}
                                 <div>

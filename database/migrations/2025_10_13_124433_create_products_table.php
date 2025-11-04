@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->string('short_description')->nullable();    
-            $table->string('description')->nullable();
-            $table->json('features')->nullable();
+            $table->string('title_en');
+            $table->string('title_ar');
+            $table->string('slug_en')->unique();
+            $table->string('slug_ar')->unique();
+            $table->string('short_description_en')->nullable();
+            $table->string('short_description_ar')->nullable();
+            $table->string('description_en')->nullable();
+            $table->string('description_ar')->nullable();
+            $table->json('features_en')->nullable();
+            $table->json('features_ar')->nullable();
             $table->string('image_path')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);

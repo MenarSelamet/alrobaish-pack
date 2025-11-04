@@ -22,18 +22,24 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:products,slug',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
+            'slug_en' => 'required|string|max:255|unique:products,slug',
+            'slug_ar' => 'required|string|max:255|unique:products,slug',
             'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable|string|max:500',
+            'description_en' => 'nullable|string|max:500',
+            'description_ar' => 'nullable|string|max:500',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $product = Product::create([
-            'title' => $validated['title'],
-            'slug' => $validated['slug'],
+            'title_en' => $validated['title_en'],
+            'title_ar' => $validated['title_ar'],
+            'slug_en' => $validated['slug_en'],
+            'slug_ar' => $validated['slug_ar'],
             'category_id' => $validated['category_id'],
-            'description' => $validated['description'] ?? null,
+            'description_en' => $validated['description_en'] ?? null,
+            'description_ar' => $validated['description_ar'] ?? null,
         ]);
 
         if ($request->hasFile('images')) {
@@ -49,10 +55,13 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'title' => 'string|max:255',
-            'slug' => 'string|max:255|unique:products,slug,' . $product->id,
+            'title_en' => 'string|max:255',
+            'title_ar' => 'string|max:255',
+            'slug_en' => 'string|max:255|unique:products,slug,' . $product->id,
+            'slug_ar' => 'string|max:255|unique:products,slug,' . $product->id,
             'category_id' => 'exists:categories,id',
-            'description' => 'nullable|string|max:500',
+            'description_en' => 'nullable|string|max:500',
+            'description_ar' => 'nullable|string|max:500',
             'image_path' => 'nullable|string|max:2048'
         ]);
 
