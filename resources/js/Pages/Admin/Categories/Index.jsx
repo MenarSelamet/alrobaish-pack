@@ -31,6 +31,8 @@ import { useTranslation } from "react-i18next";
 
 export default function Categories({ categories }) {
     const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -347,10 +349,14 @@ export default function Categories({ categories }) {
                                         )}
                                     </TableCell>
                                     <TableCell className="font-medium">
-                                        {category.name}
+                                        {lang === "ar"
+                                            ? category.name_ar
+                                            : category.name_en}
                                     </TableCell>
                                     <TableCell>
-                                        {category.description}
+                                        {lang === "ar"
+                                            ? category.description_ar
+                                            : category.description_en}
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center">

@@ -38,6 +38,8 @@ import { useTranslation } from "react-i18next";
 
 export default function Products({ products, categories }) {
     const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
 
     // --- STATE ---
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -719,12 +721,20 @@ export default function Products({ products, categories }) {
                                     onClick={() => handleViewProduct(product)}
                                 >
                                     <TableCell className="font-medium">
-                                        {product.title}
+                                        {lang === "ar"
+                                            ? product.title_ar
+                                            : product.title_en}
                                     </TableCell>
                                     <TableCell>
-                                        {product.category?.name}
+                                        {lang === "ar"
+                                            ? product.category?.name_ar
+                                            : product.category?.name_en}
                                     </TableCell>
-                                    <TableCell>{product.description}</TableCell>
+                                    <TableCell>
+                                        {lang === "ar"
+                                            ? product.description_ar
+                                            : product.description_en}
+                                    </TableCell>
                                     <TableCell>
                                         <div className="flex items-center">
                                             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
