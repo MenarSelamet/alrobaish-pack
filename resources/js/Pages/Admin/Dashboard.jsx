@@ -29,12 +29,6 @@ export default function Dashboard() {
             icon: Users,
             color: "text-secondary",
         },
-        {
-            title: t("dashboard.stats_orders"),
-            value: "10,234",
-            icon: ShoppingBag,
-            color: "text-primary",
-        },
     ];
     return (
         <DashboardLayout>

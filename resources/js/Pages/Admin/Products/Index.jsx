@@ -270,7 +270,7 @@ export default function Products({ products, categories }) {
                                     >
                                         <div>
                                             <Label htmlFor="title_en">
-                                                {t("dashboard.product_name")}
+                                                Product Name
                                             </Label>
                                             <Input
                                                 id="title_en"
@@ -312,9 +312,7 @@ export default function Products({ products, categories }) {
 
                                         <div>
                                             <Label htmlFor="category_id">
-                                                {t(
-                                                    "dashboard.product_category"
-                                                )}
+                                                Category
                                             </Label>
                                             <Select
                                                 value={data.category_id}
@@ -364,9 +362,7 @@ export default function Products({ products, categories }) {
 
                                         <div>
                                             <Label htmlFor="description_en">
-                                                {t(
-                                                    "dashboard.product_description"
-                                                )}
+                                                Description
                                             </Label>
                                             <Textarea
                                                 id="description_en"
@@ -382,6 +378,93 @@ export default function Products({ products, categories }) {
                                                 <p className="text-sm text-red-500 mt-1">
                                                     {errors.description_en}
                                                 </p>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="images">
+                                                Images
+                                            </Label>
+                                            <div className="flex gap-2">
+                                                <Input
+                                                    type="file"
+                                                    id="images"
+                                                    ref={fileInputRef}
+                                                    accept="image/*"
+                                                    multiple
+                                                    onChange={handleAddImages}
+                                                    className="hidden"
+                                                />
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Select images..."
+                                                    value={
+                                                        imagePreviews.length > 0
+                                                            ? `${imagePreviews.length} image(s) selected`
+                                                            : ""
+                                                    }
+                                                    readOnly
+                                                    className="flex-1"
+                                                />
+                                                <Button
+                                                    type="button"
+                                                    onClick={triggerFileInput}
+                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                >
+                                                    <Plus className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                            {errors.images && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.images}
+                                                </p>
+                                            )}
+
+                                            {imagePreviews.length > 0 && (
+                                                <div className="mt-4">
+                                                    <Label className="text-sm font-medium mb-2 block">
+                                                        Image Previews:
+                                                    </Label>
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                                        {imagePreviews.map(
+                                                            (
+                                                                preview,
+                                                                index
+                                                            ) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="relative group"
+                                                                >
+                                                                    <img
+                                                                        src={
+                                                                            preview.url
+                                                                        }
+                                                                        alt={`Preview ${
+                                                                            index +
+                                                                            1
+                                                                        }`}
+                                                                        className="w-full h-24 object-cover rounded border"
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() =>
+                                                                            handleRemoveImage(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                    >
+                                                                        <X className="h-3 w-3" />
+                                                                    </button>
+                                                                    <div className="text-xs text-center mt-1 truncate">
+                                                                        {
+                                                                            preview.name
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
                                             )}
                                         </div>
                                     </TabsContent>
@@ -505,91 +588,95 @@ export default function Products({ products, categories }) {
                                                 </p>
                                             )}
                                         </div>
+                                        <div>
+                                            <Label htmlFor="images">
+                                                {t("dashboard.product_images")}
+                                            </Label>
+                                            <div className="flex gap-2">
+                                                <Input
+                                                    type="file"
+                                                    id="images"
+                                                    ref={fileInputRef}
+                                                    accept="image/*"
+                                                    multiple
+                                                    onChange={handleAddImages}
+                                                    className="hidden"
+                                                />
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Select images..."
+                                                    value={
+                                                        imagePreviews.length > 0
+                                                            ? `${imagePreviews.length} image(s) selected`
+                                                            : ""
+                                                    }
+                                                    readOnly
+                                                    className="flex-1"
+                                                />
+                                                <Button
+                                                    type="button"
+                                                    onClick={triggerFileInput}
+                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                >
+                                                    <Plus className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                            {errors.images && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.images}
+                                                </p>
+                                            )}
+
+                                            {imagePreviews.length > 0 && (
+                                                <div className="mt-4">
+                                                    <Label className="text-sm font-medium mb-2 block">
+                                                        معرض الصور{" "}
+                                                    </Label>
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                                        {imagePreviews.map(
+                                                            (
+                                                                preview,
+                                                                index
+                                                            ) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="relative group"
+                                                                >
+                                                                    <img
+                                                                        src={
+                                                                            preview.url
+                                                                        }
+                                                                        alt={`Preview ${
+                                                                            index +
+                                                                            1
+                                                                        }`}
+                                                                        className="w-full h-24 object-cover rounded border"
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() =>
+                                                                            handleRemoveImage(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                    >
+                                                                        <X className="h-3 w-3" />
+                                                                    </button>
+                                                                    <div className="text-xs text-center mt-1 truncate">
+                                                                        {
+                                                                            preview.name
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </TabsContent>
                                 </Tabs>
-
-                                {/* IMAGE UPLOAD */}
-                                <div>
-                                    <Label htmlFor="images">
-                                        {t("dashboard.product_images")}
-                                    </Label>
-                                    <div className="flex gap-2">
-                                        <Input
-                                            type="file"
-                                            id="images"
-                                            ref={fileInputRef}
-                                            accept="image/*"
-                                            multiple
-                                            onChange={handleAddImages}
-                                            className="hidden"
-                                        />
-                                        <Input
-                                            type="text"
-                                            placeholder="Select images..."
-                                            value={
-                                                imagePreviews.length > 0
-                                                    ? `${imagePreviews.length} image(s) selected`
-                                                    : ""
-                                            }
-                                            readOnly
-                                            className="flex-1"
-                                        />
-                                        <Button
-                                            type="button"
-                                            onClick={triggerFileInput}
-                                            className="bg-green-600 hover:bg-green-700 text-white"
-                                        >
-                                            <Plus className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                    {errors.images && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.images}
-                                        </p>
-                                    )}
-
-                                    {imagePreviews.length > 0 && (
-                                        <div className="mt-4">
-                                            <Label className="text-sm font-medium mb-2 block">
-                                                Image Previews:
-                                            </Label>
-                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                                {imagePreviews.map(
-                                                    (preview, index) => (
-                                                        <div
-                                                            key={index}
-                                                            className="relative group"
-                                                        >
-                                                            <img
-                                                                src={
-                                                                    preview.url
-                                                                }
-                                                                alt={`Preview ${
-                                                                    index + 1
-                                                                }`}
-                                                                className="w-full h-24 object-cover rounded border"
-                                                            />
-                                                            <button
-                                                                type="button"
-                                                                onClick={() =>
-                                                                    handleRemoveImage(
-                                                                        index
-                                                                    )
-                                                                }
-                                                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                                                            >
-                                                                <X className="h-3 w-3" />
-                                                            </button>
-                                                            <div className="text-xs text-center mt-1 truncate">
-                                                                {preview.name}
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
 
                                 <Button type="submit" className="w-full">
                                     {editingProduct

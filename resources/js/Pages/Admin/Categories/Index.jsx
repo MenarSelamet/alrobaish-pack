@@ -158,7 +158,7 @@ export default function Categories({ categories }) {
                                     >
                                         <div>
                                             <Label htmlFor="name_en">
-                                                {t("dashboard.category_name")}
+                                                Category Name
                                             </Label>
                                             <Input
                                                 id="name_en"
@@ -178,7 +178,7 @@ export default function Categories({ categories }) {
                                         </div>
                                         <div>
                                             <Label htmlFor="slug_en">
-                                                {t("dashboard.slug")}
+                                                Slug
                                             </Label>
                                             <Input
                                                 id="slug_en"
@@ -198,9 +198,7 @@ export default function Categories({ categories }) {
                                         </div>
                                         <div>
                                             <Label htmlFor="description_en">
-                                                {t(
-                                                    "dashboard.category_description"
-                                                )}
+                                                Description
                                             </Label>
                                             <Textarea
                                                 id="description_en"
@@ -218,6 +216,27 @@ export default function Categories({ categories }) {
                                                 </p>
                                             )}
                                         </div>
+                                        <div>
+                                            <Label htmlFor="image_path">
+                                                Image URL
+                                            </Label>
+                                            <Input
+                                                type="file"
+                                                id="image_path"
+                                                accept="image/*"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "image_path",
+                                                        e.target.files[0]
+                                                    )
+                                                }
+                                            />
+                                            {errors.name && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.image}
+                                                </p>
+                                            )}
+                                        </div>
                                     </TabsContent>
                                     <TabsContent
                                         value="arabic"
@@ -225,7 +244,7 @@ export default function Categories({ categories }) {
                                     >
                                         <div>
                                             <Label htmlFor="name_ar">
-                                                {t("dashboard.category_name")}
+                                                إسم الفئة
                                             </Label>
                                             <Input
                                                 id="name_ar"
@@ -245,7 +264,7 @@ export default function Categories({ categories }) {
                                         </div>
                                         <div>
                                             <Label htmlFor="slug_ar">
-                                                {t("dashboard.slug")}
+                                                الرابط المختصر
                                             </Label>
                                             <Input
                                                 id="slug_ar"
@@ -265,9 +284,7 @@ export default function Categories({ categories }) {
                                         </div>
                                         <div>
                                             <Label htmlFor="description_ar">
-                                                {t(
-                                                    "dashboard.category_description"
-                                                )}
+                                                وصف الفئة
                                             </Label>
                                             <Textarea
                                                 id="description_ar"
@@ -285,30 +302,30 @@ export default function Categories({ categories }) {
                                                 </p>
                                             )}
                                         </div>
+                                        <div>
+                                            <Label htmlFor="image_path">
+                                                رابط الصورة
+                                            </Label>
+                                            <Input
+                                                type="file"
+                                                id="image_path"
+                                                accept="image/*"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "image_path",
+                                                        e.target.files[0]
+                                                    )
+                                                }
+                                            />
+                                            {errors.name && (
+                                                <p className="text-sm text-red-500 mt-1">
+                                                    {errors.image}
+                                                </p>
+                                            )}
+                                        </div>
                                     </TabsContent>
                                 </Tabs>
 
-                                <div>
-                                    <Label htmlFor="image_path">
-                                        {t("dashboard.category_image")}
-                                    </Label>
-                                    <Input
-                                        type="file"
-                                        id="image_path"
-                                        accept="image/*"
-                                        onChange={(e) =>
-                                            setData(
-                                                "image_path",
-                                                e.target.files[0]
-                                            )
-                                        }
-                                    />
-                                    {errors.name && (
-                                        <p className="text-sm text-red-500 mt-1">
-                                            {errors.image}
-                                        </p>
-                                    )}
-                                </div>
                                 <Button type="submit" className="w-full">
                                     {editingCategory
                                         ? t("dashboard.update")
