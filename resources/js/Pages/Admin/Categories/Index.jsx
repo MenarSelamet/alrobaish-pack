@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import { Button } from "../../../Components/button";
 import { Input } from "../../../Components/input";
 import { Label } from "../../../Components/label";

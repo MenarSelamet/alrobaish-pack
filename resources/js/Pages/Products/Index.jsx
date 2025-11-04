@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 
 const Products = ({ categories }) => {
     const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -50,10 +52,14 @@ const Products = ({ categories }) => {
                                     </div>
                                     <CardHeader>
                                         <CardTitle className="text-2xl">
-                                            {category.name}
+                                            {lang === "ar"
+                                                ? category.name_ar
+                                                : category.name_en}
                                         </CardTitle>
                                         <CardDescription className="text-base">
-                                            {category.description}
+                                            {lang === "ar"
+                                                ? category.description_ar
+                                                : category.description_en}
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>

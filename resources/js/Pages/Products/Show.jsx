@@ -3,9 +3,13 @@ import { ArrowLeft, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "@inertiajs/react";
 import { Card, CardContent } from "../../components/card";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ProductCategory = ({ category, products }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
 
     const nextImage = () => {
         setSelectedImageIndex((prev) =>
@@ -33,7 +37,10 @@ const ProductCategory = ({ category, products }) => {
                             Categories
                         </Link>
                         <h1 className="text-5xl font-bold text-foreground">
-                            Products in {category.name}
+                            Products in{" "}
+                            {lang === "ar"
+                                ? category.name_ar
+                                : category.name_en}
                         </h1>
                     </div>
                 </section>
@@ -130,10 +137,14 @@ const ProductCategory = ({ category, products }) => {
                                 <div className="space-y-6">
                                     <div>
                                         <h2 className="text-3xl font-bold text-foreground mb-4">
-                                            {product.title}
+                                            {lang === "ar"
+                                                ? product.title_ar
+                                                : product.title_en}
                                         </h2>
                                         <p className="text-lg text-muted-foreground leading-relaxed">
-                                            {product.description}
+                                            {lang === "ar"
+                                                ? product.description_ar
+                                                : product.description_en}
                                         </p>
                                     </div>
 
@@ -176,9 +187,9 @@ const ProductCategory = ({ category, products }) => {
                                                                 Description:{" "}
                                                             </span>
                                                             <span className="text-muted-foreground">
-                                                                {
-                                                                    product.short_description
-                                                                }
+                                                                {lang === "ar"
+                                                                    ? product.description_ar
+                                                                    : product.description_en}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -192,11 +203,13 @@ const ProductCategory = ({ category, products }) => {
                                                                 Category:{" "}
                                                             </span>
                                                             <span className="text-muted-foreground">
-                                                                {
-                                                                    product
-                                                                        .category
-                                                                        .name
-                                                                }
+                                                                {lang === "ar"
+                                                                    ? product
+                                                                          .category
+                                                                          .name_ar
+                                                                    : product
+                                                                          .category
+                                                                          .name_en}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -210,7 +223,9 @@ const ProductCategory = ({ category, products }) => {
                                                                 Product Code:{" "}
                                                             </span>
                                                             <span className="text-muted-foreground">
-                                                                {product.slug}
+                                                                {lang === "ar"
+                                                                    ? product.slug_ar
+                                                                    : product.slug_en}
                                                             </span>
                                                         </div>
                                                     </div>
