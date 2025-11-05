@@ -93,7 +93,7 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Mission Section */}
+                {/* Journey Section */}
                 <section className="py-20">
                     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
                         {/* Left Side */}
@@ -139,6 +139,77 @@ export default function Welcome() {
                     </div>
                 </section>
 
+                {/* Solutions Section */}
+                <section className="bg-[#6B7B3A] py-20">
+                    <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                        {/* Left side */}
+                        <div className="text-white">
+                            <h3 className="text-lg font-medium mb-4">
+                                Solutions
+                            </h3>
+                            <h2 className="text-4xl md:text-5xl font-serif font-semibold leading-tight mb-6">
+                                Explore What We Are Doing Better
+                            </h2>
+                            <p className="mb-8 text-gray-100 leading-relaxed">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Ut elit tellus, luctus nec
+                                ullamcorper mattis, pulvinar dapibus leo. Lorem
+                                ipsum dolor sit amet, consectetur adipiscing
+                                elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
+
+                            <Link href="/products">
+                                <Button className="bg-[#9C8C47] text-[#3A3310] hover:bg-[#8B7E40] shadow-md px-6 py-2">
+                                    Products{" "}
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Button>
+                            </Link>
+                        </div>
+
+                        {/* Right side */}
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
+                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
+                                    Paper Bags
+                                </h4>
+                                <p className="text-[#3B3D1F] text-sm">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit
+                                </p>
+                            </div>
+                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
+                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
+                                    Boxing
+                                </h4>
+                                <p className="text-[#3B3D1F] text-sm">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit
+                                </p>
+                            </div>
+                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
+                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
+                                    Paper Cups
+                                </h4>
+                                <p className="text-[#3B3D1F] text-sm">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit
+                                </p>
+                            </div>
+                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
+                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
+                                    Boxing
+                                </h4>
+                                <p className="text-[#3B3D1F] text-sm">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Mission Section */}
                 <section className="py-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center mb-16">
