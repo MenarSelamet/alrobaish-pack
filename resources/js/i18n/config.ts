@@ -12,10 +12,14 @@ i18n.use(LanguageDetector)
             en: { translation: en },
             ar: { translation: ar },
         },
-        fallbackLng: "en",
+        lng: "ar",
+        fallbackLng: "ar",
         interpolation: {
             escapeValue: false,
         },
     });
+
+    document.documentElement.dir = 'rtl';
+    document.documentElement.lang = 'ar';
 
 export default i18n;
