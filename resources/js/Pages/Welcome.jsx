@@ -52,44 +52,47 @@ export default function Welcome() {
                     </div>
                 </section>
                 {/* Stats Section */}
-                <section className="py-16 bg-primary/5">
+                <section className="relative z-30 -mt-16">
                     <div className="container mx-auto px-4">
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                            <div>
-                                <div className="text-4xl font-bold text-primary mb-2">
-                                    10,000+
+                        <div className="bg-white shadow-lg border-primary border-b-4 border-green-700 rounded-md">
+                            <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-300 text-center">
+                                <div className="p-8">
+                                    <div className="text-4xl font-bold text-primary mb-2">
+                                        10,000+
+                                    </div>
+                                    <div className="text-gray-600">
+                                        {t("home.stats_customers")}
+                                    </div>
                                 </div>
-                                <div className="text-muted-foreground">
-                                    {t("home.stats_customers")}
+                                <div className="p-8">
+                                    <div className="text-4xl font-bold text-primary mb-2">
+                                        5M+
+                                    </div>
+                                    <div className="text-gray-600">
+                                        {t("home.stats_bags")}
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div className="text-4xl font-bold text-primary mb-2">
-                                    5M+
+                                <div className="p-8">
+                                    <div className="text-4xl font-bold text-primary mb-2">
+                                        100%
+                                    </div>
+                                    <div className="text-gray-600">
+                                        {t("home.stats_recyclable")}
+                                    </div>
                                 </div>
-                                <div className="text-muted-foreground">
-                                    {t("home.stats_bags")}
-                                </div>
-                            </div>
-                            <div>
-                                <div className="text-4xl font-bold text-primary mb-2">
-                                    100%
-                                </div>
-                                <div className="text-muted-foreground">
-                                    {t("home.stats_recyclable")}
-                                </div>
-                            </div>
-                            <div>
-                                <div className="text-4xl font-bold text-primary mb-2">
-                                    15+
-                                </div>
-                                <div className="text-muted-foreground">
-                                    {t("home.stats_experience")}
+                                <div className="p-8">
+                                    <div className="text-4xl font-bold text-primary mb-2">
+                                        15+
+                                    </div>
+                                    <div className="text-gray-600">
+                                        {t("home.stats_experience")}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
                 {/* Mission Section */}
                 <section className="py-20">
                     <div className="container mx-auto px-4">
