@@ -33,11 +33,11 @@ const ProductCategory = ({ category, products }) => {
                             href="/products"
                             className="inline-flex items-center text-primary hover:underline mb-6"
                         >
-                            <ArrowLeft className="mr-2 h-4 w-4" /> Back to
-                            Categories
+                            <ArrowLeft className="mr-2 h-4 w-4" />{" "}
+                            {t("products.back_to_categories")}
                         </Link>
                         <h1 className="text-5xl font-bold text-foreground">
-                            Products in{" "}
+                            {t("products.products_in_category")}:
                             {lang === "ar"
                                 ? category.name_ar
                                 : category.name_en}
@@ -176,7 +176,9 @@ const ProductCategory = ({ category, products }) => {
                                     <Card>
                                         <CardContent className="pt-6">
                                             <h3 className="text-2xl font-bold text-foreground mb-6">
-                                                Product Specifications
+                                                {t(
+                                                    "products.product_specifications"
+                                                )}
                                             </h3>
                                             <div className="space-y-4">
                                                 {product.short_description && (
@@ -184,7 +186,10 @@ const ProductCategory = ({ category, products }) => {
                                                         <span className="h-2 w-2 rounded-full bg-primary mr-3 mt-2 flex-shrink-0" />
                                                         <div>
                                                             <span className="font-medium text-foreground">
-                                                                Description:{" "}
+                                                                {t(
+                                                                    "products.product_description"
+                                                                )}
+                                                                :{" "}
                                                             </span>
                                                             <span className="text-muted-foreground">
                                                                 {lang === "ar"
@@ -200,7 +205,10 @@ const ProductCategory = ({ category, products }) => {
                                                         <span className="h-2 w-2 rounded-full bg-primary mr-3 mt-2 flex-shrink-0" />
                                                         <div>
                                                             <span className="font-medium text-foreground">
-                                                                Category:{" "}
+                                                                {t(
+                                                                    "products.category"
+                                                                )}
+                                                                :{" "}
                                                             </span>
                                                             <span className="text-muted-foreground">
                                                                 {lang === "ar"
@@ -238,7 +246,7 @@ const ProductCategory = ({ category, products }) => {
                                     <div className="pt-4">
                                         <Link href="/contact">
                                             <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-                                                Request a Quote
+                                                {t("products.request_button")}
                                             </button>
                                         </Link>
                                     </div>

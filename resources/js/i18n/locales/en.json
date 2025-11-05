@@ -76,7 +76,13 @@
         "food_feature3": "Various capacities",
         "cta_custom_title": "Need Custom Solutions?",
         "cta_custom_subtitle": "We specialize in creating custom paper bags tailored to your exact specifications. Let's discuss your project!",
-        "cta_custom_button": "Get a Custom Quote"
+        "cta_custom_button": "Get a Custom Quote",
+        "back_to_categories": "Back to Categories",
+        "products_in_category": "Products in this Category",
+        "product_specifications": "Product Specifications",
+        "product_description": "Description",
+        "category": "Category",
+        "request_button": "Request a Demo"
     },
     "contact": {
         "title": "Contact Us",
@@ -174,11 +180,14 @@
         "products_in_category": "Products In Category",
         "cancel_button": "Cancel",
         "confirm_delete_title": "Confirm Deletion",
-        "confirm_delete_message": "Are you sure you want to delete this item?"
+        "confirm_delete_message": "Are you sure you want to delete this item?",
+        "password": "Password",
+        "select_role": "Select Role"
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",
         "quick_links": "Quick Links",
-        "contact": "Contact Us"
+        "contact": "Contact Us",
+        "rights_reserved": "EcoBag Co. All rights reserved."
     }
 }

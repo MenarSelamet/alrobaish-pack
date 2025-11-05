@@ -76,7 +76,13 @@
         "food_feature3": "سعات مختلفة",
         "cta_custom_title": "هل تحتاج حلول مخصصة؟",
         "cta_custom_subtitle": "نحن متخصصون في إنشاء أكياس ورقية مخصصة مصممة حسب مواصفاتك الدقيقة. دعنا نناقش مشروعك!",
-        "cta_custom_button": "احصل على عرض سعر مخصص"
+        "cta_custom_button": "احصل على عرض سعر مخصص",
+        "back_to_categories": "العودة إلى الفئات",
+        "products_in_category": "المنتجات في فئة",
+        "product_specifications": "المواصفات",
+        "product_description": "الوصف",
+        "category": "الفئة",
+        "request_button": "اطلب عرضًا توضيحيًا"
     },
     "contact": {
         "title": "اتصل بنا",
@@ -139,6 +145,7 @@
         "product_name": "اسم المنتج",
         "product_category": "الفئة",
         "product_description": "الوصف",
+        "products_in_category": "المنتجات في الفئة",
         "product_images": "الصور",
         "add_image": "إضافة صورة",
         "image_url": "رابط الصورة",
@@ -172,11 +179,13 @@
         "logout": "تسجيل الخروج",
         "slug": "الرابط المختصر",
         "no_image": "لا توجد صورة",
-        "password": "كلمة المرور"
+        "password": "كلمة المرور",
+        "select_role": "اختر الدور"
     },
     "footer": {
         "tagline": "حلول تغليف مستدامة لعملك",
         "quick_links": "روابط سريعة",
-        "contact": "اتصل بنا"
+        "contact": "اتصل بنا",
+        "rights_reserved": "جميع الحقوق محفوظة إيكو باغ"
     }
 }

@@ -1,7 +1,9 @@
 import { Package, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <footer className="bg-primary text-primary-foreground mt-20">
             <div className="container mx-auto px-4 py-12">
@@ -14,67 +16,72 @@ const Footer = () => {
                             </span>
                         </div>
                         <p className="text-sm opacity-90">
-                            Crafting sustainable paper bags for a greener
-                            tomorrow.
+                            {t("footer.tagline")}
                         </p>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold mb-4">Quick Links</h3>
+                        <h3 className="font-semibold mb-4">
+                            {t("footer.quick_links")}
+                        </h3>
                         <div className="flex flex-col gap-2 text-sm">
                             <Link
                                 to="/"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Home
+                                {t("nav.home")}
                             </Link>
                             <Link
                                 to="/about"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                About Us
+                                {t("nav.about")}
                             </Link>
                             <Link
                                 to="/products"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Products
+                                {t("nav.products")}
                             </Link>
                             <Link
                                 to="/contact"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Contact
+                                {t("nav.contact")}
                             </Link>
                         </div>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold mb-4">Products</h3>
+                        <h3 className="font-semibold mb-4">
+                            {t("products.title")}
+                        </h3>
                         <div className="flex flex-col gap-2 text-sm">
                             <Link
                                 to="/products/shopping"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Shopping Bags
+                                {t("products.shopping_title")}
                             </Link>
                             <Link
                                 to="/products/gift"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Gift Bags
+                                {t("products.gift_title")}
                             </Link>
                             <Link
                                 to="/products/food"
                                 className="opacity-90 hover:opacity-100 transition-opacity"
                             >
-                                Food Packaging
+                                {t("products.food_title")}
                             </Link>
                         </div>
                     </div>
 
                     <div>
-                        <h3 className="font-semibold mb-4">Contact Info</h3>
+                        <h3 className="font-semibold mb-4">
+                            {t("contact.title")}
+                        </h3>
                         <div className="flex flex-col gap-2 text-sm">
                             <div className="flex items-center gap-2 opacity-90">
                                 <Phone className="h-4 w-4" />
@@ -93,7 +100,7 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm opacity-90">
-                    © {new Date().getFullYear()} EcoBag Co. All rights reserved.
+                    © {new Date().getFullYear()} {t("footer.rights_reserved")}
                 </div>
             </div>
         </footer>

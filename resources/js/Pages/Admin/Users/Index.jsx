@@ -183,7 +183,7 @@ export default function Users({ users }) {
                                         }
                                     >
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select role" />
+                                            <SelectValue placeholder={t("dashboard.select_role")} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             {roles.map((role) => (

@@ -379,7 +379,7 @@ export default function Categories({ categories }) {
                                         <div className="flex items-center">
                                             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                                                 {category.products_count || 0}{" "}
-                                                products
+                                                {t("dashboard.products")}
                                             </span>
                                         </div>
                                     </TableCell>

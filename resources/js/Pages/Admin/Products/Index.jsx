@@ -828,7 +828,7 @@ export default function Products({ products, categories }) {
                                                 {product.images?.length > 0 ? (
                                                     <span>
                                                         {product.images.length}{" "}
-                                                        Images
+                                                        {t( "dashboard.image" )}
                                                     </span>
                                                 ) : (
                                                     <span className="text-muted-foreground text-sm">
