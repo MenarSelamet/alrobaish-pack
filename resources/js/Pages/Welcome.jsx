@@ -95,6 +95,51 @@ export default function Welcome() {
 
                 {/* Mission Section */}
                 <section className="py-20">
+                    <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                        {/* Left Side */}
+                        <div className="relative pl-6 border-l-4 border-yellow-700">
+                            <span className="text-sm uppercase tracking-wide text-gray-700 mb-2 block">
+                                {t("home.journey_subtitle")}
+                            </span>
+                            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 leading-snug">
+                                {t("home.journey_tagline")}
+                            </h2>
+                            <p className="text-gray-600 mb-8">
+                                {t("home.journey_text")}
+                            </p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-2">
+                                        {t("home.vision_title")}
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        {t("home.vision_text")}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-2">
+                                        {t("home.mission_title")}
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        {t("home.mission_text_2")}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Side */}
+                        <div className="flex justify-center">
+                            <img
+                                src="/images/food-bags.jpg"
+                                alt="Paper Bag"
+                                className="rounded-md shadow-md w-full max-w-md"
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center mb-16">
                             <h2 className="text-4xl font-bold text-foreground mb-6">
