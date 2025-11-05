@@ -33,7 +33,7 @@ export default function Welcome() {
                                 {t("home.hero_subtitle")}
                             </p>
                             <div className="flex gap-4">
-                                <Link to="/products">
+                                <Link href="/products">
                                     <Button
                                         size="lg"
                                         className="bg-primary hover:bg-primary/90"
@@ -42,7 +42,7 @@ export default function Welcome() {
                                         <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </Link>
-                                <Link to="/contact">
+                                <Link href="/contact">
                                     <Button size="lg" variant="outline">
                                         {t("home.cta_quote")}
                                     </Button>

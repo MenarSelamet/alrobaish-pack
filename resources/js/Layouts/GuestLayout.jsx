@@ -9,7 +9,7 @@ export default function GuestLayout({ children }) {
     const { t } = useTranslation();
     return (
         <div>
-            <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+            <div className="absolute top-0 left-0 w-full z-50 bg-transparent border-none">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 group">
                         <Package className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
@@ -42,7 +42,7 @@ export default function GuestLayout({ children }) {
                         >
                             {t("nav.contact")}
                         </Link>
-                        <ThemeToggle/>
+                        <ThemeToggle />
                         <LanguageSwitcher />
                     </div>
                 </div>
