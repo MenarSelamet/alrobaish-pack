@@ -195,5 +195,28 @@
         "quick_links": "Quick Links",
         "contact": "Contact Us",
         "rights_reserved": "EcoBag Co. All rights reserved."
+    },
+    "login": {
+        "title": "Admin Login",
+        "email": "Email",
+        "password": "Password",
+        "login_button": "Login",
+        "forgot_password": "Forgot your password?",
+        "invalid_credentials": "Invalid email or password.",
+        "remember_me": "Remember Me"
+    },
+    "solutions": {
+        "title": "Solutions for Every Industry",
+        "subtitle": "Explore our tailored paper bag solutions designed to meet the unique needs of various industries.",
+        "text": "At EcoBag Co., we understand that different industries have distinct packaging requirements. That's why we offer specialized paper bag solutions that cater to a variety of sectors, ensuring that your packaging not only meets your functional needs but also aligns with your brand values and sustainability goals.",
+        "products_button": "Explore Products",
+        "retail_title": "Retail",
+        "retail_text": "Enhance your brand with our durable and customizable shopping bags, perfect for boutiques, department stores, and specialty shops.",
+        "food_title": "Food Service",
+        "food_text": "Our food-safe paper bags are ideal for restaurants, cafes, and bakeries, providing hygienic and eco-friendly packaging options.",
+        "events_title": "Events & Hospitality",
+        "events_text": "Make a lasting impression with our elegant gift bags, perfect for weddings, corporate events, and hospitality services.",
+        "ecommerce_title": "E-commerce",
+        "ecommerce_text": "Protect your products during shipping with our sturdy and recyclable packaging solutions designed for online retailers."
     }
 }

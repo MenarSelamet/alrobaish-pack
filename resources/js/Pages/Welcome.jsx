@@ -1,12 +1,14 @@
 import { Head, Link } from "@inertiajs/react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../Components/button";
-import { ArrowRight, Package, Leaf, Award } from "lucide-react";
+import { ArrowRight, ArrowLeft, Package, Leaf, Award } from "lucide-react";
 import GuestLayout from "../Layouts/GuestLayout";
 import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
     const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
 
     return (
         <GuestLayout>
@@ -39,7 +41,11 @@ export default function Welcome() {
                                         className="bg-primary hover:bg-primary/90"
                                     >
                                         {t("home.cta_products")}
-                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                        {lang === "ar" ? (
+                                            <ArrowLeft className="ml-2 h-4 w-4" />
+                                        ) : (
+                                            <ArrowRight className="ml-2 h-4 w-4" />
+                                        )}
                                     </Button>
                                 </Link>
                                 <Link href="/contact">
@@ -97,7 +103,14 @@ export default function Welcome() {
                 <section className="py-20">
                     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
                         {/* Left Side */}
-                        <div className="relative pl-6 border-l-4 border-yellow-700">
+
+                        <div
+                            className={
+                                lang === "ar"
+                                    ? "relative pr-6 border-r-4 border-yellow-700"
+                                    : "relative pl-6 border-l-4 border-yellow-700"
+                            }
+                        >
                             <span className="text-sm uppercase tracking-wide text-gray-700 mb-2 block">
                                 {t("home.journey_subtitle")}
                             </span>
@@ -140,71 +153,86 @@ export default function Welcome() {
                 </section>
 
                 {/* Solutions Section */}
-                <section className="bg-[#6B7B3A] py-20">
+                <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
                         {/* Left side */}
                         <div className="text-white">
                             <h3 className="text-lg font-medium mb-4">
-                                Solutions
+                                {t("solutions.title")}
                             </h3>
                             <h2 className="text-4xl md:text-5xl font-serif font-semibold leading-tight mb-6">
-                                Explore What We Are Doing Better
+                                {t("solutions.subtitle")}
                             </h2>
                             <p className="mb-8 text-gray-100 leading-relaxed">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Ut elit tellus, luctus nec
-                                ullamcorper mattis, pulvinar dapibus leo. Lorem
-                                ipsum dolor sit amet, consectetur adipiscing
-                                elit. Ut elit tellus, luctus nec ullamcorper
-                                mattis, pulvinar dapibus leo.
+                                {t("solutions.text")}
                             </p>
 
                             <Link href="/products">
-                                <Button className="bg-[#9C8C47] text-[#3A3310] hover:bg-[#8B7E40] shadow-md px-6 py-2">
-                                    Products{" "}
-                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                <Button size="lg" variant="secondary">
+                                    {t("solutions.products_button")}{" "}
+                                    {lang === "ar" ? (
+                                        <ArrowLeft className="ml-2 h-4 w-4" />
+                                    ) : (
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    )}
                                 </Button>
                             </Link>
                         </div>
 
                         {/* Right side */}
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
-                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
-                                    Paper Bags
-                                </h4>
-                                <p className="text-[#3B3D1F] text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit
-                                </p>
-                            </div>
-                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
-                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
-                                    Boxing
-                                </h4>
-                                <p className="text-[#3B3D1F] text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit
-                                </p>
-                            </div>
-                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
-                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
-                                    Paper Cups
-                                </h4>
-                                <p className="text-[#3B3D1F] text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit
-                                </p>
-                            </div>
-                            <div className="bg-[#EEEAE2] text-center p-8 border border-[#D6D0C3]">
-                                <h4 className="font-semibold text-[#3B3D1F] mb-2">
-                                    Boxing
-                                </h4>
-                                <p className="text-[#3B3D1F] text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit
-                                </p>
-                            </div>
+                            <Card className="bg-[#EEEAE2]  p-6 hover:shadow-lg transition-shadow">
+                                <CardContent>
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Leaf className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        {t("solutions.retail_title")}
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        {t("solutions.retail_text")}
+                                    </p>
+                                </CardContent>
+                            </Card>
+                            <Card className="bg-[#EEEAE2]  p-6">
+                                <CardContent>
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Package className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        {t("solutions.food_title")}
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        {t("solutions.food_text")}
+                                    </p>
+                                </CardContent>
+                            </Card>
+                            <Card className="bg-[#EEEAE2]  p-6 ">
+                                <CardContent>
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Package className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        {t("solutions.events_title")}
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        {t("solutions.events_text")}
+                                    </p>
+                                </CardContent>
+                            </Card>
+                            <Card className="bg-[#EEEAE2]  p-6 ">
+                                <CardContent>
+                                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                        <Award className="h-6 w-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold mb-3">
+                                        {t("solutions.ecommerce_title")}
+                                    </h3>
+                                    <p className="text-muted-foreground">
+                                        {t("solutions.ecommerce_text")}
+                                    </p>
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
                 </section>

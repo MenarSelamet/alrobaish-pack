@@ -5,8 +5,10 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 export default function Login({ status, canResetPassword }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -33,12 +35,15 @@ export default function Login({ status, canResetPassword }) {
                     )}
 
                     <h2 className="text-2xl font-semibold text-center mb-6">
-                        Welcome Back
+                        {t("login.title")}
                     </h2>
 
                     <form onSubmit={submit}>
                         <div>
-                            <InputLabel htmlFor="email" value="Email" />
+                            <InputLabel
+                                htmlFor="email"
+                                value={t("login.email")}
+                            />
 
                             <TextInput
                                 id="email"
@@ -60,7 +65,10 @@ export default function Login({ status, canResetPassword }) {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password" value="Password" />
+                            <InputLabel
+                                htmlFor="password"
+                                value={t("login.password")}
+                            />
 
                             <TextInput
                                 id="password"
@@ -90,7 +98,7 @@ export default function Login({ status, canResetPassword }) {
                                     }
                                 />
                                 <span className="ms-2 text-sm text-gray-600">
-                                    Remember me
+                                    {t("login.remember_me")}
                                 </span>
                             </label>
                         </div>
@@ -101,12 +109,12 @@ export default function Login({ status, canResetPassword }) {
                                     href={route("password.request")}
                                     className="text-sm text-gray-600 underline hover:text-gray-900"
                                 >
-                                    Forgot your password?
+                                    {t("login.forgot_password")}
                                 </Link>
                             )}
 
                             <PrimaryButton disabled={processing}>
-                                Log in
+                                {t("login.login_button")}
                             </PrimaryButton>
                         </div>
                     </form>
