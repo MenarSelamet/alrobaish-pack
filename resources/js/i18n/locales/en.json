@@ -218,5 +218,17 @@
         "events_text": "Make a lasting impression with our elegant gift bags, perfect for weddings, corporate events, and hospitality services.",
         "ecommerce_title": "E-commerce",
         "ecommerce_text": "Protect your products during shipping with our sturdy and recyclable packaging solutions designed for online retailers."
+    },
+    "success":{
+        "title": "Success Stories",
+        "subtitle_1": "See how our sustainable paper bag solutions",
+        "subtitle_2": "have helped businesses like yours make a positive impact.",
+        "subtitle_3": "We are with you every step you take",
+        "story1_title": "Understanding Your Business",
+        "story1_text": "We take the time to understand your unique packaging needs and sustainability goals, ensuring our solutions align perfectly with your business objectives.",
+        "story2_title": "Designing Your Products",
+        "story2_text": "We collaborate closely with you to design custom paper bags that reflect your brand identity while prioritizing eco-friendly materials and practices.",
+        "story3_title": "Creating Your Product",
+        "story3_text": "We utilize advanced manufacturing techniques to produce high-quality, durable paper bags that meet your specifications and exceed your expectations."
     }
 }
