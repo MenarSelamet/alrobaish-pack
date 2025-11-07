@@ -19,6 +19,7 @@ const Products = ({ categories }) => {
     return (
         <GuestLayout>
             <div className="min-h-screen">
+            
                 {/* Hero Section */}
                 <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
                     <div className="container mx-auto px-4">

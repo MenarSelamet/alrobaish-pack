@@ -236,6 +236,76 @@ export default function Welcome() {
                         </div>
                     </div>
                 </section>
+                <section
+                    className="relative h-[700px] flex flex-col justify-center text-center text-white bg-fixed bg-cover bg-center"
+                    style={{ backgroundImage: "url('/images/hero-bags.jpg')" }}
+                >
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/50"></div>
+
+                    {/* Content */}
+                    <div className="relative z-10 px-4 max-w-4xl mx-auto">
+                        <h3 className="text-lg font-medium mb-2 text-[#e4dfc4]">
+                            Three Steps For Success
+                        </h3>
+                        <h2 className="text-3xl md:text-4xl font-semibold leading-snug mb-4 text-[#f2f0d8]">
+                            Discover the Journey of Our <br />
+                            Eco-Friendly Paper Bag <br />
+                            Manufacturing Process
+                        </h2>
+                        <p className="text-[#e6b264] text-lg">
+                            We are with you every step you take
+                        </p>
+                    </div>
+                    {/* Solutions Section */}
+                    {/* Cards */}
+                    <div className="relative z-10 mt-12 flex flex-col md:flex-row justify-center gap-6 px-6">
+                        {/* Step 1 */}
+                        <div className="bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 border-l-4 border-[#f2b85d]">
+                            <h3 className="text-2xl font-bold text-black mb-2">
+                                01
+                            </h3>
+                            <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                Understanding Your Business
+                            </h4>
+                            <p className="text-sm text-gray-600">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Ut elit tellus, luctus nec
+                                ullamcorper mattis, pulvinar dapibus leo.
+                            </p>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 border-l-4 border-[#f2b85d]">
+                            <h3 className="text-2xl font-bold text-black mb-2">
+                                02
+                            </h3>
+                            <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                Designing Your Product
+                            </h4>
+                            <p className="text-sm text-gray-600">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Ut elit tellus, luctus nec
+                                ullamcorper mattis, pulvinar dapibus leo.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 border-l-4 border-[#f2b85d]">
+                            <h3 className="text-2xl font-bold text-black mb-2">
+                                03
+                            </h3>
+                            <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                Creating Your Product
+                            </h4>
+                            <p className="text-sm text-gray-600">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Ut elit tellus, luctus nec
+                                ullamcorper mattis, pulvinar dapibus leo.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
                 {/* Mission Section */}
                 <section className="py-20">
