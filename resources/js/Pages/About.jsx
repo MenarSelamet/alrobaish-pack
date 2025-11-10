@@ -4,7 +4,14 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "../Components/accordion";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+} from "../components/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import GuestLayout from "../Layouts/GuestLayout";
+import { Building2, Store, ShoppingBag, Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
@@ -41,8 +48,77 @@ const About = () => {
                         </div>
                     </div>
                 </section>
+                {/* Partners Section */}
+                <section className="bg-green-800 py-16 bg-muted/30">
+                    <div className="container mx-auto px-4">
+                        <div className="max-w-5xl mx-auto">
+                            <h2 className="text-3xl font-bold text-foreground mb-12 text-center text-white">
+                                {t("about.partners_title")}
+                            </h2>
+                            <Carousel
+                                opts={{
+                                    align: "start",
+                                    loop: true,
+                                }}
+                                plugins={[
+                                    Autoplay({
+                                        delay: 3000,
+                                    }),
+                                ]}
+                                className="w-full"
+                            >
+                                <CarouselContent className="-ml-4">
+                                    {[
+                                        {
+                                            icon: Building2,
+                                            name: "Corporate Partners",
+                                        },
+                                        { icon: Store, name: "Retail Chain" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        { icon: Package, name: "E-commerce" },
+                                        {
+                                            icon: Building2,
+                                            name: "Logistics Co",
+                                        },
+                                        { icon: Package, name: "E-commerce" },
+                                        {
+                                            icon: Building2,
+                                            name: "Logistics Co",
+                                        },
+                                        { icon: Package, name: "E-commerce" },
+                                        {
+                                            icon: Building2,
+                                            name: "Logistics Co",
+                                        },
+                                        { icon: Store, name: "Supermarkets" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Boutiques",
+                                        },
+                                        { icon: Package, name: "Distribution" },
+                                    ].map((partner, index) => {
+                                        const Icon = partner.icon;
+                                        return (
+                                            <CarouselItem
+                                                key={index}
+                                                className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
+                                            >
+                                                <div className="flex items-center justify-center p-8 bg-background rounded-lg border border-border hover:shadow-lg transition-shadow">
+                                                    <Icon className="h-12 w-12 text-primary" />
+                                                </div>
+                                            </CarouselItem>
+                                        );
+                                    })}
+                                </CarouselContent>
+                            </Carousel>
+                        </div>
+                    </div>
+                </section>
                 {/* Values Section */}
-                <section className="py-16 bg-muted/30">
+                <section className=" py-16 bg-muted/30">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-3xl font-bold text-foreground mb-12 text-center">
