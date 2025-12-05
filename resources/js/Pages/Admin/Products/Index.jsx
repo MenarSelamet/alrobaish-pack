@@ -63,8 +63,6 @@ export default function Products({ products, categories }) {
     } = useForm({
         title_en: "",
         title_ar: "",
-        slug_en: "",
-        slug_ar: "",
         category_id: "",
         description_en: "",
         description_ar: "",
@@ -92,8 +90,6 @@ export default function Products({ products, categories }) {
         setData({
             title_en: product.title_en || "",
             title_ar: product.title_ar || "",
-            slug_en: product.slug_en || "",
-            slug_ar: product.slug_ar || "",
             category_id: product.category_id || "",
             description_en: product.description_en || "",
             description_ar: product.description_ar || "",
@@ -288,28 +284,6 @@ export default function Products({ products, categories }) {
                                                 </p>
                                             )}
                                         </div>
-
-                                        <div>
-                                            <Label htmlFor="slug_en">
-                                                Slug
-                                            </Label>
-                                            <Input
-                                                id="slug_en"
-                                                value={data.slug_en}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "slug_en",
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
-                                            {errors.slug_en && (
-                                                <p className="text-sm text-red-500 mt-1">
-                                                    {errors.slug_en}
-                                                </p>
-                                            )}
-                                        </div>
-
                                         <div>
                                             <Label htmlFor="category_id">
                                                 Category
@@ -489,27 +463,6 @@ export default function Products({ products, categories }) {
                                             {errors.title_ar && (
                                                 <p className="text-sm text-red-500 mt-1">
                                                     {errors.title_ar}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        <div>
-                                            <Label htmlFor="slug_ar">
-                                                Slug
-                                            </Label>
-                                            <Input
-                                                id="slug_ar"
-                                                value={data.slug_ar}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "slug_ar",
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
-                                            {errors.slug_ar && (
-                                                <p className="text-sm text-red-500 mt-1">
-                                                    {errors.slug_ar}
                                                 </p>
                                             )}
                                         </div>
