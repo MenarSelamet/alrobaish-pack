@@ -14,8 +14,6 @@ class Product extends Model
         'category_id',
         'title_en',
         'title_ar',
-        'slug_en',
-        'slug_ar',
         'short_descritpion_en',
         'short_descritpion_ar',
         'description_en',
