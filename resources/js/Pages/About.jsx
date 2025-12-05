@@ -78,20 +78,35 @@ const About = () => {
                                             icon: ShoppingBag,
                                             name: "Fashion Brands",
                                         },
-                                        { icon: Package, name: "E-commerce" },
+                                        { icon: Store, name: "Retail Chain" },
                                         {
-                                            icon: Building2,
-                                            name: "Logistics Co",
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        { icon: Store, name: "Retail Chain" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        { icon: Store, name: "Retail Chain" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
                                         },
                                         { icon: Package, name: "E-commerce" },
                                         {
                                             icon: Building2,
                                             name: "Logistics Co",
                                         },
-                                        { icon: Package, name: "E-commerce" },
+                                        { icon: Store, name: "Supermarkets" },
                                         {
-                                            icon: Building2,
-                                            name: "Logistics Co",
+                                            icon: ShoppingBag,
+                                            name: "Boutiques",
+                                        },
+                                        { icon: Store, name: "Supermarkets" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Boutiques",
                                         },
                                         { icon: Store, name: "Supermarkets" },
                                         {

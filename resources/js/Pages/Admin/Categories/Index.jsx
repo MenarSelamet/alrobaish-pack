@@ -83,8 +83,6 @@ export default function Categories({ categories }) {
             name_ar: category.name_ar,
             description_en: category.description_en,
             description_ar: category.description_ar,
-            slug_en: category.slug_en,
-            slug_ar: category.slug_ar,
             image_path: category.image,
         });
         setIsDialogOpen(true);
@@ -177,26 +175,6 @@ export default function Categories({ categories }) {
                                             )}
                                         </div>
                                         <div>
-                                            <Label htmlFor="slug_en">
-                                                Slug
-                                            </Label>
-                                            <Input
-                                                id="slug_en"
-                                                value={data.slug_en}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "slug_en",
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
-                                            {errors.slug_en && (
-                                                <p className="text-sm text-red-500 mt-1">
-                                                    {errors.slug_en}
-                                                </p>
-                                            )}
-                                        </div>
-                                        <div>
                                             <Label htmlFor="description_en">
                                                 Description
                                             </Label>
@@ -259,26 +237,6 @@ export default function Categories({ categories }) {
                                             {errors.name_ar && (
                                                 <p className="text-sm text-red-500 mt-1">
                                                     {errors.name_ar}
-                                                </p>
-                                            )}
-                                        </div>
-                                        <div>
-                                            <Label htmlFor="slug_ar">
-                                                الرابط المختصر
-                                            </Label>
-                                            <Input
-                                                id="slug_ar"
-                                                value={data.slug_ar}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "slug_ar",
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
-                                            {errors.slug_ar && (
-                                                <p className="text-sm text-red-500 mt-1">
-                                                    {errors.slug_ar}
                                                 </p>
                                             )}
                                         </div>
