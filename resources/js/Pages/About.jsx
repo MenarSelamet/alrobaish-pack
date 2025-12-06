@@ -49,7 +49,7 @@ const About = () => {
                     </div>
                 </section>
                 {/* Partners Section */}
-                <section className="bg-green-800 py-16 bg-muted/30">
+                <section className="bg-green-700 py-16 bg-muted/30">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-3xl font-bold text-foreground mb-12 text-center text-white">
@@ -62,7 +62,7 @@ const About = () => {
                                 }}
                                 plugins={[
                                     Autoplay({
-                                        delay: 3000,
+                                        delay: 1000,
                                     }),
                                 ]}
                                 className="w-full"
@@ -83,6 +83,22 @@ const About = () => {
                                             icon: ShoppingBag,
                                             name: "Fashion Brands",
                                         },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Fashion Brands",
+                                        },
                                         { icon: Store, name: "Retail Chain" },
                                         {
                                             icon: ShoppingBag,
@@ -97,6 +113,16 @@ const About = () => {
                                         {
                                             icon: Building2,
                                             name: "Logistics Co",
+                                        },
+                                        { icon: Store, name: "Supermarkets" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Boutiques",
+                                        },
+                                        { icon: Store, name: "Supermarkets" },
+                                        {
+                                            icon: ShoppingBag,
+                                            name: "Boutiques",
                                         },
                                         { icon: Store, name: "Supermarkets" },
                                         {
