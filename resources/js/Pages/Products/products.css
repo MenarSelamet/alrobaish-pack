@@ -1,0 +1,94 @@
+/* PAGE */
+.catalog-page {
+  padding: 6rem 10%;
+  background: #faf9f7;
+  background-image: radial-gradient(
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+}
+
+/* SECTION */
+.catalog-section {
+  margin-bottom: 6rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.catalog-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HEADER */
+.catalog-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.catalog-header h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+/* GRID */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+/* IMAGE CARD */
+.catalog-image {
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.75rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.catalog-section.is-visible .catalog-image {
+  animation-name: fadeInUp;
+}
+
+.catalog-image img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* ANIMATION */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .catalog-page {
+    padding: 4rem 6%;
+  }
+
+  .catalog-header h2 {
+    font-size: 2rem;
+  }
+}

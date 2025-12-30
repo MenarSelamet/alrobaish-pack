@@ -12,10 +12,8 @@ export default function GuestLayout({ children }) {
             <div className="absolute top-0 left-0 w-full z-50 bg-transparent border-none">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 group">
-                        <Package className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
-                        <span className="text-xl font-bold text-foreground">
-                            Alrobaish Pack
-                        </span>
+                       <img className="w-32" src="/images/logo.png"/>
+                        
                     </Link>
                     <div className="flex items-center gap-6">
                         <Link

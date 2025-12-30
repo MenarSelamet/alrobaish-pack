@@ -49,7 +49,7 @@ const About = () => {
                     </div>
                 </section>
                 {/* Partners Section */}
-                <section className="bg-green-700 py-16 bg-muted/30">
+                <section className="bg-primary py-16 ">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-3xl font-bold text-foreground mb-12 text-center text-white">
@@ -145,7 +145,7 @@ const About = () => {
                                         return (
                                             <CarouselItem
                                                 key={index}
-                                                className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
+                                                className=" pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
                                             >
                                                 <div className="flex items-center justify-center p-8 bg-background rounded-lg border border-border hover:shadow-lg transition-shadow">
                                                     <Icon className="h-12 w-12 text-primary" />
