@@ -25,6 +25,8 @@ export default function ResetPassword({ token, email }) {
         <GuestLayout>
             <Head title="Reset Password" />
 
+            <div className="flex items-center justify-center min-h-screen">
+            <div className="w-full max-w-md bg-card shadow-md rounded-lg p-8 border border-border">
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
@@ -89,6 +91,8 @@ export default function ResetPassword({ token, email }) {
                     </PrimaryButton>
                 </div>
             </form>
+            </div>
+            </div>
         </GuestLayout>
     );
 }

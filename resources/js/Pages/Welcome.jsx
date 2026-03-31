@@ -60,13 +60,13 @@ export default function Welcome() {
                 {/* Stats Section */}
                 <section className="relative z-30 -mt-16">
                     <div className="container mx-auto px-4">
-                        <div className="bg-white shadow-lg border-primary border-b-4 border-green-700 rounded-md">
-                            <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-300 text-center">
+                        <div className="bg-card shadow-lg border-primary border-b-4 border-green-700 rounded-md">
+                            <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border text-center">
                                 <div className="p-8">
                                     <div className="text-4xl font-bold text-primary mb-2">
                                         10,000+
                                     </div>
-                                    <div className="text-gray-600">
+                                    <div className="text-muted-foreground">
                                         {t("home.stats_customers")}
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ export default function Welcome() {
                                     <div className="text-4xl font-bold text-primary mb-2">
                                         5M+
                                     </div>
-                                    <div className="text-gray-600">
+                                    <div className="text-muted-foreground">
                                         {t("home.stats_bags")}
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@ export default function Welcome() {
                                     <div className="text-4xl font-bold text-primary mb-2">
                                         100%
                                     </div>
-                                    <div className="text-gray-600">
+                                    <div className="text-muted-foreground">
                                         {t("home.stats_recyclable")}
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@ export default function Welcome() {
                                     <div className="text-4xl font-bold text-primary mb-2">
                                         15+
                                     </div>
-                                    <div className="text-gray-600">
+                                    <div className="text-muted-foreground">
                                         {t("home.stats_experience")}
                                     </div>
                                 </div>
@@ -111,13 +111,13 @@ export default function Welcome() {
                                     : "relative pl-6 border-l-4 border-yellow-700"
                             }
                         >
-                            <span className="text-sm uppercase tracking-wide text-gray-700 mb-2 block">
+                            <span className="text-sm uppercase tracking-wide text-muted-foreground mb-2 block">
                                 {t("home.journey_subtitle")}
                             </span>
                             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 leading-snug">
                                 {t("home.journey_tagline")}
                             </h2>
-                            <p className="text-gray-600 mb-8">
+                            <p className="text-muted-foreground mb-8">
                                 {t("home.journey_text")}
                             </p>
 
@@ -126,7 +126,7 @@ export default function Welcome() {
                                     <h3 className="text-lg font-semibold mb-2">
                                         {t("home.vision_title")}
                                     </h3>
-                                    <p className="text-gray-600">
+                                    <p className="text-muted-foreground">
                                         {t("home.vision_text")}
                                     </p>
                                 </div>
@@ -134,7 +134,7 @@ export default function Welcome() {
                                     <h3 className="text-lg font-semibold mb-2">
                                         {t("home.mission_title")}
                                     </h3>
-                                    <p className="text-gray-600">
+                                    <p className="text-muted-foreground">
                                         {t("home.mission_text_2")}
                                     </p>
                                 </div>
@@ -156,14 +156,14 @@ export default function Welcome() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
                         {/* Left side */}
-                        <div className="text-white">
+                        <div className="text-primary-foreground">
                             <h3 className="text-lg font-medium mb-4">
                                 {t("solutions.title")}
                             </h3>
                             <h2 className="text-4xl md:text-5xl font-serif font-semibold leading-tight mb-6">
                                 {t("solutions.subtitle")}
                             </h2>
-                            <p className="mb-8 text-gray-100 leading-relaxed">
+                            <p className="mb-8 text-primary-foreground/80 leading-relaxed">
                                 {t("solutions.text")}
                             </p>
 
@@ -181,7 +181,7 @@ export default function Welcome() {
 
                         {/* Right side */}
                         <div className="grid grid-cols-2 gap-2">
-                            <Card className="bg-[#EEEAE2]  p-6 hover:shadow-lg transition-shadow">
+                            <Card className="bg-card p-6 hover:shadow-lg transition-shadow">
                                 <CardContent>
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Leaf className="h-6 w-6 text-primary" />
@@ -194,7 +194,7 @@ export default function Welcome() {
                                     </p>
                                 </CardContent>
                             </Card>
-                            <Card className="bg-[#EEEAE2]  p-6">
+                            <Card className="bg-card p-6">
                                 <CardContent>
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Package className="h-6 w-6 text-primary" />
@@ -207,7 +207,7 @@ export default function Welcome() {
                                     </p>
                                 </CardContent>
                             </Card>
-                            <Card className="bg-[#EEEAE2]  p-6 ">
+                            <Card className="bg-card p-6">
                                 <CardContent>
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Package className="h-6 w-6 text-primary" />
@@ -220,7 +220,7 @@ export default function Welcome() {
                                     </p>
                                 </CardContent>
                             </Card>
-                            <Card className="bg-[#EEEAE2]  p-6 ">
+                            <Card className="bg-card p-6">
                                 <CardContent>
                                     <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                                         <Award className="h-6 w-6 text-primary" />
@@ -330,57 +330,57 @@ export default function Welcome() {
                         <div className="flex flex-col md:flex-row justify-center gap-6">
                             {/* Step 1 */}
                             <div
-                                className={`bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
+                                className={`bg-card text-card-foreground shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
                                     lang === "ar"
                                         ? "border-r-[#f2b85d]"
                                         : "border-l-[#f2b85d]"
                                 }`}
                             >
-                                <h3 className="text-2xl font-bold text-black mb-2">
+                                <h3 className="text-2xl font-bold text-foreground mb-2">
                                     01
                                 </h3>
-                                <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                <h4 className="font-semibold mb-3 text-foreground">
                                     {t("success.story1_title")}
                                 </h4>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-muted-foreground">
                                     {t("success.story1_text")}
                                 </p>
                             </div>
 
                             {/* Step 2 */}
                             <div
-                                className={`bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
+                                className={`bg-card text-card-foreground shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
                                     lang === "ar"
                                         ? "border-r-[#f2b85d]"
                                         : "border-l-[#f2b85d]"
                                 }`}
                             >
-                                <h3 className="text-2xl font-bold text-black mb-2">
+                                <h3 className="text-2xl font-bold text-foreground mb-2">
                                     02
                                 </h3>
-                                <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                <h4 className="font-semibold mb-3 text-foreground">
                                     {t("success.story2_title")}
                                 </h4>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-muted-foreground">
                                     {t("success.story2_text")}
                                 </p>
                             </div>
 
                             {/* Step 3 */}
                             <div
-                                className={`bg-[#f3efea]/90 text-black shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
+                                className={`bg-card text-card-foreground shadow-xl rounded-md w-full md:w-1/3 p-8 backdrop-blur-sm border-4 border-transparent ${
                                     lang === "ar"
                                         ? "border-r-[#f2b85d]"
                                         : "border-l-[#f2b85d]"
                                 }`}
                             >
-                                <h3 className="text-2xl font-bold text-black mb-2">
+                                <h3 className="text-2xl font-bold text-foreground mb-2">
                                     03
                                 </h3>
-                                <h4 className="font-semibold mb-3 text-[#3d3d3d]">
+                                <h4 className="font-semibold mb-3 text-foreground">
                                     {t("success.story3_title")}
                                 </h4>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-muted-foreground">
                                     {t("success.story3_text")}
                                 </p>
                             </div>

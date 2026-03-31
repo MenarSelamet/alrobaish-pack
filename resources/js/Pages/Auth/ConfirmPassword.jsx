@@ -22,7 +22,9 @@ export default function ConfirmPassword() {
         <GuestLayout>
             <Head title="Confirm Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="flex items-center justify-center min-h-screen">
+            <div className="w-full max-w-md bg-card shadow-md rounded-lg p-8 border border-border">
+            <div className="mb-4 text-sm text-muted-foreground">
                 This is a secure area of the application. Please confirm your
                 password before continuing.
             </div>
@@ -50,6 +52,8 @@ export default function ConfirmPassword() {
                     </PrimaryButton>
                 </div>
             </form>
+            </div>
+            </div>
         </GuestLayout>
     );
 }

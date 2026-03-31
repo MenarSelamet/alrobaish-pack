@@ -382,7 +382,7 @@ export default function Products({ products, categories }) {
                                                 <Button
                                                     type="button"
                                                     onClick={triggerFileInput}
-                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
                                                 >
                                                     <Plus className="h-4 w-4" />
                                                 </Button>
@@ -569,7 +569,7 @@ export default function Products({ products, categories }) {
                                                 <Button
                                                     type="button"
                                                     onClick={triggerFileInput}
-                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
                                                 >
                                                     <Plus className="h-4 w-4" />
                                                 </Button>
@@ -777,7 +777,7 @@ export default function Products({ products, categories }) {
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center">
-                                            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                            <span className="bg-primary/10 text-primary text-xs font-medium px-2.5 py-0.5 rounded-full">
                                                 {product.images?.length > 0 ? (
                                                     <span>
                                                         {product.images.length}{" "}

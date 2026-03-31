@@ -25,7 +25,7 @@ export default function Login({ status, canResetPassword }) {
     return (
         <GuestLayout>
             <div className="flex items-center justify-center min-h-screen">
-                <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
+                <div className="w-full max-w-md bg-card shadow-md rounded-lg p-8 border border-border">
                     <Head title="Log in" />
 
                     {status && (
@@ -97,7 +97,7 @@ export default function Login({ status, canResetPassword }) {
                                         setData("remember", e.target.checked)
                                     }
                                 />
-                                <span className="ms-2 text-sm text-gray-600">
+                                <span className="ms-2 text-sm text-muted-foreground">
                                     {t("login.remember_me")}
                                 </span>
                             </label>
@@ -107,7 +107,7 @@ export default function Login({ status, canResetPassword }) {
                             {canResetPassword && (
                                 <Link
                                     href={route("password.request")}
-                                    className="text-sm text-gray-600 underline hover:text-gray-900"
+                                    className="text-sm text-muted-foreground underline hover:text-foreground"
                                 >
                                     {t("login.forgot_password")}
                                 </Link>

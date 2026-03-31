@@ -335,7 +335,7 @@ export default function Categories({ categories }) {
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center">
-                                            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                            <span className="bg-primary/10 text-primary text-xs font-medium px-2.5 py-0.5 rounded-full">
                                                 {category.products_count || 0}{" "}
                                                 {t("dashboard.products")}
                                             </span>

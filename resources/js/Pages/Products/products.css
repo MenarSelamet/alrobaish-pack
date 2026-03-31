@@ -1,12 +1,19 @@
 /* PAGE */
 .catalog-page {
   padding: 6rem 10%;
-  background: #faf9f7;
+  background-color: hsl(var(--background));
   background-image: radial-gradient(
     rgba(0, 0, 0, 0.03) 1px,
     transparent 1px
   );
   background-size: 18px 18px;
+}
+
+.dark .catalog-page {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
 }
 
 /* SECTION */
@@ -46,6 +53,14 @@
   );
 }
 
+.dark .divider {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+}
+
 /* GRID */
 .catalog-grid {
   display: grid;
@@ -55,7 +70,7 @@
 
 /* IMAGE CARD */
 .catalog-image {
-  background: #fff;
+  background: hsl(var(--card));
   border-radius: 14px;
   padding: 0.75rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);

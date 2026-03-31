@@ -53,7 +53,7 @@ const ProductCategory = ({ category, products }) => {
                                 {/* Images Section */}
                                 <div className="space-y-4">
                                     {/* Main Image */}
-                                    <div className="relative bg-gray-100 rounded-lg overflow-hidden">
+                                    <div className="relative bg-muted rounded-lg overflow-hidden">
                                         {product.images &&
                                         product.images.length > 0 ? (
                                             <>
@@ -91,8 +91,8 @@ const ProductCategory = ({ category, products }) => {
                                                 )}
                                             </>
                                         ) : (
-                                            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-                                                <span className="text-gray-500">
+                                            <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
+                                                <span className="text-muted-foreground">
                                                     No Image Available
                                                 </span>
                                             </div>

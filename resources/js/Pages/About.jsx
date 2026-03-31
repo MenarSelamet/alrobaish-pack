@@ -52,7 +52,7 @@ const About = () => {
                 <section className="bg-primary py-16 ">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
-                            <h2 className="text-3xl font-bold text-foreground mb-12 text-center text-white">
+                            <h2 className="text-3xl font-bold text-primary-foreground mb-12 text-center">
                                 {t("about.partners_title")}
                             </h2>
                             <Carousel
