@@ -12,7 +12,7 @@ class UserController extends Controller
     {
 
         return inertia('Admin/Users/Index', [
-            'users' => User::all()
+            'users' => User::all(),
         ]);
     }
 
@@ -20,20 +20,22 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'role' => 'required|string|in:admin,user',
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => 'required|string|min:8',
         ]);
 
         User::create($validated);
+
         return redirect(route('users.index'));
     }
 
-    public function update(Request $request, User $user) {}
+    public function update(): void {}
 
-    public function destroy(User $user) {
+    public function destroy(User $user)
+    {
 
         $user->delete();
+
         return redirect(route('users.index'));
     }
 }

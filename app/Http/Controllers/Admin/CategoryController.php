@@ -12,9 +12,8 @@ class CategoryController extends Controller
     {
         $categories = Category::withCount('products')->latest()->get();
 
-
         return inertia('Admin/Categories/Index', [
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -35,9 +34,7 @@ class CategoryController extends Controller
             $validated['image_path'] = $imagePath;
         }
 
-
-
-        Category::create($validated, $imagePath);
+        Category::create($validated);
 
         return redirect()->route('categories.index');
     }
@@ -45,10 +42,16 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
+            'description_en' => 'nullable|string',
+            'description_ar' => 'nullable|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+        if ($request->hasFile('image_path')) {
+            $validated['image_path'] = $request->file('image_path')->store('categories', 'public');
+        }
 
         $category->update($validated);
 
@@ -58,6 +61,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }
