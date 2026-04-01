@@ -50,7 +50,7 @@ const About = ({ faqs = [] }) => {
                             {t("about.partners_title")}
                         </h2>
                     </div>
-                    <div className="relative">
+                    <div className="relative" dir="ltr">
                         {/* fade edges */}
                         <div className="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
                         <div className="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
