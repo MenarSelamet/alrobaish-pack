@@ -297,8 +297,8 @@ export default function Categories({ categories }) {
                                 </Tabs>
 
                                 {/* Image upload — outside tabs, shared for both languages */}
-                                <div>
-                                    <Label>{t("dashboard.category_image")}</Label>
+                                <div dir={activeTab === "arabic" ? "rtl" : "ltr"}>
+                                    <Label>{activeTab === "arabic" ? "رابط الصورة" : "Image"}</Label>
                                     <div className="flex gap-2 mt-1">
                                         <Input
                                             type="file"
@@ -309,7 +309,7 @@ export default function Categories({ categories }) {
                                         />
                                         <Input
                                             type="text"
-                                            placeholder={t("dashboard.add_image")}
+                                            placeholder={activeTab === "arabic" ? "إضافة صورة" : "Add Image"}
                                             value={
                                                 imagePreview
                                                     ? imagePreview.isExisting
