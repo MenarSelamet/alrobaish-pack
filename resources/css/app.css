@@ -96,3 +96,18 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Infinite marquee for partners section */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+    animation: marquee 20s linear infinite;
+    width: max-content;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}

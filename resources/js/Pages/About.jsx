@@ -4,12 +4,6 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "../Components/accordion";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from "../components/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import GuestLayout from "../Layouts/GuestLayout";
 import { Building2, Store, ShoppingBag, Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -50,112 +44,48 @@ const About = ({ faqs = [] }) => {
                     </div>
                 </section>
                 {/* Partners Section */}
-                <section className="bg-primary py-16 ">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-5xl mx-auto">
-                            <h2 className="text-3xl font-bold text-primary-foreground mb-12 text-center">
-                                {t("about.partners_title")}
-                            </h2>
-                            <Carousel
-                                opts={{
-                                    align: "start",
-                                    loop: true,
-                                }}
-                                plugins={[
-                                    Autoplay({
-                                        delay: 1000,
-                                    }),
-                                ]}
-                                className="w-full"
-                            >
-                                <CarouselContent className="-ml-4">
-                                    {[
-                                        {
-                                            icon: Building2,
-                                            name: "Corporate Partners",
-                                        },
-                                        { icon: Store, name: "Retail Chain" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        { icon: Store, name: "Retail Chain" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        { icon: Store, name: "Retail Chain" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        { icon: Store, name: "Retail Chain" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Fashion Brands",
-                                        },
-                                        { icon: Package, name: "E-commerce" },
-                                        {
-                                            icon: Building2,
-                                            name: "Logistics Co",
-                                        },
-                                        { icon: Store, name: "Supermarkets" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Boutiques",
-                                        },
-                                        { icon: Store, name: "Supermarkets" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Boutiques",
-                                        },
-                                        { icon: Store, name: "Supermarkets" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Boutiques",
-                                        },
-                                        { icon: Store, name: "Supermarkets" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Boutiques",
-                                        },
-                                        { icon: Store, name: "Supermarkets" },
-                                        {
-                                            icon: ShoppingBag,
-                                            name: "Boutiques",
-                                        },
-                                        { icon: Package, name: "Distribution" },
-                                    ].map((partner, index) => {
-                                        const Icon = partner.icon;
-                                        return (
-                                            <CarouselItem
-                                                key={index}
-                                                className=" pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
-                                            >
-                                                <div className="flex items-center justify-center p-8 bg-background rounded-lg border border-border hover:shadow-lg transition-shadow">
-                                                    <Icon className="h-12 w-12 text-primary" />
-                                                </div>
-                                            </CarouselItem>
-                                        );
-                                    })}
-                                </CarouselContent>
-                            </Carousel>
+                <section className="bg-primary py-16 overflow-hidden">
+                    <div className="container mx-auto px-4 mb-12">
+                        <h2 className="text-3xl font-bold text-primary-foreground text-center">
+                            {t("about.partners_title")}
+                        </h2>
+                    </div>
+                    <div className="relative">
+                        {/* fade edges */}
+                        <div className="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
+                        <div className="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
+                        <div className="flex gap-6 marquee-track">
+                            {[
+                                { icon: Building2, name: "Corporate Partners" },
+                                { icon: Store, name: "Retail Chain" },
+                                { icon: ShoppingBag, name: "Fashion Brands" },
+                                { icon: Package, name: "E-commerce" },
+                                { icon: Building2, name: "Logistics Co" },
+                                { icon: Store, name: "Supermarkets" },
+                                { icon: ShoppingBag, name: "Boutiques" },
+                                { icon: Package, name: "Distribution" },
+                                { icon: Building2, name: "Corporate Partners" },
+                                { icon: Store, name: "Retail Chain" },
+                                { icon: ShoppingBag, name: "Fashion Brands" },
+                                { icon: Package, name: "E-commerce" },
+                                { icon: Building2, name: "Logistics Co" },
+                                { icon: Store, name: "Supermarkets" },
+                                { icon: ShoppingBag, name: "Boutiques" },
+                                { icon: Package, name: "Distribution" },
+                            ].map((partner, index) => {
+                                const Icon = partner.icon;
+                                return (
+                                    <div
+                                        key={index}
+                                        className="flex-shrink-0 flex flex-col items-center justify-center gap-3 w-36 p-6 bg-background/10 rounded-xl border border-primary-foreground/20 backdrop-blur-sm"
+                                    >
+                                        <Icon className="h-10 w-10 text-primary-foreground" />
+                                        <span className="text-xs text-primary-foreground/80 text-center font-medium">
+                                            {partner.name}
+                                        </span>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
