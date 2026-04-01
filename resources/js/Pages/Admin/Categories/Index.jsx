@@ -376,7 +376,7 @@ export default function Categories({ categories }) {
                                 <TableHead>
                                     {t("dashboard.products_in_category")}
                                 </TableHead>
-                                <TableHead className="text-right">
+                                <TableHead className="text-end">
                                     {t("dashboard.actions")}
                                 </TableHead>
                             </TableRow>
@@ -415,7 +415,7 @@ export default function Categories({ categories }) {
                                             </span>
                                         </div>
                                     </TableCell>
-                                    <TableCell className="text-right">
+                                    <TableCell className="text-end">
                                         <Button
                                             variant="ghost"
                                             size="icon"

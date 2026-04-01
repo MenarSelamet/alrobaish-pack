@@ -50,6 +50,7 @@ export default function Products({ products, categories }) {
     const [viewingProduct, setViewingProduct] = useState(null);
     const [filterCategory, setFilterCategory] = useState("all");
     const [imagePreviews, setImagePreviews] = useState([]);
+    const [activeTab, setActiveTab] = useState("english");
     const fileInputRef = useRef(null);
 
     const {
@@ -72,16 +73,25 @@ export default function Products({ products, categories }) {
     // --- FORM HANDLERS ---
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const options = {
+            forceFormData: true,
+            onSuccess: () => handleDialogClose(),
+            onError: (errs) => {
+                const hasEnglishError = errs.title_en || errs.description_en || errs.category_id;
+                const hasArabicError = errs.title_ar || errs.description_ar;
+                if (hasArabicError && !hasEnglishError) {
+                    setActiveTab("arabic");
+                } else {
+                    setActiveTab("english");
+                }
+            },
+        };
+
         if (editingProduct) {
-            put(`/admin/dashboard/products/${editingProduct.id}`, data, {
-                forceFormData: true,
-                onSuccess: () => handleDialogClose(),
-            });
+            put(`/admin/dashboard/products/${editingProduct.id}`, options);
         } else {
-            post(`/admin/dashboard/products`, {
-                forceFormData: true,
-                onSuccess: () => handleDialogClose(),
-            });
+            post(`/admin/dashboard/products`, options);
         }
     };
 
@@ -135,6 +145,7 @@ export default function Products({ products, categories }) {
         setIsDialogOpen(false);
         setEditingProduct(null);
         setImagePreviews([]);
+        setActiveTab("english");
         reset();
     };
 
@@ -248,15 +259,22 @@ export default function Products({ products, categories }) {
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <Tabs
-                                    defaultValue="english"
+                                    value={activeTab}
+                                    onValueChange={setActiveTab}
                                     className="space-y-4"
                                 >
                                     <TabsList className="grid w-full grid-cols-2">
-                                        <TabsTrigger value="english">
+                                        <TabsTrigger value="english" className="gap-2">
                                             English
+                                            {(errors.title_en || errors.description_en || errors.category_id) && (
+                                                <span className="h-2 w-2 rounded-full bg-red-500 inline-block" />
+                                            )}
                                         </TabsTrigger>
-                                        <TabsTrigger value="arabic">
+                                        <TabsTrigger value="arabic" className="gap-2">
                                             العربية
+                                            {(errors.title_ar || errors.description_ar) && (
+                                                <span className="h-2 w-2 rounded-full bg-red-500 inline-block" />
+                                            )}
                                         </TabsTrigger>
                                     </TabsList>
 
@@ -722,7 +740,7 @@ export default function Products({ products, categories }) {
                                 <TableHead>
                                     {t("dashboard.product_images")}
                                 </TableHead>
-                                <TableHead className="text-right">
+                                <TableHead className="text-end">
                                     {t("dashboard.actions")}
                                 </TableHead>
                             </TableRow>
@@ -767,7 +785,7 @@ export default function Products({ products, categories }) {
                                             </span>
                                         </div>
                                     </TableCell>
-                                    <TableCell className="text-right">
+                                    <TableCell className="text-end">
                                         <Button
                                             variant="ghost"
                                             size="icon"
