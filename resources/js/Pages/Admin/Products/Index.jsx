@@ -222,7 +222,7 @@ export default function Products({ products, categories }) {
                                         key={category.id}
                                         value={String(category.id)}
                                     >
-                                        {category.name}
+                                        {lang === "ar" ? category.name_ar : category.name_en}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
@@ -299,30 +299,16 @@ export default function Products({ products, categories }) {
                                                 }
                                             >
                                                 <SelectTrigger id="category_id">
-                                                    <SelectValue>
-                                                        {data.category_id
-                                                            ? categories.find(
-                                                                  (cat) =>
-                                                                      cat.id ==
-                                                                      data.category_id
-                                                              )?.name
-                                                            : "Select category"}
-                                                    </SelectValue>
+                                                    <SelectValue placeholder="Select category" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     {categories.map(
                                                         (category) => (
                                                             <SelectItem
-                                                                key={
-                                                                    category.id
-                                                                }
-                                                                value={
-                                                                    category.id
-                                                                }
+                                                                key={category.id}
+                                                                value={String(category.id)}
                                                             >
-                                                                {
-                                                                    category.name_en
-                                                                }
+                                                                {category.name_en}
                                                             </SelectItem>
                                                         )
                                                     )}
@@ -485,30 +471,16 @@ export default function Products({ products, categories }) {
                                                 }
                                             >
                                                 <SelectTrigger id="category_id">
-                                                    <SelectValue>
-                                                        {data.category_id
-                                                            ? categories.find(
-                                                                  (cat) =>
-                                                                      cat.id ==
-                                                                      data.category_id
-                                                              )?.name
-                                                            : "Select category"}
-                                                    </SelectValue>
+                                                    <SelectValue placeholder="اختر فئة" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     {categories.map(
                                                         (category) => (
                                                             <SelectItem
-                                                                key={
-                                                                    category.id
-                                                                }
-                                                                value={
-                                                                    category.id
-                                                                }
+                                                                key={category.id}
+                                                                value={String(category.id)}
                                                             >
-                                                                {
-                                                                    category.name_ar
-                                                                }
+                                                                {category.name_ar}
                                                             </SelectItem>
                                                         )
                                                     )}
