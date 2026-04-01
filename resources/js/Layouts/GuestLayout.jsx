@@ -1,14 +1,27 @@
 import { Link } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
 import ThemeToggle from "../Components/ThemeToggle";
 import Footer from "../Components/Footer";
 
 export default function GuestLayout({ children }) {
     const { t } = useTranslation();
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <div>
-            <div className="absolute top-0 left-0 w-full z-50 bg-transparent border-none">
+            <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+                scrolled
+                    ? "bg-background/70 backdrop-blur-md border-b border-border/40 shadow-sm"
+                    : "bg-transparent border-none"
+            }`}>
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-6">
                         <Link
