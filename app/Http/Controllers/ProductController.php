@@ -12,12 +12,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-
         $categories = Category::all();
+        $products = Product::with('category')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->take(12)
+            ->get();
+
         return inertia('Products/Index', [
-            'categories' => $categories
+            'categories' => $categories,
+            'products'   => $products,
         ]);
     }
 
