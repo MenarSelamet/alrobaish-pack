@@ -1,0 +1,145 @@
+/* =====================
+   HERO — animates on load (no JS needed)
+   ===================== */
+.hero-title {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: home-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: home-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: home-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+/* Hero image subtle Ken Burns */
+.hero-bg {
+  animation: ken-burns 18s ease-in-out infinite alternate;
+}
+
+@keyframes ken-burns {
+  from { transform: scale(1);    }
+  to   { transform: scale(1.06); }
+}
+
+/* =====================
+   SCROLL ANIMATIONS
+   ===================== */
+.home-fade-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-slide-start {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-slide-end {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-fade-up.is-visible,
+.home-slide-start.is-visible,
+.home-slide-end.is-visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Stagger delays */
+.delay-100 { transition-delay: 0.10s; }
+.delay-200 { transition-delay: 0.20s; }
+.delay-300 { transition-delay: 0.30s; }
+.delay-400 { transition-delay: 0.40s; }
+.delay-500 { transition-delay: 0.50s; }
+
+/* =====================
+   SHARED KEYFRAME
+   ===================== */
+@keyframes home-fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   CARD HOVER — lift + shadow
+   ===================== */
+.home-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .home-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Mission cards — primary top border reveal on hover */
+.home-card-mission {
+  border-top: 3px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.home-card-mission:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-top-color: hsl(var(--primary));
+}
+
+.dark .home-card-mission:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =====================
+   ICON HOVER — scale + rotate
+   ===================== */
+.home-icon-wrap {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+}
+
+.home-card:hover .home-icon-wrap,
+.home-card-mission:hover .home-icon-wrap {
+  transform: scale(1.2) rotate(-8deg);
+  background-color: hsl(var(--primary) / 0.2);
+}
+
+/* =====================
+   STAT CARDS — number pop on hover
+   ===================== */
+.home-stat-number {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+}
+
+.home-stat:hover .home-stat-number {
+  transform: scale(1.15);
+}
+
+/* =====================
+   STEP CARDS — accent border
+   ===================== */
+.home-step-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+}
+
+.dark .home-step-card:hover {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
