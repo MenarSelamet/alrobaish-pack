@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Contact;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
+use App\Models\Faq;
 use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +31,7 @@ Route::get('admin/dashboard', function () {
 Route::resource('admin/dashboard/categories', CategoryController::class);
 Route::resource('admin/dashboard/products', AdminProductController::class);
 Route::resource('admin/dashboard/users', UserController::class);
+Route::resource('admin/dashboard/faqs', FaqController::class)->only(['index', 'store', 'update', 'destroy']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,7 +40,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    return Inertia::render('About', [
+        'faqs' => Faq::orderBy('order')->orderBy('id')->get(),
+    ]);
 });
 
 // Route::get('/contact', function () {

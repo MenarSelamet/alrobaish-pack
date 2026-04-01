@@ -48,6 +48,7 @@
         "value3_title": "Customer Focus",
         "value3_text": "Your success is our success. We work closely with each client to deliver perfect solutions.",
         "faq_title": "Frequently Asked Questions",
+        "faq_empty": "No FAQs available yet.",
         "faq1_q": "What materials are your bags made from?",
         "faq1_a": "All our bags are made from 100% recyclable kraft paper sourced from sustainably managed forests. We use eco-friendly inks and adhesives to ensure the entire product is environmentally responsible.",
         "faq2_q": "What is the minimum order quantity?",
@@ -190,7 +191,15 @@
         "confirm_delete_title": "Confirm Deletion",
         "confirm_delete_message": "Are you sure you want to delete this item?",
         "password": "Password",
-        "select_role": "Select Role"
+        "select_role": "Select Role",
+        "faqs": "FAQs",
+        "add_faq": "Add FAQ",
+        "add_new_faq": "Add New FAQ",
+        "edit_faq": "Edit FAQ",
+        "faq_question": "Question",
+        "faq_answer": "Answer",
+        "faq_order": "Order",
+        "no_faqs": "No FAQs yet."
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",

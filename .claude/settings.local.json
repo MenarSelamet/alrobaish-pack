@@ -12,7 +12,8 @@
       "Bash(grep -E '\\\\.\\(json|md\\)$')",
       "Bash(php artisan:*)",
       "mcp__laravel-boost__browser-logs",
-      "mcp__laravel-boost__last-error"
+      "mcp__laravel-boost__last-error",
+      "mcp__laravel-boost__tinker"
     ]
   }
 }

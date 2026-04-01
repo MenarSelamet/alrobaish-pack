@@ -14,8 +14,9 @@ import GuestLayout from "../Layouts/GuestLayout";
 import { Building2, Store, ShoppingBag, Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const About = () => {
-    const { t } = useTranslation();
+const About = ({ faqs = [] }) => {
+    const { t, i18n } = useTranslation();
+    const lang = i18n.language;
     return (
         <GuestLayout>
             <div className="min-h-screen">
@@ -210,83 +211,32 @@ const About = () => {
                             <h2 className="text-3xl font-bold text-foreground mb-12 text-center">
                                 {t("about.faq_title")}
                             </h2>
-                            <Accordion
-                                type="single"
-                                collapsible
-                                className="space-y-4"
-                            >
-                                <AccordionItem
-                                    value="item-1"
-                                    className="border rounded-lg px-6"
+                            {faqs.length === 0 ? (
+                                <p className="text-center text-muted-foreground">
+                                    {t("about.faq_empty")}
+                                </p>
+                            ) : (
+                                <Accordion
+                                    type="single"
+                                    collapsible
+                                    className="space-y-4"
                                 >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq1_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq1_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem
-                                    value="item-2"
-                                    className="border rounded-lg px-6"
-                                >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq2_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq2_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem
-                                    value="item-3"
-                                    className="border rounded-lg px-6"
-                                >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq3_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq3_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem
-                                    value="item-4"
-                                    className="border rounded-lg px-6"
-                                >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq4_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq4_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem
-                                    value="item-5"
-                                    className="border rounded-lg px-6"
-                                >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq5_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq5_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-
-                                <AccordionItem
-                                    value="item-6"
-                                    className="border rounded-lg px-6"
-                                >
-                                    <AccordionTrigger className="text-left hover:no-underline">
-                                        {t("about.faq6_q")}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground">
-                                        {t("about.faq6_a")}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
+                                    {faqs.map((faq) => (
+                                        <AccordionItem
+                                            key={faq.id}
+                                            value={String(faq.id)}
+                                            className="border rounded-lg px-6"
+                                        >
+                                            <AccordionTrigger className="text-start hover:no-underline">
+                                                {lang === "ar" ? faq.question_ar : faq.question_en}
+                                            </AccordionTrigger>
+                                            <AccordionContent className="text-muted-foreground text-start">
+                                                {lang === "ar" ? faq.answer_ar : faq.answer_en}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    ))}
+                                </Accordion>
+                            )}
                         </div>
                     </div>
                 </section>

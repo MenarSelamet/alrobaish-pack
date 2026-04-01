@@ -1,5 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
-import { LayoutDashboard, Package, FolderTree, Users } from "lucide-react";
+import { LayoutDashboard, Package, FolderTree, Users, HelpCircle } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -46,6 +46,11 @@ export default function DashboardLayout({ header, children }) {
             title: t("dashboard.users"),
             url: "/admin/dashboard/users",
             icon: Users,
+        },
+        {
+            title: t("dashboard.faqs"),
+            url: "/admin/dashboard/faqs",
+            icon: HelpCircle,
         },
     ];
 
