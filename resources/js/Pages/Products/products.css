@@ -1,271 +1,212 @@
 /* =====================
-   SHOWCASE PAGE WRAPPER
+   MOSAIC GRID
    ===================== */
-.showcase-page {
-  background-color: hsl(var(--background));
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 2rem 4%;
+}
+
+/* Every 4th card (0-indexed: 0, 4, 8…) is featured — spans 2 cols */
+.mosaic-card--featured {
+  grid-column: span 2;
 }
 
 /* =====================
-   SECTION
+   CARD BASE
    ===================== */
-.showcase-section {
-  position: relative;
-}
-
-.showcase-section--tinted {
-  background-color: hsl(var(--card));
-}
-
-/* Divider between sections */
-.showcase-divider {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    hsl(var(--border)),
-    transparent
-  );
-  margin: 0 10%;
-}
-
-.dark .showcase-divider {
-  background: linear-gradient(
-    to right,
-    transparent,
-    hsl(var(--border) / 0.8),
-    transparent
-  );
-}
-
-/* =====================
-   ROW (flex container)
-   ===================== */
-.showcase-row {
-  display: flex;
-  flex-direction: row;
-  min-height: 70vh;
-}
-
-.showcase-row--reversed {
-  flex-direction: row-reverse;
-}
-
-/* =====================
-   IMAGE HALF
-   ===================== */
-.showcase-image-half {
-  flex: 0 0 60%;
+.mosaic-card {
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 16px;
+  background: hsl(var(--muted));
+  cursor: pointer;
 }
 
-.showcase-image-half.animate-slide-from-left {
-  transform: translateX(-80px);
-}
+.mosaic-card--featured { aspect-ratio: 16 / 9; }
+.mosaic-card--small    { aspect-ratio: 4 / 3; }
 
-.showcase-image-half.animate-slide-from-right {
-  transform: translateX(80px);
-}
-
-.showcase-section.is-visible .showcase-image-half {
-  opacity: 1;
-  transform: translateX(0);
-  transition-delay: 0s;
-}
-
-.showcase-img {
+/* =====================
+   IMAGE
+   ===================== */
+.mosaic-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.showcase-image-half:hover .showcase-img {
-  transform: scale(1.03);
+.mosaic-card:hover .mosaic-img {
+  transform: scale(1.07);
 }
 
-/* Fallback for missing image */
-.showcase-img-fallback {
+/* Fallback */
+.mosaic-img-fallback {
   width: 100%;
   height: 100%;
-  min-height: 70vh;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary) / 0.15),
-    hsl(var(--primary) / 0.05)
-  );
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--primary) / 0.05));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: hsl(var(--muted-foreground));
 }
 
-.dark .showcase-img-fallback {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary) / 0.1),
-    hsl(var(--muted) / 0.4)
-  );
-}
-
 /* =====================
-   CONTENT HALF
+   HOVER OVERLAY — slides up from bottom
    ===================== */
-.showcase-content-half {
-  flex: 0 0 40%;
+.mosaic-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 5%;
-  position: relative;
-  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.75rem;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.15s;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.showcase-section.is-visible .showcase-content-half {
+.mosaic-card:hover .mosaic-overlay {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* =====================
-   DECORATIVE INDEX NUMBER
-   ===================== */
-.showcase-index-number {
+/* Always-visible subtle gradient at bottom for index number */
+.mosaic-card::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(7rem, 20vw, 12rem);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), transparent);
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.mosaic-card:hover::after {
+  opacity: 0;
+}
+
+/* =====================
+   OVERLAY CONTENT
+   ===================== */
+.mosaic-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  transform: translateY(8px);
+  transition: transform 0.35s ease 0.05s;
+}
+
+.mosaic-card--featured .mosaic-name {
+  font-size: 1.8rem;
+}
+
+.mosaic-card:hover .mosaic-name {
+  transform: translateY(0);
+}
+
+.mosaic-desc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  transform: translateY(8px);
+  transition: transform 0.35s ease 0.08s;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mosaic-card:hover .mosaic-desc {
+  transform: translateY(0);
+}
+
+.mosaic-cta {
+  transform: translateY(8px);
+  transition: transform 0.35s ease 0.12s;
+}
+
+.mosaic-card:hover .mosaic-cta {
+  transform: translateY(0);
+}
+
+/* =====================
+   INDEX NUMBER (always visible, bottom-right)
+   ===================== */
+.mosaic-index {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.25rem;
+  font-size: 3.5rem;
   font-weight: 900;
   line-height: 1;
-  color: hsl(var(--foreground) / 0.04);
+  color: rgba(255, 255, 255, 0.15);
   pointer-events: none;
   user-select: none;
   letter-spacing: -0.05em;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  transition-delay: 0.1s;
+  transition: opacity 0.3s ease;
 }
 
-.showcase-section.is-visible .showcase-index-number {
-  opacity: 1;
+.mosaic-card:hover .mosaic-index {
+  opacity: 0;
 }
 
 /* =====================
-   TEXT BODY
+   SCROLL ANIMATION
    ===================== */
-.showcase-text-body {
-  position: relative;
+.mosaic-card {
+  opacity: 0;
+  transform: scale(0.94) translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.mosaic-card.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.mosaic-card:hover {
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.25);
   z-index: 1;
-  max-width: 380px;
 }
 
 /* =====================
-   TITLE
+   RESPONSIVE
    ===================== */
-.showcase-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
-  font-weight: 700;
-  color: hsl(var(--foreground));
-  line-height: 1.15;
-  margin-bottom: 1.25rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transition-delay: 0.25s;
-}
-
-.showcase-section.is-visible .showcase-title {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =====================
-   DESCRIPTION
-   ===================== */
-.showcase-desc {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: hsl(var(--muted-foreground));
-  margin-bottom: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transition-delay: 0.38s;
-}
-
-.showcase-section.is-visible .showcase-desc {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =====================
-   CTA BUTTON
-   ===================== */
-.showcase-cta {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transition-delay: 0.5s;
-}
-
-.showcase-section.is-visible .showcase-cta {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =====================
-   RESPONSIVE — TABLET (max 1024px)
-   ===================== */
-@media (max-width: 1024px) {
-  .showcase-image-half {
-    flex: 0 0 55%;
+@media (max-width: 900px) {
+  .mosaic-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .showcase-content-half {
-    flex: 0 0 45%;
-    padding: 3rem 4%;
+  .mosaic-card--featured {
+    grid-column: span 2;
   }
 }
 
-/* =====================
-   RESPONSIVE — MOBILE (max 768px)
-   ===================== */
-@media (max-width: 768px) {
-  .showcase-row,
-  .showcase-row--reversed {
-    flex-direction: column;
+@media (max-width: 560px) {
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem 4%;
   }
-
-  .showcase-image-half {
-    flex: none;
-    height: 55vw;
-    min-height: 260px;
-    transform: translateY(40px) !important;
-  }
-
-  .showcase-section.is-visible .showcase-image-half {
-    transform: translateY(0) !important;
-  }
-
-  .showcase-content-half {
-    flex: none;
-    padding: 2.5rem 6%;
-    min-height: unset;
-  }
-
-  .showcase-index-number {
-    font-size: clamp(5rem, 30vw, 8rem);
-  }
-
-  .showcase-divider {
-    margin: 0 6%;
+  .mosaic-card--featured,
+  .mosaic-card--small {
+    grid-column: span 1;
+    aspect-ratio: 4 / 3;
   }
 }

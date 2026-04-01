@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import GuestLayout from "../../Layouts/GuestLayout";
 import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
@@ -9,7 +9,7 @@ import "./Products.css";
 const Products = ({ categories }) => {
     const { t, i18n } = useTranslation();
     const lang = i18n.language;
-    const sectionsRef = useRef([]);
+    const cardsRef = useRef([]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -20,18 +20,13 @@ const Products = ({ categories }) => {
                     }
                 });
             },
-            { threshold: 0.15 }
+            { threshold: 0.1 }
         );
 
-        sectionsRef.current.forEach((el) => el && observer.observe(el));
+        cardsRef.current.forEach((el) => el && observer.observe(el));
 
         return () => observer.disconnect();
     }, []);
-
-    const isImageLeft = (index) => {
-        const isEven = index % 2 === 0;
-        return lang === "ar" ? !isEven : isEven;
-    };
 
     return (
         <GuestLayout>
@@ -49,90 +44,59 @@ const Products = ({ categories }) => {
                 </div>
             </section>
 
-            {/* Showcase */}
-            <div className="showcase-page">
+            {/* Mosaic Grid */}
+            <div className="mosaic-grid">
                 {categories.map((category, index) => {
-                    const imageOnLeft = isImageLeft(index);
-                    const name =
-                        lang === "ar" ? category.name_ar : category.name_en;
-                    const desc =
-                        lang === "ar"
-                            ? category.description_ar
-                            : category.description_en;
+                    const isFeatured = index % 4 === 0;
+                    const name = lang === "ar" ? category.name_ar : category.name_en;
+                    const desc = lang === "ar" ? category.description_ar : category.description_en;
                     const indexLabel = String(index + 1).padStart(2, "0");
+                    const staggerDelay = (index % 4) * 0.08;
 
                     return (
-                        <React.Fragment key={category.id}>
-                            <section
-                                ref={(el) =>
-                                    (sectionsRef.current[index] = el)
-                                }
-                                className={`showcase-section${index % 2 === 0 ? " showcase-section--tinted" : ""}`}
-                            >
-                                <div
-                                    className={`showcase-row${imageOnLeft ? "" : " showcase-row--reversed"}`}
-                                >
-                                    {/* Image Half */}
-                                    <div
-                                        className={`showcase-image-half ${imageOnLeft ? "animate-slide-from-left" : "animate-slide-from-right"}`}
-                                    >
-                                        {category.image_path ? (
-                                            <img
-                                                src={`/storage/${category.image_path}`}
-                                                alt={name}
-                                                className="showcase-img"
-                                            />
-                                        ) : (
-                                            <div className="showcase-img-fallback">
-                                                <span>{name}</span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Content Half */}
-                                    <div className="showcase-content-half">
-                                        <span
-                                            className="showcase-index-number"
-                                            aria-hidden="true"
-                                        >
-                                            {indexLabel}
-                                        </span>
-                                        <div className="showcase-text-body">
-                                            <h2 className="showcase-title">
-                                                {name}
-                                            </h2>
-                                            {desc && (
-                                                <p className="showcase-desc">
-                                                    {desc}
-                                                </p>
-                                            )}
-                                            <Link
-                                                href={`/products/category/${category.id}`}
-                                            >
-                                                <Button
-                                                    size="lg"
-                                                    className="showcase-cta"
-                                                >
-                                                    {t("products.view_details")}
-                                                    {lang === "ar" ? (
-                                                        <ArrowLeft className="ms-2 h-4 w-4" />
-                                                    ) : (
-                                                        <ArrowRight className="ms-2 h-4 w-4" />
-                                                    )}
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {index < categories.length - 1 && (
-                                <div
-                                    className="showcase-divider"
-                                    aria-hidden="true"
+                        <Link
+                            key={category.id}
+                            href={`/products/category/${category.id}`}
+                            ref={(el) => (cardsRef.current[index] = el)}
+                            className={`mosaic-card ${isFeatured ? "mosaic-card--featured" : "mosaic-card--small"}`}
+                            style={{ transitionDelay: `${staggerDelay}s` }}
+                        >
+                            {/* Image */}
+                            {category.image_path ? (
+                                <img
+                                    src={`/storage/${category.image_path}`}
+                                    alt={name}
+                                    className="mosaic-img"
                                 />
+                            ) : (
+                                <div className="mosaic-img-fallback">
+                                    <span>{name}</span>
+                                </div>
                             )}
-                        </React.Fragment>
+
+                            {/* Index number (always visible) */}
+                            <span className="mosaic-index" aria-hidden="true">
+                                {indexLabel}
+                            </span>
+
+                            {/* Hover overlay */}
+                            <div className="mosaic-overlay">
+                                <h2 className="mosaic-name">{name}</h2>
+                                {desc && (
+                                    <p className="mosaic-desc">{desc}</p>
+                                )}
+                                <div className="mosaic-cta">
+                                    <Button size="sm" variant="secondary">
+                                        {t("products.view_details")}
+                                        {lang === "ar" ? (
+                                            <ArrowLeft className="ms-2 h-4 w-4" />
+                                        ) : (
+                                            <ArrowRight className="ms-2 h-4 w-4" />
+                                        )}
+                                    </Button>
+                                </div>
+                            </div>
+                        </Link>
                     );
                 })}
             </div>
