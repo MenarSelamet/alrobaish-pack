@@ -1,5 +1,4 @@
 import { Link } from "@inertiajs/react";
-import { Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../Components/LanguageSwitcher";
 import ThemeToggle from "../Components/ThemeToggle";
@@ -11,10 +10,6 @@ export default function GuestLayout({ children }) {
         <div>
             <div className="absolute top-0 left-0 w-full z-50 bg-transparent border-none">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-2 group">
-                       <img className="w-32" src="/images/logo.png"/>
-                        
-                    </Link>
                     <div className="flex items-center gap-6">
                         <Link
                             href="/"
@@ -43,6 +38,9 @@ export default function GuestLayout({ children }) {
                         <ThemeToggle />
                         <LanguageSwitcher />
                     </div>
+                    <Link href="/" className="flex items-center gap-2 group">
+                        <img className="w-32" src="/images/logo.png"/>
+                    </Link>
                 </div>
             </div>
 
