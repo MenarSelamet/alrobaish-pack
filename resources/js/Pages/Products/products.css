@@ -1,109 +1,271 @@
-/* PAGE */
-.catalog-page {
-  padding: 6rem 10%;
+/* =====================
+   SHOWCASE PAGE WRAPPER
+   ===================== */
+.showcase-page {
   background-color: hsl(var(--background));
-  background-image: radial-gradient(
-    rgba(0, 0, 0, 0.03) 1px,
-    transparent 1px
-  );
-  background-size: 18px 18px;
 }
 
-.dark .catalog-page {
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.03) 1px,
-    transparent 1px
+/* =====================
+   SECTION
+   ===================== */
+.showcase-section {
+  position: relative;
+}
+
+.showcase-section--tinted {
+  background-color: hsl(var(--card));
+}
+
+/* Divider between sections */
+.showcase-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--border)),
+    transparent
+  );
+  margin: 0 10%;
+}
+
+.dark .showcase-divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--border) / 0.8),
+    transparent
   );
 }
 
-/* SECTION */
-.catalog-section {
-  margin-bottom: 6rem;
+/* =====================
+   ROW (flex container)
+   ===================== */
+.showcase-row {
+  display: flex;
+  flex-direction: row;
+  min-height: 70vh;
+}
+
+.showcase-row--reversed {
+  flex-direction: row-reverse;
+}
+
+/* =====================
+   IMAGE HALF
+   ===================== */
+.showcase-image-half {
+  flex: 0 0 60%;
+  position: relative;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.catalog-section.is-visible {
+.showcase-image-half.animate-slide-from-left {
+  transform: translateX(-80px);
+}
+
+.showcase-image-half.animate-slide-from-right {
+  transform: translateX(80px);
+}
+
+.showcase-section.is-visible .showcase-image-half {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+.showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.showcase-image-half:hover .showcase-img {
+  transform: scale(1.03);
+}
+
+/* Fallback for missing image */
+.showcase-img-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: 70vh;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.15),
+    hsl(var(--primary) / 0.05)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+}
+
+.dark .showcase-img-fallback {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.1),
+    hsl(var(--muted) / 0.4)
+  );
+}
+
+/* =====================
+   CONTENT HALF
+   ===================== */
+.showcase-content-half {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 5%;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.15s;
+}
+
+.showcase-section.is-visible .showcase-content-half {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* HEADER */
-.catalog-header {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+/* =====================
+   DECORATIVE INDEX NUMBER
+   ===================== */
+.showcase-index-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(7rem, 20vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  color: hsl(var(--foreground) / 0.04);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  transition-delay: 0.1s;
 }
 
-.catalog-header h2 {
-  font-size: 2.4rem;
+.showcase-section.is-visible .showcase-index-number {
+  opacity: 1;
+}
+
+/* =====================
+   TEXT BODY
+   ===================== */
+.showcase-text-body {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+}
+
+/* =====================
+   TITLE
+   ===================== */
+.showcase-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.divider {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0)
-  );
-}
-
-.dark .divider {
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0)
-  );
-}
-
-/* GRID */
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-/* IMAGE CARD */
-.catalog-image {
-  background: hsl(var(--card));
-  border-radius: 14px;
-  padding: 0.75rem;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  color: hsl(var(--foreground));
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: 0.25s;
 }
 
-.catalog-section.is-visible .catalog-image {
-  animation-name: fadeInUp;
+.showcase-section.is-visible .showcase-title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.catalog-image img {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
+/* =====================
+   DESCRIPTION
+   ===================== */
+.showcase-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: 0.38s;
 }
 
-/* ANIMATION */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.showcase-section.is-visible .showcase-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================
+   CTA BUTTON
+   ===================== */
+.showcase-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: 0.5s;
+}
+
+.showcase-section.is-visible .showcase-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================
+   RESPONSIVE — TABLET (max 1024px)
+   ===================== */
+@media (max-width: 1024px) {
+  .showcase-image-half {
+    flex: 0 0 55%;
+  }
+  .showcase-content-half {
+    flex: 0 0 45%;
+    padding: 3rem 4%;
   }
 }
 
-/* RESPONSIVE */
+/* =====================
+   RESPONSIVE — MOBILE (max 768px)
+   ===================== */
 @media (max-width: 768px) {
-  .catalog-page {
-    padding: 4rem 6%;
+  .showcase-row,
+  .showcase-row--reversed {
+    flex-direction: column;
   }
 
-  .catalog-header h2 {
-    font-size: 2rem;
+  .showcase-image-half {
+    flex: none;
+    height: 55vw;
+    min-height: 260px;
+    transform: translateY(40px) !important;
+  }
+
+  .showcase-section.is-visible .showcase-image-half {
+    transform: translateY(0) !important;
+  }
+
+  .showcase-content-half {
+    flex: none;
+    padding: 2.5rem 6%;
+    min-height: unset;
+  }
+
+  .showcase-index-number {
+    font-size: clamp(5rem, 30vw, 8rem);
+  }
+
+  .showcase-divider {
+    margin: 0 6%;
   }
 }

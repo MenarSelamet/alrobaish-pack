@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import { Button } from "../../../Components/button";
 import { Input } from "../../../Components/input";
 import { Label } from "../../../Components/label";
@@ -263,6 +263,7 @@ export default function Products({ products, categories }) {
                                     <TabsContent
                                         value="english"
                                         className="space-y-4"
+                                        dir="ltr"
                                     >
                                         <div>
                                             <Label htmlFor="title_en">
@@ -445,6 +446,7 @@ export default function Products({ products, categories }) {
                                     <TabsContent
                                         value="arabic"
                                         className="space-y-4"
+                                        dir="rtl"
                                     >
                                         <div>
                                             <Label htmlFor="title_ar">

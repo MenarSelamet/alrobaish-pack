@@ -10,7 +10,9 @@
       "Bash(find /c/Users/Saya-/Herd/alrobaish-pack -name *Filament* -o -name *filament* -type f)",
       "Bash(find /c/Users/Saya-/Herd/alrobaish-pack -maxdepth 1 -name *.json -o -name *.md)",
       "Bash(grep -E '\\\\.\\(json|md\\)$')",
-      "Bash(php artisan:*)"
+      "Bash(php artisan:*)",
+      "mcp__laravel-boost__browser-logs",
+      "mcp__laravel-boost__last-error"
     ]
   }
 }

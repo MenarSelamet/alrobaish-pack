@@ -1,44 +1,37 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import GuestLayout from "../../Layouts/GuestLayout";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "../../components/card";
 import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
-import { ArrowRight, ShoppingBag, Gift, UtensilsCrossed } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef } from "react";
 import "./Products.css";
-import { useState } from "react";
 
-const Products = ({categories}) => {
-    const { t } = useTranslation();
-    const { i18n } = useTranslation();
+const Products = ({ categories }) => {
+    const { t, i18n } = useTranslation();
     const lang = i18n.language;
     const sectionsRef = useRef([]);
 
-    console.log(categories);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
 
-   useEffect(() => {
-       const observer = new IntersectionObserver(
-           (entries) => {
-               entries.forEach((entry) => {
-                   if (entry.isIntersecting) {
-                       entry.target.classList.add("is-visible");
-                   }
-               });
-           },
-           { threshold: 0.2 }
-       );
+        sectionsRef.current.forEach((el) => el && observer.observe(el));
 
-       sectionsRef.current.forEach((el) => el && observer.observe(el));
+        return () => observer.disconnect();
+    }, []);
 
-       return () => observer.disconnect();
-   }, []);
+    const isImageLeft = (index) => {
+        const isEven = index % 2 === 0;
+        return lang === "ar" ? !isEven : isEven;
+    };
 
     return (
         <GuestLayout>
@@ -56,81 +49,93 @@ const Products = ({categories}) => {
                 </div>
             </section>
 
-            <section>
-                <div className="catalog-page">
-                    {categories.map((category, index) => (
-                        <section
-                            key={category.id}
-                            ref={(el) => (sectionsRef.current[index] = el)}
-                            className="catalog-section"
-                        >
-                            <div className="catalog-header">
-                                <h2>
-                                    {lang === "ar"
-                                        ? category.name_ar
-                                        : category.name_en}
-                                </h2>
-                                <span className="divider" />
-                            </div>
+            {/* Showcase */}
+            <div className="showcase-page">
+                {categories.map((category, index) => {
+                    const imageOnLeft = isImageLeft(index);
+                    const name =
+                        lang === "ar" ? category.name_ar : category.name_en;
+                    const desc =
+                        lang === "ar"
+                            ? category.description_ar
+                            : category.description_en;
+                    const indexLabel = String(index + 1).padStart(2, "0");
 
-                            <div className="catalog-grid">
-                                {category.image_path && (
-                                    <img
-                                        src={`/storage/${category.image_path}`}
-                                        // alt={category.name}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                    />
-                                )}
-                            </div>
-                        </section>
-                    ))}
-                </div>
-            </section>
-            {/* Products Grid */}
-            {/* <section className="py-16">
-                    <div className="container mx-auto px-4">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {categories.map((category) => (
-                                <Card
-                                    key={category.id}
-                                    className="overflow-hidden hover:shadow-xl transition-shadow"
+                    return (
+                        <React.Fragment key={category.id}>
+                            <section
+                                ref={(el) =>
+                                    (sectionsRef.current[index] = el)
+                                }
+                                className={`showcase-section${index % 2 === 0 ? " showcase-section--tinted" : ""}`}
+                            >
+                                <div
+                                    className={`showcase-row${imageOnLeft ? "" : " showcase-row--reversed"}`}
                                 >
-                                    <div className="h-64 overflow-hidden">
-                                        {category.image_path && (
+                                    {/* Image Half */}
+                                    <div
+                                        className={`showcase-image-half ${imageOnLeft ? "animate-slide-from-left" : "animate-slide-from-right"}`}
+                                    >
+                                        {category.image_path ? (
                                             <img
                                                 src={`/storage/${category.image_path}`}
-                                                // alt={category.name}
-                                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                                alt={name}
+                                                className="showcase-img"
                                             />
+                                        ) : (
+                                            <div className="showcase-img-fallback">
+                                                <span>{name}</span>
+                                            </div>
                                         )}
                                     </div>
-                                    <CardHeader>
-                                        <CardTitle className="text-2xl">
-                                            {lang === "ar"
-                                                ? category.name_ar
-                                                : category.name_en}
-                                        </CardTitle>
-                                        <CardDescription className="text-base">
-                                            {lang === "ar"
-                                                ? category.description_ar
-                                                : category.description_en}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Link
-                                            href={`/products/category/${category.id}`}
+
+                                    {/* Content Half */}
+                                    <div className="showcase-content-half">
+                                        <span
+                                            className="showcase-index-number"
+                                            aria-hidden="true"
                                         >
-                                            <Button className="w-full">
-                                                {t("products.view_details")}
-                                                <ArrowRight className="ml-2 h-4 w-4" />
-                                            </Button>
-                                        </Link>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
-                    </div>
-                </section> */}
+                                            {indexLabel}
+                                        </span>
+                                        <div className="showcase-text-body">
+                                            <h2 className="showcase-title">
+                                                {name}
+                                            </h2>
+                                            {desc && (
+                                                <p className="showcase-desc">
+                                                    {desc}
+                                                </p>
+                                            )}
+                                            <Link
+                                                href={`/products/category/${category.id}`}
+                                            >
+                                                <Button
+                                                    size="lg"
+                                                    className="showcase-cta"
+                                                >
+                                                    {t("products.view_details")}
+                                                    {lang === "ar" ? (
+                                                        <ArrowLeft className="ms-2 h-4 w-4" />
+                                                    ) : (
+                                                        <ArrowRight className="ms-2 h-4 w-4" />
+                                                    )}
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {index < categories.length - 1 && (
+                                <div
+                                    className="showcase-divider"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </React.Fragment>
+                    );
+                })}
+            </div>
         </GuestLayout>
     );
 };
