@@ -4,13 +4,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Contact;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Category;
 use App\Models\Faq;
-use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,7 +22,13 @@ Route::get('/', function () {
 });
 
 Route::get('admin/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
+    return Inertia::render('Admin/Dashboard', [
+        'stats' => [
+            'products'   => \App\Models\Product::count(),
+            'categories' => \App\Models\Category::count(),
+            'users'      => \App\Models\User::count(),
+        ],
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('admin/dashboard/categories', CategoryController::class);
@@ -52,8 +55,6 @@ Route::get('/about', function () {
 Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/category/{category}', [ProductController::class, 'showByCategory']);
-
-// Route::post('/contact', [Contact::class, '__invoke']);
 
 Route::resource('/contact', ContactController::class);
 

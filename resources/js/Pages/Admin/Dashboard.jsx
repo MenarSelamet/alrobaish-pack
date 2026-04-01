@@ -8,24 +8,24 @@ import {
 import { Package, FolderTree, Users, ShoppingBag } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export default function Dashboard() {
+export default function Dashboard({ stats }) {
     const { t } = useTranslation();
-    const stats = [
+    const cards = [
         {
             title: t("dashboard.stats_total_products"),
-            value: "24",
+            value: stats.products,
             icon: Package,
             color: "text-primary",
         },
         {
             title: t("dashboard.stats_categories"),
-            value: "3",
+            value: stats.categories,
             icon: FolderTree,
             color: "text-accent",
         },
         {
             title: t("dashboard.stats_users"),
-            value: "156",
+            value: stats.users,
             icon: Users,
             color: "text-secondary",
         },
@@ -38,7 +38,7 @@ export default function Dashboard() {
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {stats.map((stat) => (
+                    {cards.map((stat) => (
                         <Card key={stat.title}>
                             <CardHeader className="flex flex-row items-center justify-between pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
