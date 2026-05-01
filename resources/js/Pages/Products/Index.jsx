@@ -4,7 +4,7 @@ import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
 import { ArrowRight, ArrowLeft, Leaf, ShieldCheck, Printer, PackageCheck, Wrench, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import "./Products.css";
+import "./products.css";
 
 const Products = ({ categories, products }) => {
     const { t, i18n } = useTranslation();
