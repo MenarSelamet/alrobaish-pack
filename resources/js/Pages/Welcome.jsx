@@ -137,7 +137,7 @@ export default function Welcome() {
                             className="bg-card shadow-lg border-primary border-b-4 border-green-700 rounded-md home-fade-up"
                             ref={ref(0)}
                         >
-                            <div className="grid grid-cols-2 md:grid-cols-4 divide-y-0 divide-border text-center">
+                            <div className="stats-grid grid grid-cols-2 md:grid-cols-4 text-center">
                                 <StatCounter target={2000} suffix="+" label={t("home.stats_customers")} />
                                 <StatCounter target={5}     suffix="M+" label={t("home.stats_bags")} />
                                 <StatCounter target={90}   suffix="%" label={t("home.stats_recyclable")} />
@@ -151,7 +151,7 @@ export default function Welcome() {
                 <section className="py-12 md:py-20">
                     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                         <div
-                            className={`relative ${lang === "ar" ? "home-slide-end pr-4 md:pr-6 border-r-4" : "home-slide-start pl-4 md:pl-6 border-l-4"} border-yellow-700`}
+                            className={`relative ${lang === "ar" ? "home-slide-end pr-3 sm:pr-4 md:pr-6 border-r-4" : "home-slide-start pl-3 sm:pl-4 md:pl-6 border-l-4"} border-yellow-700`}
                             ref={ref(1)}
                         >
                             <span className="text-sm uppercase tracking-wide text-muted-foreground mb-2 block">
@@ -303,7 +303,7 @@ export default function Welcome() {
                 <section>
                     {/* Background banner */}
                     <div
-                        className="relative flex flex-col justify-center items-center text-center text-white bg-cover bg-center py-16 md:py-24 pb-24 md:pb-36"
+                        className="relative flex flex-col justify-center items-center text-center text-white bg-cover bg-center py-16 md:py-24 md:pb-36"
                         style={{ backgroundImage: "url('/images/hero-bags.jpg')" }}
                     >
                         <div className="absolute inset-0 bg-black/40" />
@@ -327,7 +327,7 @@ export default function Welcome() {
                     </div>
 
                     {/* Step cards — pulled up over the banner on desktop, flowing below on mobile */}
-                    <div className="container mx-auto px-4 md:-mt-20 relative z-20 pb-12 md:pb-16">
+                    <div className="container mx-auto px-4 pt-8 md:pt-0 md:-mt-20 relative z-20 pb-12 md:pb-16">
                         <div className="flex flex-col md:flex-row justify-center gap-5 md:gap-6">
                             {[
                                 { num: "01", titleKey: "success.story1_title", textKey: "success.story1_text", delay: "delay-100" },
