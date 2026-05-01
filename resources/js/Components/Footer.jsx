@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const Footer = () => {
     const { t, i18n } = useTranslation();
     return (
-        <footer className="bg-primary text-primary-foreground mt-20 ">
+        <footer className="bg-primary text-primary-foreground mt-20">
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
@@ -25,28 +25,16 @@ const Footer = () => {
                             {t("footer.quick_links")}
                         </h3>
                         <div className="flex flex-col gap-2 text-sm">
-                            <Link
-                                to="/"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("nav.home")}
                             </Link>
-                            <Link
-                                to="/about"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/about" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("nav.about")}
                             </Link>
-                            <Link
-                                to="/products"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/products" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("nav.products")}
                             </Link>
-                            <Link
-                                to="/contact"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/contact" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("nav.contact")}
                             </Link>
                         </div>
@@ -57,22 +45,13 @@ const Footer = () => {
                             {t("products.title")}
                         </h3>
                         <div className="flex flex-col gap-2 text-sm">
-                            <Link
-                                to="/products/shopping"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/products" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("products.shopping_title")}
                             </Link>
-                            <Link
-                                to="/products/gift"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/products" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("products.gift_title")}
                             </Link>
-                            <Link
-                                to="/products/food"
-                                className="opacity-90 hover:opacity-100 transition-opacity"
-                            >
+                            <Link href="/products" className="opacity-90 hover:opacity-100 transition-opacity">
                                 {t("products.food_title")}
                             </Link>
                         </div>
