@@ -209,10 +209,13 @@ export default function Welcome() {
                             className={`flex justify-center ${lang === "ar" ? "home-slide-start" : "home-slide-end"}`}
                             ref={ref(2)}
                         >
-                            <img
-                                src="/images/food-bags.jpg"
-                                alt="Paper Bag"
-                                className="rounded-md shadow-md w-full max-w-md transition-transform duration-500 hover:scale-[1.02]"
+                            <video
+                                src="/images/video.mp4"
+                                className="rounded-md shadow-md w-full max-w-md"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
                             />
                         </div>
                     </div>
