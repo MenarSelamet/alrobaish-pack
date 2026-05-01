@@ -138,10 +138,10 @@ export default function Welcome() {
                             ref={ref(0)}
                         >
                             <div className="grid grid-cols-2 md:grid-cols-4 divide-y-0 divide-border text-center">
-                                <StatCounter target={10000} suffix="+" label={t("home.stats_customers")} />
+                                <StatCounter target={2000} suffix="+" label={t("home.stats_customers")} />
                                 <StatCounter target={5}     suffix="M+" label={t("home.stats_bags")} />
-                                <StatCounter target={100}   suffix="%" label={t("home.stats_recyclable")} />
-                                <StatCounter target={15}    suffix="+" label={t("home.stats_experience")} />
+                                <StatCounter target={90}   suffix="%" label={t("home.stats_recyclable")} />
+                                <StatCounter target={20}    suffix="+" label={t("home.stats_experience")} />
                             </div>
                         </div>
                     </div>
