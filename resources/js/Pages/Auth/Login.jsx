@@ -117,6 +117,16 @@ export default function Login({ status, canResetPassword }) {
                                 {t("login.login_button")}
                             </PrimaryButton>
                         </div>
+
+                        <div className="mt-4 text-center text-sm text-muted-foreground">
+                            Don't have an account?{" "}
+                            <Link
+                                href={route("register")}
+                                className="underline hover:text-foreground"
+                            >
+                                Register
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </div>
