@@ -21,5 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+
+        if (! file_exists(public_path('storage'))) {
+            \Artisan::call('storage:link');
+        }
     }
 }
