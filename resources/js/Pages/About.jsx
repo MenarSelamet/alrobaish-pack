@@ -38,21 +38,50 @@ const About = ({ faqs = [] }) => {
             <div className="min-h-screen">
 
                 {/* ── Hero ──────────────────────────── */}
-                <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
+                <section className="relative overflow-hidden pt-28 pb-20 bg-gradient-to-br from-primary/8 via-background to-background">
+                    {/* Decorative blobs */}
+                    <div className="absolute -top-32 -start-32 w-[500px] h-[500px] rounded-full bg-primary/6 blur-3xl pointer-events-none" />
+                    <div className="absolute bottom-0 -end-24 w-72 h-72 rounded-full bg-primary/5 blur-2xl pointer-events-none" />
+
                     <div className="container mx-auto px-4">
-                        <div className="max-w-3xl mx-auto text-center">
-                            <h1
-                                className="text-5xl font-bold text-foreground mb-6 home-fade-up is-visible"
-                                style={{ transitionDelay: "0.05s" }}
-                            >
-                                {t("about.title")}
-                            </h1>
-                            <p
-                                className="text-xl text-muted-foreground home-fade-up is-visible"
-                                style={{ transitionDelay: "0.2s" }}
-                            >
-                                {t("about.subtitle")}
-                            </p>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                            {/* Left: Text block */}
+                            <div>
+                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-widest mb-5 home-fade-up is-visible">
+                                    {t("about.hero_badge")}
+                                </span>
+                                <h1
+                                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-5 home-fade-up is-visible"
+                                    style={{ transitionDelay: "0.1s" }}
+                                >
+                                    {t("about.title")}
+                                </h1>
+                                <p
+                                    className="text-lg text-muted-foreground max-w-lg home-fade-up is-visible"
+                                    style={{ transitionDelay: "0.2s" }}
+                                >
+                                    {t("about.subtitle")}
+                                </p>
+                            </div>
+
+                            {/* Right: Image stack */}
+                            <div className="relative hidden lg:flex items-end justify-end h-80">
+                                {/* Background image */}
+                                <img
+                                    src="/images/shopping-bags.jpg"
+                                    alt=""
+                                    className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-xl"
+                                />
+                                {/* Overlay gradient */}
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-background/60 to-transparent" />
+
+                                {/* Floating label top-start */}
+                                <div className="absolute top-4 start-4 z-10 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+                                    {t("about.hero_badge")}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
