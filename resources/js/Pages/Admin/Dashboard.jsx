@@ -4,7 +4,7 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from "../../components/card";
+} from "../../Components/card";
 import { Package, FolderTree, Users, ShoppingBag } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
