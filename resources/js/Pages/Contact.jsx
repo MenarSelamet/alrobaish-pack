@@ -6,7 +6,7 @@ import {
     CardDescription,
     CardTitle,
     CardHeader,
-} from "../components/card";
+} from "../Components/card";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Label } from "../Components/label";
 import { Input } from "../Components/input";

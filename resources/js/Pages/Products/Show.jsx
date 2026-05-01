@@ -1,7 +1,7 @@
 import GuestLayout from "../../Layouts/GuestLayout";
 import { ArrowLeft, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "@inertiajs/react";
-import { Card, CardContent } from "../../components/card";
+import { Card, CardContent } from "../../Components/card";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 

@@ -55,7 +55,7 @@ function StatCounter({ target, suffix, label, duration = 1800 }) {
     );
 }
 
-import { Card, CardContent } from "../components/card";
+import { Card, CardContent } from "../Components/card";
 import { Button } from "../Components/button";
 import { ArrowRight, ArrowLeft, Package, Leaf, Award } from "lucide-react";
 import GuestLayout from "../Layouts/GuestLayout";
