@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import GuestLayout from "../../Layouts/GuestLayout";
 import { Button } from "../../Components/button";
 import { Link } from "@inertiajs/react";
-import { ArrowRight, ArrowLeft, Leaf, ShieldCheck, Printer, PackageCheck, Wrench, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowLeft, Leaf, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import "./products.css";
 
@@ -43,12 +43,6 @@ const Products = ({ categories, products }) => {
     const cat0 = categories[0];
     const cat1 = categories[1];
     const cat2 = categories[2];
-
-    const services = [
-        { icon: Printer,      titleKey: "service1_title", descKey: "service1_desc", cat: categories[3] },
-        { icon: PackageCheck, titleKey: "service2_title", descKey: "service2_desc", cat: categories[4] },
-        { icon: Wrench,       titleKey: "service3_title", descKey: "service3_desc", cat: categories[5] },
-    ];
 
     const name = (c) => c ? (isRtl ? c.name_ar : c.name_en) : "";
 
@@ -170,47 +164,6 @@ const Products = ({ categories, products }) => {
 
             </div>
 
-            {/* ── Services Section ───────────────────────── */}
-            <section className="services-section">
-                <div className="services-section__header fade-up" ref={addRef}>
-                    <h2 className="text-2xl font-bold text-foreground leading-snug mb-2">
-                        {t("products.services_heading")}
-                    </h2>
-                    <p className="text-sm text-muted-foreground">{t("products.services_subtitle")}</p>
-                </div>
-                <div className="services-grid">
-                    {services.map((svc, i) => {
-                        const Icon = svc.icon;
-                        return (
-                            <div key={i} className={`service-card fade-up delay-${i}`} ref={addRef}>
-                                <div className="service-card__image">
-                                    {svc.cat?.image_path ? (
-                                        <img src={`/storage/${svc.cat.image_path}`} alt={t(svc.titleKey)} />
-                                    ) : (
-                                        <div className="service-card__image-fallback">
-                                            <Icon size={32} />
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="service-card__body">
-                                    <h3 className="font-semibold text-foreground text-sm leading-snug">
-                                        {t(svc.titleKey)}
-                                    </h3>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">
-                                        {t(svc.descKey)}
-                                    </p>
-                                    <Link href="/contact" className="mt-1 block">
-                                        <Button size="sm" variant="link" className="px-0 text-xs h-auto">
-                                            {t("contact.title")}
-                                            {isRtl ? <ArrowLeft className="ms-1 h-3 w-3" /> : <ArrowRight className="ms-1 h-3 w-3" />}
-                                        </Button>
-                                    </Link>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </section>
 
             {/* ── Products Carousel ──────────────────────── */}
             {products && products.length > 0 && (
