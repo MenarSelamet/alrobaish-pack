@@ -139,7 +139,7 @@ const Products = ({ categories, products }) => {
                         <h3 className="bento-title">{t("products.feature_eco_title")}</h3>
                         <p className="bento-desc">{t("products.feature_eco_desc")}</p>
                         <Link href="/about">
-                            <Button size="sm" variant="ghost" className="px-0 text-primary">
+                            <Button size="sm" variant="ghost" className="text-primary">
                                 {t("products.view_details")}
                                 {isRtl ? <ArrowLeft className="ms-1 h-3 w-3" /> : <ArrowRight className="ms-1 h-3 w-3" />}
                             </Button>
@@ -154,7 +154,7 @@ const Products = ({ categories, products }) => {
                         <h3 className="bento-title">{t("products.feature_durable_title")}</h3>
                         <p className="bento-desc">{t("products.feature_durable_desc")}</p>
                         <Link href="/contact">
-                            <Button size="sm" variant="ghost" className="px-0 text-primary">
+                            <Button size="sm" variant="ghost" className="text-primary">
                                 {t("products.view_details")}
                                 {isRtl ? <ArrowLeft className="ms-1 h-3 w-3" /> : <ArrowRight className="ms-1 h-3 w-3" />}
                             </Button>
