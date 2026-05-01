@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     return (
         <footer className="bg-primary text-primary-foreground mt-20 ">
             <div className="container mx-auto px-4 py-12">
@@ -12,7 +12,7 @@ const Footer = () => {
                         <div className="flex items-center gap-2 mb-4">
                             <Package className="h-6 w-6" />
                             <span className="text-xl font-bold">
-                                EcoBag Co.
+                                {i18n.language === "ar" ? "مصنع إبداعات دوما" : "Dooma Creativity Factory"}
                             </span>
                         </div>
                         <p className="text-sm opacity-90">
