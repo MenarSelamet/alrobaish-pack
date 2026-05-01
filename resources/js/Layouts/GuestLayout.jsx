@@ -19,7 +19,7 @@ export default function GuestLayout({ children }) {
         <div>
             {/* Floating navbar */}
             <div className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 px-4">
-                <div className={`w-full max-w-5xl flex items-center justify-between h-14 px-5 rounded-2xl border transition-all duration-300 ${
+                <div className={`w-full max-w-6xl flex items-center justify-between h-14 px-5 rounded-2xl border transition-all duration-300 ${
                     scrolled
                         ? "bg-background/80 backdrop-blur-md border-border/50 shadow-lg"
                         : "bg-background/70 backdrop-blur-md border-border/30 shadow-md"

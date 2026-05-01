@@ -225,7 +225,7 @@
    PRODUCTS CAROUSEL
    ===================== */
 .carousel-section {
-  padding: 0 4% 3.5rem;
+  padding: 0 4% 2rem;
 }
 .carousel-header {
   display: flex;
@@ -329,10 +329,10 @@
    DISCOVER CATEGORIES
    ===================== */
 .discover-section {
-  padding: 0 4% 5rem;
+  padding: 2rem 4% 5rem;
 }
 .discover-header {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 .discover-filters {
   display: flex;
