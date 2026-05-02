@@ -19,19 +19,19 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = $request->validate([
-            'name_en' => 'required|string|max:255',
-            'name_ar' => 'required|string|max:255',
+            'name_en'        => 'required|string|max:255',
+            'name_ar'        => 'required|string|max:255',
             'description_en' => 'nullable|string',
             'description_ar' => 'nullable|string',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'image_path'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'is_featured'    => 'nullable|boolean',
         ]);
 
-        $imagePath = null;
+        $validated['is_featured'] = $request->boolean('is_featured');
+
         if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('categories', 'public');
-            $validated['image_path'] = $imagePath;
+            $validated['image_path'] = $request->file('image_path')->store('categories', 'public');
         }
 
         Category::create($validated);
@@ -42,12 +42,15 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name_en' => 'required|string|max:255',
-            'name_ar' => 'required|string|max:255',
+            'name_en'        => 'required|string|max:255',
+            'name_ar'        => 'required|string|max:255',
             'description_en' => 'nullable|string',
             'description_ar' => 'nullable|string',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'image_path'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'is_featured'    => 'nullable|boolean',
         ]);
+
+        $validated['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image_path')) {
             $validated['image_path'] = $request->file('image_path')->store('categories', 'public');

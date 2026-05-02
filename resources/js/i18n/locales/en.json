@@ -119,7 +119,57 @@
         "discover_heading": "Discover Our Product Categories",
         "discover_subtitle": "Browse our full selection and find the perfect packaging for your business.",
         "discover_all": "All",
-        "no_products": "No products available yet."
+        "no_products": "No products available yet.",
+
+        "hero_eyebrow": "B2B PACKAGING SOLUTIONS",
+        "hero_title_1": "Built for cafés, bakeries &",
+        "hero_title_2": "brands that think in batches.",
+        "hero_subtitle": "Custom-printable bag families, fully tailored to your logo, colors and finish — from 500-unit pilots to 100,000-unit production lines.",
+        "hero_cta_browse": "Browse the range",
+        "hero_cta_quote": "Request a custom quote",
+        "hero_stat_families": "product families",
+        "hero_stat_moq": "MOQ on custom prints",
+        "hero_stat_lead": "standard lead time",
+
+        "honeycomb_eyebrow": "THE RANGE",
+        "honeycomb_title": "Pick a hexagon. See the range.",
+        "honeycomb_subtitle": "Each family is engineered for a specific use case — bakery, food-service, retail, takeaway, e-commerce. Hover or tap to preview, click to load it below.",
+        "honeycomb_hint": "↓ Tap any hexagon to load that category",
+
+        "featured_eyebrow": "NOW SHOWING",
+        "featured_view_range": "View this range",
+        "featured_request_sample": "Request a sample",
+        "featured_sub_skus": "products in this family",
+        "featured_strip_hint": "Click any image to see it larger",
+        "featured_no_products": "No products in this category yet.",
+
+        "fullrange_eyebrow": "FULL RANGE",
+        "fullrange_title": "Every category we make",
+        "fullrange_subtitle": "The diamond above showcases our featured families. Below is the complete catalog — including new categories as they're added.",
+
+        "modal_request_sample": "Request a sample",
+        "modal_use_for_quote": "Use this on a custom quote",
+        "modal_no_specs": "No detailed specs published yet — request a sample for full data.",
+        "modal_close": "Close",
+        "modal_prev": "Previous",
+        "modal_next": "Next",
+
+        "usps_eyebrow": "WHY ALROBAISH",
+        "usps_title": "Built for the way packaging buyers actually work.",
+        "usps_u1_title": "Custom printing",
+        "usps_u1_desc": "Up to 6-color flexo + offset — your logo, brand colors, or seasonal artwork.",
+        "usps_u2_title": "Flexible MOQ",
+        "usps_u2_desc": "From 100 stock-design units to 100,000+ custom-print runs.",
+        "usps_u3_title": "Fast turnaround",
+        "usps_u3_desc": "2–3 weeks standard production, rush available for repeat clients.",
+        "usps_u4_title": "Eco materials",
+        "usps_u4_desc": "90% recyclable kraft, food-safe coatings, FSC-sourced paper on request.",
+
+        "cta_card_eyebrow": "CUSTOM QUOTE",
+        "cta_card_title": "Tell us about the bag you need. We'll send specs, pricing & a sample.",
+        "cta_card_subtitle": "Send us your size, paper weight, print artwork (or none) and target quantity. A real human replies within one business day.",
+        "cta_card_button": "Start a quote request",
+        "cta_card_contact_label": "Or reach us directly"
     },
     "contact": {
         "title": "Contact Us",
@@ -236,7 +286,9 @@
         "faq_question": "Question",
         "faq_answer": "Answer",
         "faq_order": "Order",
-        "no_faqs": "No FAQs yet."
+        "no_faqs": "No FAQs yet.",
+        "featured": "Featured on home",
+        "featured_help": "Show this category in the homepage honeycomb (max 9)."
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",

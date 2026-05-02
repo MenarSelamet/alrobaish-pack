@@ -26,7 +26,8 @@ import {
     TabsList,
     TabsTrigger,
 } from "../../../Components/tabs";
-import { Plus, Pencil, Trash2, X } from "lucide-react";
+import Checkbox from "../../../Components/Checkbox";
+import { Plus, Pencil, Trash2, X, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function Categories({ categories }) {
@@ -54,6 +55,7 @@ export default function Categories({ categories }) {
         description_en: "",
         description_ar: "",
         image_path: null,
+        is_featured: false,
     });
 
     const handleSubmit = (e) => {
@@ -90,6 +92,7 @@ export default function Categories({ categories }) {
             description_en: category.description_en || "",
             description_ar: category.description_ar || "",
             image_path: null,
+            is_featured: Boolean(category.is_featured),
         });
         if (category.image_path) {
             setImagePreview({
@@ -354,6 +357,25 @@ export default function Categories({ categories }) {
                                     )}
                                 </div>
 
+                                {/* Featured-on-home toggle (max 9 honoured by the page) */}
+                                <label className="flex items-start gap-3 cursor-pointer rounded-lg border border-border p-3 hover:bg-muted/40 transition-colors">
+                                    <Checkbox
+                                        id="is_featured"
+                                        checked={Boolean(data.is_featured)}
+                                        onChange={(e) => setData("is_featured", e.target.checked)}
+                                        className="mt-0.5"
+                                    />
+                                    <div className="flex-1">
+                                        <div className="text-sm font-medium text-foreground inline-flex items-center gap-1.5">
+                                            <Star className="h-3.5 w-3.5 text-primary" />
+                                            {t("dashboard.featured")}
+                                        </div>
+                                        <p className="text-xs text-muted-foreground mt-0.5">
+                                            {t("dashboard.featured_help")}
+                                        </p>
+                                    </div>
+                                </label>
+
                                 <Button type="submit" className="w-full">
                                     {editingCategory
                                         ? t("dashboard.update")
@@ -398,9 +420,17 @@ export default function Categories({ categories }) {
                                         )}
                                     </TableCell>
                                     <TableCell className="font-medium">
-                                        {lang === "ar"
-                                            ? category.name_ar
-                                            : category.name_en}
+                                        <div className="inline-flex items-center gap-2">
+                                            {lang === "ar"
+                                                ? category.name_ar
+                                                : category.name_en}
+                                            {category.is_featured && (
+                                                <span className="inline-flex items-center gap-1 bg-primary/10 text-primary text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                                                    <Star className="h-2.5 w-2.5" />
+                                                    {t("dashboard.featured")}
+                                                </span>
+                                            )}
+                                        </div>
                                     </TableCell>
                                     <TableCell>
                                         {lang === "ar"

@@ -16,12 +16,24 @@ class Category extends Model
         'description_en',
         'description_ar',
         'is_active',
+        'is_featured',
         'sort_order',
         'image_path',
-
     ];
 
-    public function products()
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_active'   => 'boolean',
+            'is_featured' => 'boolean',
+            'sort_order'  => 'integer',
+        ];
+    }
+
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Product::class);
     }

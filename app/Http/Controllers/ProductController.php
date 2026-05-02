@@ -14,16 +14,35 @@ class ProductController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        $categories = Category::all();
-        $products = Product::with('category')
+        $allCategories = Category::query()
             ->where('is_active', true)
             ->orderBy('sort_order')
-            ->take(12)
+            ->orderBy('id')
+            ->get();
+
+        $featuredCategories = $allCategories
+            ->where('is_featured', true)
+            ->take(9)
+            ->values();
+
+        // Fall back to first 9 by sort_order if nothing is flagged yet
+        // (covers the case where the migration hasn't run, or all are unflagged).
+        if ($featuredCategories->isEmpty()) {
+            $featuredCategories = $allCategories->take(9)->values();
+        }
+
+        // All active products with primary image_path; the lightbox uses these.
+        $products = Product::query()
+            ->with('category:id,name_en,name_ar')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
             ->get();
 
         return inertia('Products/Index', [
-            'categories' => $categories,
-            'products'   => $products,
+            'featuredCategories' => $featuredCategories,
+            'categories'         => $allCategories,
+            'products'           => $products,
         ]);
     }
 
