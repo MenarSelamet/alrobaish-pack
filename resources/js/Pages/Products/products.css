@@ -227,6 +227,12 @@
 .carousel-section {
   padding: 0 4% 2rem;
 }
+.carousel-section--tinted {
+  background: hsl(var(--primary) / 0.04);
+  padding-top: 2.5rem;
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+}
 .carousel-header {
   display: flex;
   align-items: baseline;
@@ -330,6 +336,11 @@
    ===================== */
 .discover-section {
   padding: 2rem 4% 2rem;
+}
+.discover-section--muted {
+  background: hsl(var(--muted) / 0.5);
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 .discover-header {
   margin-bottom: 1.25rem;

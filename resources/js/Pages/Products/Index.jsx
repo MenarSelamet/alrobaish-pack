@@ -49,17 +49,38 @@ const Products = ({ categories, products }) => {
     return (
         <GuestLayout>
             {/* ── Hero ───────────────────────────────────── */}
-            <section className="pt-28 pb-14 bg-gradient-to-b from-primary/5 to-background">
-                <div className="container mx-auto px-4 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+            <section className="relative overflow-hidden bg-primary text-primary-foreground pt-28 pb-20">
+                {/* Decorative blobs */}
+                <div className="absolute -top-24 -start-24 w-96 h-96 rounded-full bg-primary-foreground/5 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-8 end-0 w-80 h-80 rounded-full bg-primary-foreground/5 blur-2xl pointer-events-none" />
+
+                <div className="container mx-auto px-4 text-center relative z-10">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-widest bg-primary-foreground/15 px-3 py-1 rounded-full mb-5">
                         {t("products.tagline")}
-                    </p>
-                    <h1 className="text-5xl font-bold text-foreground mb-4 max-w-2xl mx-auto leading-tight">
+                    </span>
+                    <h1 className="text-4xl sm:text-5xl font-bold mb-4 max-w-2xl mx-auto leading-tight">
                         {t("products.title")}
                     </h1>
-                    <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+                    <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto mb-8">
                         {t("products.subtitle")}
                     </p>
+                    <div className="flex flex-wrap gap-3 justify-center">
+                        <Link href="#discover">
+                            <Button size="lg" variant="secondary">{t("products.bento_cta")}</Button>
+                        </Link>
+                        <Link href="/contact">
+                            <Button size="lg" className="bg-primary-foreground/15 hover:bg-primary-foreground/25 text-primary-foreground border border-primary-foreground/30">
+                                {t("products.cta_custom_button")}
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Wave divider */}
+                <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none" dir="ltr">
+                    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" className="block w-full" preserveAspectRatio="none" style={{ height: 50 }}>
+                        <path d="M0,32 C360,0 1080,64 1440,32 L1440,50 L0,50 Z" fill="hsl(var(--background))" />
+                    </svg>
                 </div>
             </section>
 
@@ -73,14 +94,9 @@ const Products = ({ categories, products }) => {
                             <span className="bento-label">{t("products.tagline")}</span>
                             <h2 className="bento-title bento-title--lg">{t("products.bento_heading")}</h2>
                             <p className="bento-desc">{t("products.bento_desc")}</p>
-                            <div className="flex gap-2 flex-wrap mt-1">
-                                <Link href="#discover">
-                                    <Button size="sm">{t("products.bento_cta")}</Button>
-                                </Link>
-                                <Link href="/contact">
-                                    <Button size="sm" variant="outline">{t("products.cta_custom_button")}</Button>
-                                </Link>
-                            </div>
+                            <Link href="#discover" className="mt-1">
+                                <Button size="sm">{t("products.bento_cta")}</Button>
+                            </Link>
                         </div>
                         <div className="bento-split__image">
                             {cat0?.image_path ? (
@@ -167,7 +183,7 @@ const Products = ({ categories, products }) => {
 
             {/* ── Products Carousel ──────────────────────── */}
             {products && products.length > 0 && (
-                <section className="carousel-section">
+                <section className="carousel-section carousel-section--tinted">
                     <div className="carousel-header fade-up" ref={addRef}>
                         <h2 className="text-xl font-bold text-foreground">{t("products.carousel_heading")}</h2>
                         <Link href="#discover" className="text-sm text-primary font-medium hover:underline">
@@ -211,7 +227,7 @@ const Products = ({ categories, products }) => {
             )}
 
             {/* ── Discover Categories ────────────────────── */}
-            <section id="discover" className="discover-section">
+            <section id="discover" className="discover-section discover-section--muted">
                 <div className="discover-header fade-up" ref={addRef}>
                     <h2 className="text-2xl font-bold text-foreground mb-1">{t("products.discover_heading")}</h2>
                     <p className="text-sm text-muted-foreground">{t("products.discover_subtitle")}</p>

@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
@@ -10,6 +10,10 @@ export default function GuestLayout({ children }) {
     const { t } = useTranslation();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const { url } = usePage();
+
+    const isActive = (href) =>
+        href === "/" ? url === "/" : url.startsWith(href);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -46,7 +50,11 @@ export default function GuestLayout({ children }) {
                                 <Link
                                     key={href}
                                     href={href}
-                                    className="text-sm font-medium px-4 py-1.5 rounded-xl transition-colors hover:bg-muted hover:text-foreground text-muted-foreground"
+                                    className={`text-sm font-medium px-4 py-1.5 rounded-xl transition-colors ${
+                                        isActive(href)
+                                            ? "bg-primary/10 text-primary font-semibold"
+                                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                    }`}
                                 >
                                     {label}
                                 </Link>
@@ -78,7 +86,11 @@ export default function GuestLayout({ children }) {
                                     key={href}
                                     href={href}
                                     onClick={() => setMenuOpen(false)}
-                                    className="text-sm font-medium px-4 py-2.5 rounded-xl transition-colors hover:bg-muted hover:text-foreground text-muted-foreground"
+                                    className={`text-sm font-medium px-4 py-2.5 rounded-xl transition-colors ${
+                                        isActive(href)
+                                            ? "bg-primary/10 text-primary font-semibold"
+                                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                    }`}
                                 >
                                     {label}
                                 </Link>
