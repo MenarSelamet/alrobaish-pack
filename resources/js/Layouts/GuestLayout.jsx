@@ -7,7 +7,8 @@ import ThemeToggle from "../Components/ThemeToggle";
 import Footer from "../Components/Footer";
 
 export default function GuestLayout({ children }) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language === "ar";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const { url } = usePage();
@@ -38,14 +39,14 @@ export default function GuestLayout({ children }) {
                         : "bg-background/70 backdrop-blur-md border-border/30 shadow-md"
                 }`}>
                     {/* Top bar */}
-                    <div className="flex items-center justify-between h-14 px-5">
+                    <div dir="ltr" className={`flex items-center justify-between h-14 px-5 ${isRtl ? "" : "flex-row-reverse"}`}>
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 shrink-0">
                             <img className="w-28" src="/images/logo.png" alt="Logo" />
                         </Link>
 
                         {/* Desktop nav links */}
-                        <div className="hidden md:flex items-center gap-1">
+                        <div dir="ltr" className={`hidden md:flex items-center gap-1 ${isRtl ? "flex-row-reverse" : ""}`}>
                             {navLinks.map(({ href, label }) => (
                                 <Link
                                     key={href}
