@@ -69,7 +69,7 @@ const About = ({ faqs = [] }) => {
             <div className="bg-background text-foreground">
 
                 {/* ───────────────────────── HERO ───────────────────────── */}
-                <section className="hex-hero pt-32 pb-24 px-[6vw]">
+                <section className="hex-hero pt-24 pb-16 sm:pt-32 sm:pb-24 px-[6vw]">
                     <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center">
 
                         {/* Left: heading */}

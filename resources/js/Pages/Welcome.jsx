@@ -107,7 +107,7 @@ export default function Welcome() {
             <div className="bg-background text-foreground">
 
                 {/* ───────────────────────── HERO ───────────────────────── */}
-                <section className="hex-hero pt-32 pb-32 sm:pb-36 px-[6vw]">
+                <section className="hex-hero pt-24 pb-20 sm:pt-32 sm:pb-32 lg:pb-36 px-[6vw]">
                     <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center">
 
                         {/* Text */}
@@ -180,7 +180,7 @@ export default function Welcome() {
                 </section>
 
                 {/* ─────────────── STATS — floats up over hero ─────────────── */}
-                <section className="px-[6vw] -mt-20 sm:-mt-24 relative z-20 mb-20">
+                <section className="px-[6vw] -mt-10 sm:-mt-20 lg:-mt-24 relative z-20 mb-16 sm:mb-20">
                     <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                         <StatTile target={2000} suffix="+"  label={t("home.stats_customers")}  index={0} />
                         <StatTile target={5}    suffix="M+" label={t("home.stats_bags")}       index={1} />
@@ -403,7 +403,7 @@ export default function Welcome() {
                     </div>
 
                     {/* Step cards — pulled up over banner on desktop */}
-                    <div className="px-[6vw] -mt-24 md:-mt-28 relative z-20 pb-20 md:pb-24">
+                    <div className="px-[6vw] mt-10 md:-mt-28 relative z-20 pb-20 md:pb-24">
                         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
                             {[
                                 { num: "01", titleKey: "success.story1_title", textKey: "success.story1_text" },

@@ -77,7 +77,7 @@ const Contact = () => {
             <div className="bg-background text-foreground">
 
                 {/* ───────────────────────── HERO ───────────────────────── */}
-                <section className="hex-hero pt-32 pb-24 px-[6vw]">
+                <section className="hex-hero pt-24 pb-16 sm:pt-32 sm:pb-24 px-[6vw]">
                     <div className="max-w-6xl mx-auto relative z-10">
                         <div className="eyebrow-hex eyebrow-hex--accent mb-5">
                             <span>{t("contact.title")}</span>
