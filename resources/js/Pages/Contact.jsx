@@ -126,7 +126,7 @@ const Contact = () => {
                         {/* Form (3/5 on desktop) */}
                         <div
                             ref={addRef}
-                            className="fade-up lg:col-span-3 hex-corner-card p-8 sm:p-10"
+                            className="fade-up lg:col-span-3 hex-corner-card hex-corner-card--lg p-8 sm:p-10"
                         >
                             <div className="eyebrow-hex mb-3">
                                 <span>{t("contact.form_title")}</span>
