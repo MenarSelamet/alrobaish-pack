@@ -154,6 +154,13 @@
         "modal_prev": "Previous",
         "modal_next": "Next",
 
+        "tab_sizes": "Sizes",
+        "tab_materials": "Materials",
+        "tab_features": "Features",
+        "tab_examples": "Examples",
+        "tab_empty": "Coming soon — request a sample for full specs.",
+        "tab_examples_empty": "No example images uploaded yet for this category.",
+
         "usps_eyebrow": "WHY ALROBAISH",
         "usps_title": "Built for the way packaging buyers actually work.",
         "usps_u1_title": "Custom printing",
@@ -288,7 +295,17 @@
         "faq_order": "Order",
         "no_faqs": "No FAQs yet.",
         "featured": "Featured on home",
-        "featured_help": "Show this category in the homepage honeycomb (max 9)."
+        "featured_help": "Show this category in the homepage honeycomb (max 9).",
+        "category_image_help": "Used as the small thumbnail in the homepage honeycomb.",
+        "banner": "Banner image",
+        "banner_help": "Landscape image shown next to the category in the featured rectangle.",
+        "gallery": "Example images",
+        "gallery_help": "Up to ~8 images for the 'Examples' tab. They open in a lightbox.",
+        "gallery_remove": "Remove",
+        "sizes": "Available sizes",
+        "materials": "Materials",
+        "features_label": "Features / advantages",
+        "spec_help": "One item per line."
     },
     "footer": {
         "tagline": "Sustainable packaging solutions for your business",

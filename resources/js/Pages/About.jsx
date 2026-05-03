@@ -40,8 +40,8 @@ const About = ({ faqs = [] }) => {
     /* ── Story stats (use existing home.stats_* labels) ── */
     const stats = [
         { number: "2,000+", labelKey: "home.stats_customers"  },
-        { number: "1M+",    labelKey: "home.stats_bags"       },
-        { number: "10+",    labelKey: "home.stats_experience" },
+        { number: "5M+",    labelKey: "home.stats_bags"       },
+        { number: "20+",    labelKey: "home.stats_experience" },
     ];
 
     /* ── Values ── */

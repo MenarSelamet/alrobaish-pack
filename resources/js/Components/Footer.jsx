@@ -75,18 +75,28 @@ const Footer = () => {
         <footer className="hex-hero mt-20 pt-16 pb-8 px-[6vw]">
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-
                     <div className="md:col-span-4">
                         <div className="flex items-center gap-3 mb-4">
                             <div
                                 className="grid place-items-center text-[hsl(var(--accent-foreground))] font-extrabold text-base"
-                                style={brandHexStyle}
+                                //style={brandHexStyle}
                                 aria-hidden="true"
                             >
-                                A
+                                <Link
+                                    href="/"
+                                    className="flex items-center gap-2 shrink-0"
+                                >
+                                    <img
+                                        className="w-8"
+                                        src="/images/logo_mini.png"
+                                        alt="Logo"
+                                    />
+                                </Link>
                             </div>
                             <span className="text-lg font-extrabold leading-tight">
-                                {isRtl ? "مصنع إبداعات دوما" : "Dooma Creativity Factory"}
+                                {isRtl
+                                    ? "مصنع إبداعات دوما"
+                                    : "Dooma Creativity Factory"}
                             </span>
                         </div>
                         <p className="text-sm text-white/70 leading-relaxed max-w-xs">
@@ -105,7 +115,11 @@ const Footer = () => {
                                         href={l.href}
                                         className="group inline-flex items-center gap-2 text-white/85 hover:text-white transition-colors"
                                     >
-                                        <span aria-hidden="true" className="inline-block opacity-60 group-hover:opacity-100 transition-opacity" style={hexBulletStyle} />
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-block opacity-60 group-hover:opacity-100 transition-opacity"
+                                            style={hexBulletStyle}
+                                        />
                                         {l.label}
                                     </Link>
                                 </li>
@@ -119,11 +133,23 @@ const Footer = () => {
                         </div>
                         <ul className="flex flex-col gap-3 text-sm">
                             {contactRows.map((row, i) => (
-                                <li key={i} className="flex items-start gap-2.5">
-                                    <span className="grid place-items-center flex-shrink-0 mt-0.5" style={contactIconStyle} aria-hidden="true">
-                                        <row.Icon className="h-3 w-3" strokeWidth={2.4} />
+                                <li
+                                    key={i}
+                                    className="flex items-start gap-2.5"
+                                >
+                                    <span
+                                        className="grid place-items-center flex-shrink-0 mt-0.5"
+                                        style={contactIconStyle}
+                                        aria-hidden="true"
+                                    >
+                                        <row.Icon
+                                            className="h-3 w-3"
+                                            strokeWidth={2.4}
+                                        />
                                     </span>
-                                    <span className="text-white/85 break-words">{row.text}</span>
+                                    <span className="text-white/85 break-words">
+                                        {row.text}
+                                    </span>
                                 </li>
                             ))}
                         </ul>
@@ -155,9 +181,14 @@ const Footer = () => {
                 </div>
 
                 <div className="mt-12 pt-6 relative">
-                    <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-px" style={dividerStyle} />
+                    <div
+                        aria-hidden="true"
+                        className="absolute top-0 left-0 right-0 h-px"
+                        style={dividerStyle}
+                    />
                     <p className="text-center text-xs text-white/65">
-                        © {new Date().getFullYear()} {t("footer.rights_reserved")}
+                        © {new Date().getFullYear()}{" "}
+                        {t("footer.rights_reserved")}
                     </p>
                 </div>
             </div>

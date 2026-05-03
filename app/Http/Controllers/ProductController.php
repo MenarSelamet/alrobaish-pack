@@ -64,7 +64,8 @@ class ProductController extends Controller
 
     public function showByCategory(Category $category)
     {
-        $products = Product::where('category_id', $category->id)
+        $products = Product::query()
+            ->where('category_id', $category->id)
             ->with(['category', 'images'])
             ->get();
 

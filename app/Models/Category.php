@@ -19,6 +19,14 @@ class Category extends Model
         'is_featured',
         'sort_order',
         'image_path',
+        'banner_path',
+        'gallery_paths',
+        'sizes_en',
+        'sizes_ar',
+        'materials_en',
+        'materials_ar',
+        'features_en',
+        'features_ar',
     ];
 
     /**
@@ -27,9 +35,16 @@ class Category extends Model
     protected function casts(): array
     {
         return [
-            'is_active'   => 'boolean',
-            'is_featured' => 'boolean',
-            'sort_order'  => 'integer',
+            'is_active'     => 'boolean',
+            'is_featured'   => 'boolean',
+            'sort_order'    => 'integer',
+            'gallery_paths' => 'array',
+            'sizes_en'      => 'array',
+            'sizes_ar'      => 'array',
+            'materials_en'  => 'array',
+            'materials_ar'  => 'array',
+            'features_en'   => 'array',
+            'features_ar'   => 'array',
         ];
     }
 

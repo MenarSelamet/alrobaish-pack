@@ -5,8 +5,15 @@ import { ArrowRight, ArrowLeft, Mail, Globe, Clock } from "lucide-react";
 
 import GuestLayout from "../../Layouts/GuestLayout";
 import { Button } from "../../Components/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../Components/tabs";
 import ProductLightbox from "../../Components/ProductLightbox";
 import "./products.css";
+
+const HEX_BULLET_STYLE = {
+    width: 10, height: 11,
+    background: "hsl(var(--accent))",
+    clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+};
 
 /* ── Diamond shape lookup for 1-9 featured categories ────────────────── */
 const DIAMOND_SHAPES = {
@@ -23,6 +30,53 @@ const DIAMOND_SHAPES = {
 
 const FULLRANGE_PER_ROW = 5;
 
+/* ── Spec list row (hex-bulleted) ────────────────────────────────────── */
+function SpecList({ items }) {
+    return (
+        <ul className="flex flex-col gap-2.5">
+            {items.map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-foreground/85">
+                    <span aria-hidden="true" className="inline-block flex-shrink-0 mt-1.5" style={HEX_BULLET_STYLE} />
+                    <span className="leading-relaxed">{item}</span>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+/* ── Empty state for tabs without data yet ───────────────────────────── */
+function TabEmpty({ message }) {
+    return (
+        <div className="rounded-xl border border-dashed border-border bg-muted/40 p-5 text-sm italic text-muted-foreground">
+            {message}
+        </div>
+    );
+}
+
+/* ── Examples grid (tab content) ─────────────────────────────────────── */
+function ExamplesGrid({ items, onItemClick }) {
+    return (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+            {items.map((item, i) => (
+                <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => onItemClick(i)}
+                    className="featured-strip-item"
+                    aria-label={`Image ${i + 1}`}
+                    style={{ flex: "unset", aspectRatio: "1 / 1" }}
+                >
+                    {item.image_path ? (
+                        <img src={`/storage/${item.image_path}`} alt="" />
+                    ) : (
+                        <div className="w-full h-full bg-muted" />
+                    )}
+                </button>
+            ))}
+        </div>
+    );
+}
+
 const Products = ({ featuredCategories = [], categories = [], products = [] }) => {
     const { t, i18n } = useTranslation();
     const lang  = i18n.language;
@@ -31,7 +85,7 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
     const name = (item) => (item ? (isRtl ? item.name_ar : item.name_en) : "");
     const desc = (item) => (item ? (isRtl ? item.description_ar : item.description_en) : "");
 
-    /* ── Group products by category for the strip + lightbox ── */
+    /* ── Group products by category ── */
     const productsByCategory = useMemo(() => {
         return products.reduce((map, p) => {
             (map[p.category_id] ||= []).push(p);
@@ -40,8 +94,7 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
     }, [products]);
 
     /* ── Selected category state ── */
-    const initialId =
-        featuredCategories[0]?.id ?? categories[0]?.id ?? null;
+    const initialId = featuredCategories[0]?.id ?? categories[0]?.id ?? null;
     const [activeId, setActiveId] = useState(initialId);
     const featuredRef = useRef(null);
     const userInteracted = useRef(false);
@@ -53,6 +106,22 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
 
     const activeProducts = activeCategory ? (productsByCategory[activeCategory.id] || []) : [];
 
+    /* ── Synthesize gallery items from category.gallery_paths so the lightbox can use them ── */
+    const galleryItems = useMemo(() => {
+        if (!activeCategory) return [];
+        const paths = activeCategory.gallery_paths || [];
+        return paths.map((path, i) => ({
+            id: `gal-${activeCategory.id}-${i}`,
+            image_path: path,
+            title_en: `${activeCategory.name_en} — example ${i + 1}`,
+            title_ar: `${activeCategory.name_ar} — مثال ${i + 1}`,
+            description_en: null,
+            description_ar: null,
+            short_description_en: null,
+            short_description_ar: null,
+        }));
+    }, [activeCategory]);
+
     const selectCategory = (id) => {
         setActiveId(id);
         if (userInteracted.current && featuredRef.current) {
@@ -63,13 +132,20 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
     /* ── Lightbox state ── */
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIdx, setLightboxIdx]   = useState(0);
+    const [lightboxItems, setLightboxItems] = useState([]);
 
-    const openLightbox = (idx) => {
+    const openLightbox = (items, idx) => {
+        setLightboxItems(items);
         setLightboxIdx(idx);
         setLightboxOpen(true);
     };
 
-    /* ── Scroll-reveal animations ── */
+    /* ── Spec lists for tabs ── */
+    const specSizes      = (isRtl ? activeCategory?.sizes_ar      : activeCategory?.sizes_en)      || [];
+    const specMaterials  = (isRtl ? activeCategory?.materials_ar  : activeCategory?.materials_en)  || [];
+    const specFeatures   = (isRtl ? activeCategory?.features_ar   : activeCategory?.features_en)   || [];
+
+    /* ── Scroll-reveal ── */
     const animRefs = useRef([]);
     const addRef = (el) => {
         if (el && !animRefs.current.includes(el)) animRefs.current.push(el);
@@ -83,14 +159,13 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
         return () => observer.disconnect();
     }, [featuredCategories.length, categories.length]);
 
-    /* ── Track first user interaction so the initial render doesn't auto-scroll ── */
     useEffect(() => {
         const handler = () => { userInteracted.current = true; };
         window.addEventListener("click", handler, { once: true });
         return () => window.removeEventListener("click", handler);
     }, []);
 
-    /* ── Diamond + full-range layouts ── */
+    /* ── Layouts ── */
     const featuredCount = Math.min(featuredCategories.length, 9);
     const diamondShape  = DIAMOND_SHAPES[featuredCount] || [];
 
@@ -102,9 +177,13 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
         return rows;
     }, [categories]);
 
-    /* ── Helpers ── */
     const eyebrowCategory = isRtl ? "الفئة" : "CATEGORY";
     const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
+
+    /* Banner src: prefer banner_path, fall back to image_path */
+    const bannerSrc = activeCategory
+        ? (activeCategory.banner_path || activeCategory.image_path)
+        : null;
 
     return (
         <GuestLayout>
@@ -129,7 +208,7 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                             <a href="#honeycomb">
                                 <Button
                                     size="lg"
-                                    className="bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground,30_30%_15%))] hover:bg-[hsl(var(--accent))]/90"
+                                    className="bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] hover:bg-[hsl(var(--accent))]/90"
                                 >
                                     {t("products.hero_cta_browse")}
                                     <ArrowIcon className="ms-2 h-4 w-4" />
@@ -146,7 +225,6 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                             </Link>
                         </div>
 
-                        {/* Stats strip */}
                         <div className="flex flex-wrap gap-x-9 gap-y-4 mt-12 text-sm text-white/70">
                             <div>
                                 <strong className="block text-2xl font-bold text-white leading-none">
@@ -168,10 +246,8 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
 
                 {/* ───────────────────── HONEYCOMB DIAMOND ───────────────────── */}
                 <section id="honeycomb" className="py-20 sm:py-24 px-[6vw]">
-                    <div
-                        ref={addRef}
-                        className="fade-up flex items-end justify-between gap-6 flex-wrap mb-12"
-                    >
+                    <div className="max-w-6xl mx-auto">
+                    <div ref={addRef} className="fade-up flex items-end justify-between gap-6 flex-wrap mb-12">
                         <div className="max-w-xl">
                             <div className="eyebrow-hex mb-2">
                                 <span>{t("products.honeycomb_eyebrow")}</span>
@@ -225,80 +301,82 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                     <p className="mt-9 text-center text-sm text-muted-foreground">
                         {t("products.honeycomb_hint")}
                     </p>
+                    </div>
                 </section>
 
-                {/* ─────────────────── FEATURED CATEGORY PANEL ─────────────────── */}
+                {/* ─────────────────── FEATURED CATEGORY RECTANGLE ─────────────────── */}
                 {activeCategory && (
                     <section
                         ref={featuredRef}
                         className="px-[6vw] pb-20 sm:pb-24 bg-gradient-to-b from-background to-muted/40"
                     >
+                        <div className="max-w-6xl mx-auto">
                         <div ref={addRef} className="fade-up featured-card">
+                            {/* Banner (left, ~40%) */}
                             <div className="featured-banner">
                                 <div className="featured-tag">
                                     <span>{eyebrowCategory} {String(activeCategory.id).padStart(2, "0")}</span>
                                 </div>
-                                {activeCategory.image_path ? (
-                                    <img src={`/storage/${activeCategory.image_path}`} alt={name(activeCategory)} />
+                                {bannerSrc ? (
+                                    <img src={`/storage/${bannerSrc}`} alt={name(activeCategory)} />
                                 ) : (
                                     <div className="w-full h-full bg-muted" />
                                 )}
                             </div>
 
-                            <div className="p-8 sm:p-12 flex flex-col gap-7 relative">
+                            {/* Body (right, ~60%) */}
+                            <div className="featured-body p-6 sm:p-8 lg:p-10 flex flex-col gap-5 relative min-w-0">
                                 <div>
-                                    <div className="eyebrow-hex mb-3">
+                                    <div className="eyebrow-hex mb-2.5">
                                         <span>{t("products.featured_eyebrow")}</span>
                                     </div>
-                                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight">
+                                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight">
                                         {name(activeCategory)}
                                     </h3>
                                     {desc(activeCategory) && (
-                                        <p className="mt-3 text-muted-foreground leading-relaxed">
+                                        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                                             {desc(activeCategory)}
                                         </p>
                                     )}
                                 </div>
 
-                                {/* Strip */}
-                                {activeProducts.length > 0 ? (
-                                    <>
-                                        <div className="featured-strip">
-                                            {activeProducts.slice(0, 8).map((p, idx) => {
-                                                const pName = isRtl ? p.title_ar : p.title_en;
-                                                const hasDesc = Boolean(
-                                                    (isRtl ? p.description_ar : p.description_en) ||
-                                                    (isRtl ? p.short_description_ar : p.short_description_en)
-                                                );
-                                                return (
-                                                    <button
-                                                        key={p.id}
-                                                        type="button"
-                                                        onClick={() => openLightbox(idx)}
-                                                        className={`featured-strip-item${hasDesc ? " has-desc" : ""}`}
-                                                        aria-label={pName}
-                                                    >
-                                                        {p.image_path ? (
-                                                            <img src={`/storage/${p.image_path}`} alt={pName} />
-                                                        ) : (
-                                                            <div className="w-full h-full grid place-items-center text-xs text-muted-foreground">
-                                                                {pName}
-                                                            </div>
-                                                        )}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-                                        <p className="text-xs text-muted-foreground -mt-2">
-                                            {t("products.featured_strip_hint")}
-                                        </p>
-                                    </>
-                                ) : (
-                                    <div className="rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-                                        {t("products.featured_no_products")}
-                                    </div>
-                                )}
+                                {/* Tabs */}
+                                <Tabs
+                                    defaultValue="sizes"
+                                    key={activeCategory.id}
+                                    dir={isRtl ? "rtl" : "ltr"}
+                                    className="self-start"
+                                >
+                                    <TabsList className="bg-muted/60 flex w-full max-w-md gap-1 h-auto">
+                                        <TabsTrigger value="sizes" className="flex-1 data-[state=active]:bg-[hsl(var(--accent))] data-[state=active]:text-[hsl(var(--accent-foreground))]">{t("products.tab_sizes")}</TabsTrigger>
+                                        <TabsTrigger value="materials" className="flex-1 data-[state=active]:bg-[hsl(var(--accent))] data-[state=active]:text-[hsl(var(--accent-foreground))]">{t("products.tab_materials")}</TabsTrigger>
+                                        <TabsTrigger value="features" className="flex-1 data-[state=active]:bg-[hsl(var(--accent))] data-[state=active]:text-[hsl(var(--accent-foreground))]">{t("products.tab_features")}</TabsTrigger>
+                                        <TabsTrigger value="examples" className="flex-1 data-[state=active]:bg-[hsl(var(--accent))] data-[state=active]:text-[hsl(var(--accent-foreground))]">{t("products.tab_examples")}</TabsTrigger>
+                                    </TabsList>
 
+                                    <TabsContent value="sizes" className="mt-4">
+                                        {specSizes.length > 0
+                                            ? <SpecList items={specSizes} />
+                                            : <TabEmpty message={t("products.tab_empty")} />}
+                                    </TabsContent>
+                                    <TabsContent value="materials" className="mt-4">
+                                        {specMaterials.length > 0
+                                            ? <SpecList items={specMaterials} />
+                                            : <TabEmpty message={t("products.tab_empty")} />}
+                                    </TabsContent>
+                                    <TabsContent value="features" className="mt-4">
+                                        {specFeatures.length > 0
+                                            ? <SpecList items={specFeatures} />
+                                            : <TabEmpty message={t("products.tab_empty")} />}
+                                    </TabsContent>
+                                    <TabsContent value="examples" className="mt-4">
+                                        {galleryItems.length > 0
+                                            ? <ExamplesGrid items={galleryItems} onItemClick={(idx) => openLightbox(galleryItems, idx)} />
+                                            : <TabEmpty message={t("products.tab_examples_empty")} />}
+                                    </TabsContent>
+                                </Tabs>
+
+                                {/* Actions */}
                                 <div className="flex flex-wrap items-center gap-3 mt-auto pt-2">
                                     <Link href={`/products/category/${activeCategory.id}`}>
                                         <Button size="lg">
@@ -311,12 +389,15 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                                             {t("products.featured_request_sample")}
                                         </Button>
                                     </Link>
-                                    <span className="ms-auto text-xs text-muted-foreground inline-flex items-center gap-1.5">
-                                        <span aria-hidden="true">●</span>
-                                        {activeProducts.length} {t("products.featured_sub_skus")}
-                                    </span>
+                                    {activeProducts.length > 0 && (
+                                        <span className="ms-auto text-xs text-muted-foreground inline-flex items-center gap-1.5">
+                                            <span aria-hidden="true">●</span>
+                                            {activeProducts.length} {t("products.featured_sub_skus")}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </section>
                 )}
@@ -324,6 +405,7 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                 {/* ─────────────────────── FULL RANGE ─────────────────────── */}
                 {categories.length > 0 && (
                     <section className="px-[6vw] pb-24">
+                        <div className="max-w-6xl mx-auto">
                         <div ref={addRef} className="fade-up flex items-end justify-between gap-6 flex-wrap mb-10">
                             <div className="max-w-xl">
                                 <div className="eyebrow-hex mb-2">
@@ -364,6 +446,7 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                                     ))}
                                 </div>
                             ))}
+                        </div>
                         </div>
                     </section>
                 )}
@@ -439,11 +522,11 @@ const Products = ({ featuredCategories = [], categories = [], products = [] }) =
                     </div>
                 </section>
 
-                {/* ───────────────────────── Lightbox ───────────────────────── */}
+                {/* Lightbox */}
                 <ProductLightbox
                     open={lightboxOpen}
                     onOpenChange={setLightboxOpen}
-                    products={activeProducts}
+                    products={lightboxItems}
                     index={lightboxIdx}
                     onIndexChange={setLightboxIdx}
                     category={activeCategory}
