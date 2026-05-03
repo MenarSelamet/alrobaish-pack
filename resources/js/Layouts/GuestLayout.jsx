@@ -53,7 +53,7 @@ export default function GuestLayout({ children }) {
                                     href={href}
                                     className={`text-sm font-medium px-4 py-1.5 rounded-xl transition-colors ${
                                         isActive(href)
-                                            ? "bg-primary/10 text-primary font-semibold"
+                                            ? "bg-[hsl(var(--accent))]/20 text-foreground font-semibold"
                                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                                     }`}
                                 >
@@ -89,7 +89,7 @@ export default function GuestLayout({ children }) {
                                     onClick={() => setMenuOpen(false)}
                                     className={`text-sm font-medium px-4 py-2.5 rounded-xl transition-colors ${
                                         isActive(href)
-                                            ? "bg-primary/10 text-primary font-semibold"
+                                            ? "bg-[hsl(var(--accent))]/20 text-foreground font-semibold"
                                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                                     }`}
                                 >
