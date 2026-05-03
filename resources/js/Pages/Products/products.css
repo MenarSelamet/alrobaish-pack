@@ -5,21 +5,12 @@
    ===================================================================== */
 
 /* ---------- HEX SIZE TOKENS ---------- */
+/* Single fluid size for the diamond honeycomb hexes — scales smoothly
+   with viewport via clamp(min, ideal, max). Roughly matches the
+   full-range mini-hexes so the two sections feel cohesive. */
 .products-page {
-    --hex-w: 220px;
+    --hex-w: clamp(86px, 10vw, 150px);
     --hex-h: calc(var(--hex-w) * 1.1547); /* pointy-top hex ratio (2/√3) */
-}
-@media (max-width: 1100px) {
-    .products-page { --hex-w: 180px; }
-}
-@media (max-width: 720px) {
-    .products-page { --hex-w: 140px; }
-}
-@media (max-width: 480px) {
-    .products-page { --hex-w: 100px; }
-}
-@media (max-width: 400px) {
-    .products-page { --hex-w: 86px; }
 }
 
 /* ---------- HERO ---------- */
@@ -232,11 +223,10 @@
 
 /* ---------- FULL RANGE (mini honeycomb of all categories) ---------- */
 .fullrange-grid {
-    --mini-w: 140px;
+    --mini-w: clamp(86px, 9vw, 140px);
     --mini-h: calc(var(--mini-w) * 1.1547);
     display: flex; flex-direction: column;
 }
-@media (max-width: 720px) { .fullrange-grid { --mini-w: 100px; } }
 
 .fullrange-row { display: flex; gap: 10px; justify-content: center; }
 .fullrange-row + .fullrange-row { margin-top: calc(var(--mini-h) * -0.25 + 6px); }
